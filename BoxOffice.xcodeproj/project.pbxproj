@@ -13,7 +13,9 @@
 		63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F42970E1A0005DF7D1 /* Main.storyboard */; };
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
-		D7FBB3F32974D42B0033619E /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FBB3F22974D42B0033619E /* BoxOfficeTests.swift */; };
+		D76B9B0B29754637003380BB /* BoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* BoxOfficeSearchResult.swift */; };
+		D76B9B0C29757063003380BB /* BoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* BoxOfficeSearchResult.swift */; };
+		D7FBB3F32974D42B0033619E /* BoxOfficeSearchResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */; };
 		D7FBB3F72974D7510033619E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F22970E1A0005DF7D1 /* ViewController.swift */; };
 		D7FBB3F82974D83F0033619E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -27,8 +29,9 @@
 		63DF20F72970E1A1005DF7D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D76B9B0A29754637003380BB /* BoxOfficeSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSearchResult.swift; sourceTree = "<group>"; };
 		D7FBB3F02974D42B0033619E /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7FBB3F22974D42B0033619E /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
+		D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSearchResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,7 @@
 		D7FBB3DB2974D21A0033619E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D76B9B0A29754637003380BB /* BoxOfficeSearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,7 +120,7 @@
 		D7FBB3F12974D42B0033619E /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
-				D7FBB3F22974D42B0033619E /* BoxOfficeTests.swift */,
+				D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */,
 			);
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
@@ -224,6 +228,7 @@
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				D76B9B0B29754637003380BB /* BoxOfficeSearchResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,8 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D76B9B0C29757063003380BB /* BoxOfficeSearchResult.swift in Sources */,
 				D7FBB3F72974D7510033619E /* ViewController.swift in Sources */,
-				D7FBB3F32974D42B0033619E /* BoxOfficeTests.swift in Sources */,
+				D7FBB3F32974D42B0033619E /* BoxOfficeSearchResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
