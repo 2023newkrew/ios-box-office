@@ -1,0 +1,38 @@
+disabled_rules:
+- line_length
+- unused_optional_binding
+- colon
+- comma
+- control_statement
+
+opt_in_rules:
+- empty_count
+
+excluded:
+- Carthage
+- Pods
+- Source/ExcludedFloder
+- Source/ExcludedFile.swift
+- Source/*/ExcludedFile.swift
+
+force_cast: warning
+force_try: warning
+
+file_length:
+  warning: 500
+  error: 1200
+type_name:
+  min_length: 4
+  max_length:
+    warning: 40
+    error: 50
+  excluded: iPhone
+  allowed_symbols: ["_"]
+identifier_name:
+  min_length:
+    error: 4
+  excluded:
+    - id
+    - URL
+    - GlobalAPIKey
+reporter: "xcode"
