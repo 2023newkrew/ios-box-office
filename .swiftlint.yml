@@ -4,6 +4,8 @@ disabled_rules:
 - colon
 - comma
 - control_statement
+- trailing_whitespace
+- nesting
 
 opt_in_rules:
 - empty_count
