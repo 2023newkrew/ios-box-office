@@ -35,7 +35,7 @@ final class BoxOfficeSearchResultParsingTests: XCTestCase {
             return
         }
         do {
-            let parsed = try JSONDecoder().decode(BoxOfficeSearchResult.self, from: data)
+            let parsed = try JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data)
             XCTAssertNotNil(parsed)
         } catch {
             print("error",error)
