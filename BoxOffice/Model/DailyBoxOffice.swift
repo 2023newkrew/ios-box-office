@@ -20,9 +20,9 @@ struct DailyBoxOffice: Decodable {
         }
     }
     
-    let result: Information
+    let information: Information
     
     enum CodingKeys: String, CodingKey {
-        case result = "boxOfficeResult"
+        case information = "boxOfficeResult"
     }
 }
