@@ -8,6 +8,6 @@
 import Foundation
 
 final class DefaultNetworkProvider: NetworkProvider {
-    let session: URLSession = .shared
+    let session: URLSessionable = URLSession.shared
     let decoder: DecodingUtility = JSONDecodingUtility()
 }

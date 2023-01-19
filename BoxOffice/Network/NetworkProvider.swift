@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkProvider {
-    var session: URLSession { get }
+    var session: URLSessionable { get }
     var decoder: DecodingUtility { get }
     func request<T: APIEndpoint>(
         _ request: T,

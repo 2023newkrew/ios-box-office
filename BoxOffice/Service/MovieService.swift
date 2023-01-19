@@ -57,6 +57,3 @@ extension MovieService {
     }
 }
 
-final class DefaultMovieService: MovieService {
-    let networkProvider: NetworkProvider = DefaultNetworkProvider()
-}
