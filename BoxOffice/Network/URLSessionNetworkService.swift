@@ -8,6 +8,11 @@
 import Foundation
 
 final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
+    let session: URLSession
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+    
     private enum AppInfo {
         static var key: URLQueryItem {
             guard let filePath = Bundle.main.url(forResource: "Info", withExtension: "plist") else {
@@ -36,7 +41,7 @@ final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = session.dataTask(with: url) { data, response, error in
             if error != nil {
                 completion(.failure(.transportError))
                 return
@@ -76,5 +81,4 @@ final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
         }
         return components
     }
-    
 }
