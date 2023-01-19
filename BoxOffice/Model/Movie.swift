@@ -16,8 +16,13 @@ struct Movie: Decodable {
 }
 
 struct MovieResult: Decodable {
-    let movieInfo: MovieInformation
+    let information: MovieInformation
     let source: String
+    
+    enum CodingKeys: String, CodingKey {
+        case information = "movieInfo"
+        case source
+    }
 }
 
 struct MovieInformation: Decodable {
