@@ -12,7 +12,7 @@ struct DailyBoxOfficeAPI {
     private let apiProvider: APIDataTaskProvider
     
     init(session: URLSession = URLSession.shared,
-         query: DailyBoxOfficeAPIQuery? = nil) {
+         query: DailyBoxOfficeAPIQuery) {
         self.apiProvider = APIDataTaskProvider(session: session,
                                        baseURL: self.urlString,
                                        query: query)
