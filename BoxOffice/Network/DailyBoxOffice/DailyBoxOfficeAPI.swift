@@ -11,7 +11,7 @@ struct DailyBoxOfficeAPI {
     private let urlString = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
     private let apiProvider: APIDataTaskProvider
     
-    init(session: URLSession = URLSession.shared,
+    init(session: URLSessionCallable = URLSession.shared,
          query: DailyBoxOfficeAPIQuery) {
         self.apiProvider = APIDataTaskProvider(session: session,
                                        baseURL: self.urlString,

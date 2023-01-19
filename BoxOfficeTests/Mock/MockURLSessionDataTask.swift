@@ -6,18 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 class MockURLSessionDataTask: URLSessionDataTask {
-    private let completion: (Data?, URLResponse?, Error?) -> Void
+
+    private let resumeHandler: () -> Void
     
-    init(completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        self.completion = completion
+    init(resumeHandler: @escaping () -> Void) {
+        self.resumeHandler = resumeHandler
     }
     
     override func resume() {
-        let data: Data? = nil
-        let response: URLResponse? = nil
-        let error: Error? = nil
-        completion(data, response, error)
+        resumeHandler()
     }
 }

@@ -13,7 +13,7 @@ struct APIDataTaskProvider {
     let query: QueryItems?
     let method: HTTPMethod
     
-    init(session: URLSession = URLSession.shared,
+    init(session: URLSessionCallable = URLSession.shared,
          baseURL: String,
          query: QueryItems? = nil,
          method: HTTPMethod = .get) {

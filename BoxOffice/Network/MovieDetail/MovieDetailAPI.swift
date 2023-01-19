@@ -11,7 +11,7 @@ struct MovieDetailAPI {
     private let urlString = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     private let apiProvider: APIDataTaskProvider
     
-    init(session: URLSession = URLSession.shared,
+    init(session: URLSessionCallable = URLSession.shared,
          query: MovieDetailAPIQuery) {
         self.apiProvider = APIDataTaskProvider(session: session,
                                        baseURL: self.urlString,
