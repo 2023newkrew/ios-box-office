@@ -43,7 +43,7 @@
 		D7A904372978FE94006B8F49 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A904362978FE94006B8F49 /* MockURLSession.swift */; };
 		D7A90439297900C4006B8F49 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A90438297900C4006B8F49 /* MockURLSessionDataTask.swift */; };
 		D7A9043B2979092E006B8F49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7A9043A2979092E006B8F49 /* TestAssets.xcassets */; };
-		D7A9043D29790A2E006B8F49 /* APIConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A9043C29790A2E006B8F49 /* APIConnectionTests.swift */; };
+		D7A9043D29790A2E006B8F49 /* APIDataTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A9043C29790A2E006B8F49 /* APIDataTaskTests.swift */; };
 		D7FBB3F32974D42B0033619E /* BoxOfficeSearchResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */; };
 		D7FBB3F72974D7510033619E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F22970E1A0005DF7D1 /* ViewController.swift */; };
 		D7FBB3F82974D83F0033619E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
@@ -74,7 +74,7 @@
 		D7A904362978FE94006B8F49 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		D7A90438297900C4006B8F49 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		D7A9043A2979092E006B8F49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
-		D7A9043C29790A2E006B8F49 /* APIConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConnectionTests.swift; sourceTree = "<group>"; };
+		D7A9043C29790A2E006B8F49 /* APIDataTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataTaskTests.swift; sourceTree = "<group>"; };
 		D7FBB3F02974D42B0033619E /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSearchResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,7 +218,7 @@
 		D7FBB3F12974D42B0033619E /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
-				D7A9043C29790A2E006B8F49 /* APIConnectionTests.swift */,
+				D7A9043C29790A2E006B8F49 /* APIDataTaskTests.swift */,
 				D7FBB3F22974D42B0033619E /* BoxOfficeSearchResultTests.swift */,
 				D7A9043A2979092E006B8F49 /* TestAssets.xcassets */,
 				D7A904352978FE61006B8F49 /* Mock */,
@@ -360,7 +360,7 @@
 				D7A90439297900C4006B8F49 /* MockURLSessionDataTask.swift in Sources */,
 				D7859195297653760071CD1F /* HTTPMethod.swift in Sources */,
 				D7859194297653730071CD1F /* DailyBoxOfficeAPIQuery.swift in Sources */,
-				D7A9043D29790A2E006B8F49 /* APIConnectionTests.swift in Sources */,
+				D7A9043D29790A2E006B8F49 /* APIDataTaskTests.swift in Sources */,
 				D785919C297669CD0071CD1F /* MovieDetailAPI.swift in Sources */,
 				D78591A729768EAC0071CD1F /* MovieAPIFault.swift in Sources */,
 				D78591AE29777D370071CD1F /* QueryItems.swift in Sources */,
