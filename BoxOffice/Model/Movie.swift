@@ -2,49 +2,139 @@
 //  Movie.swift
 //  BoxOffice
 //
-//  Created by kakao on 2023/01/17.
+//  Created by kakao on 2023/01/19.
 //
 
 import Foundation
 
 struct Movie: Decodable {
-    let number: String
-    let rank: String
-    let rankingChange: String
-    let rankOldOrNew: String
-    let representativeCode: String
+    let result: MovieResult
+    
+    enum CodingKeys: String, CodingKey {
+        case result = "movieInfoResult"
+    }
+}
+
+struct MovieResult: Decodable {
+    let movieInfo: MovieInformation
+    let source: String
+}
+
+struct MovieInformation: Decodable {
+    let code: String
     let name: String
+    let englishName: String
+    let originalName: String
+    let runningTime: String
+    let productionYear: String
     let openDate: String
-    let salesForTheDay: String
-    let salesShareForTheDay: String
-    let salesChange: String
-    let salesRatioChange: String
-    let cumulativeSales: String
-    let audienceCount: String
-    let audienceChange: String
-    let audienceRatioChange: String
-    let cumulativeAudience: String
-    let screenCountForTheDay: String
-    let showCountForTheDay: String
+    let productionStateNme: String
+    let type: String
+    let nations: [Nation]
+    let genres: [Genre]
+    let directors: [Director]
+    let actors: [Actor]
+    let showTypes: [ShowType]
+    let companys: [Company]
+    let audits: [Audit]
+    let staffs: [Staff]
 
     enum CodingKeys: String, CodingKey {
-        case number = "rnum"
-        case rank
-        case rankingChange = "rankInten"
-        case rankOldOrNew = "rankOldAndNew"
-        case representativeCode = "movieCd"
+        case code = "movieCd"
         case name = "movieNm"
+        case englishName = "movieNmEn"
+        case originalName = "movieNmOg"
+        case runningTime = "showTm"
+        case productionYear = "prdtYear"
         case openDate = "openDt"
-        case salesForTheDay = "salesAmt"
-        case salesShareForTheDay = "salesShare"
-        case salesChange = "salesInten"
-        case salesRatioChange = "salesChange"
-        case cumulativeSales = "salesAcc"
-        case audienceCount = "audiCnt"
-        case audienceChange = "audiInten"
-        case audienceRatioChange = "audiChange"
-        case cumulativeAudience = "audiAcc"
-        case screenCountForTheDay = "scrnCnt"
-        case showCountForTheDay = "showCnt"
+        case productionStateNme = "prdtStatNm"
+        case type = "typeNm"
+        case nations, genres, directors, actors, showTypes, companys, audits, staffs
+    }
+}
+
+struct Actor: Decodable {
+    let name: String
+    let englishName: String
+    let caseName: String
+    let englishCastName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "peopleNm"
+        case englishName = "peopleNmEn"
+        case caseName = "cast"
+        case englishCastName = "castEn"
+    }
+}
+
+struct Audit: Decodable {
+    let number: String
+    let watchGrade: String
+    
+    enum CodingKeys: String, CodingKey {
+        case number = "auditNo"
+        case watchGrade = "watchGradeNm"
+    }
+}
+
+struct Company: Decodable {
+    let code: String
+    let name: String
+    let englishName: String
+    let partName: String
+
+    enum CodingKeys: String, CodingKey {
+        case code = "companyCd"
+        case name = "companyNm"
+        case englishName = "companyNmEn"
+        case partName = "companyPartNm"
+    }
+}
+
+struct Director: Decodable {
+    let name: String
+    let englishName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "peopleNm"
+        case englishName = "peopleNmEn"
+    }
+}
+
+struct Genre: Decodable {
+    let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "genreNm"
+    }
+}
+
+struct Nation: Decodable {
+    let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "nationNm"
+    }
+}
+
+struct ShowType: Decodable {
+    let name: String
+    let subtitle: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "showTypeGroupNm"
+        case subtitle = "showTypeNm"
+    }
+}
+
+struct Staff: Decodable {
+    let name: String
+    let englishName: String
+    let role: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "peopleNm"
+        case englishName = "peopleNmEn"
+        case role = "staffRoleNm"
     }
 }
