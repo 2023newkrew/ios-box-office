@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIDataTaskProvider {
-    let session: URLSession
+    let session: URLSessionCallable
     let baseURL: String
     let query: QueryItems?
     let method: HTTPMethod
