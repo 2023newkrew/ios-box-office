@@ -19,5 +19,5 @@ enum SecretKey {
         return keys
     }()
     
-    static let boxOfficeAPIKey = secretKeys?["BoxOfficeAPIKey"] as? String
+    static let boxOfficeAPIKey = SecretKey.secretKeys?["BoxOfficeAPIKey"] as? String
 }

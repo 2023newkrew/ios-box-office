@@ -8,7 +8,7 @@
 import Foundation
 
 struct DailyBoxOfficeAPIQuery: QueryItems{
-    var items: [URLQueryItem]
+    let items: [URLQueryItem]
     
     init(key: String,
          targetDate: String,

@@ -19,6 +19,6 @@ struct MovieDetailAPI {
     }
     
     func dataTask(completion: @escaping (Data) -> ()) -> URLSessionDataTask? {
-        return apiProvider.dataTask(completion: completion)
+        return self.apiProvider.dataTask(completion: completion)
     }
 }

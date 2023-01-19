@@ -8,7 +8,7 @@
 import Foundation
 
 struct MovieDetailAPIQuery: QueryItems{
-    var items: [URLQueryItem]
+    let items: [URLQueryItem]
     
     init(key: String,
          movieCode: String) {
