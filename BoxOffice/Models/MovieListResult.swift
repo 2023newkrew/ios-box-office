@@ -9,10 +9,6 @@ import Foundation
 
 struct MovieInfoDetailResult: Decodable {
     var movieInfoResult: MovieInfoResult
-    
-    enum CodingKeys: String, CodingKey {
-        case movieInfoResult = "movieInfoResult"
-    }
 }
 
 struct MovieInfoResult: Decodable {
@@ -21,7 +17,7 @@ struct MovieInfoResult: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case movieInfo = "movieInfo"
-        case source = "source"
+        case source
     }
 }
 
