@@ -13,27 +13,12 @@ final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
         self.session = session
     }
     
-    private enum AppInfo {
-        static var key: URLQueryItem {
-            guard let filePath = Bundle.main.url(forResource: "Info", withExtension: "plist") else {
-                fatalError()
-            }
-            guard let plist = NSDictionary(contentsOf: filePath) else {
-                fatalError()
-            }
-            guard let key = plist.object(forKey: "APP_KEY") as? String else {
-                fatalError()
-            }
-            return URLQueryItem(name: "key", value: key)
-        }
-    }
-    
     func fetch<T: Decodable> (
         searchTarget: URLInfo,
         queryItems: [String: String]? = nil,
         completion: @escaping (Result<T,
                                URLSessionNetworkServiceError>) -> Void) {
-        guard let urlComponent = URLComponentsGenerator(searchTarget: searchTarget,
+        guard let urlComponent = establishURLComponents(searchTarget: searchTarget,
                                                         queryItems: queryItems),
               let url = urlComponent.url
         else {
@@ -68,17 +53,22 @@ final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
         task.resume()
     }
     
-    private func URLComponentsGenerator(searchTarget: URLInfo,
+    private func establishURLComponents(searchTarget: URLInfo,
                                         queryItems: [String: String]?) -> URLComponents? {
-        var components = URLComponents(string: searchTarget.urlString)
-        components?.queryItems?.append(AppInfo.key)
+        var components = URLComponents(string: URLInfo.baseURL)
+        components?.path = searchTarget.path
         
-        guard let queryItems = queryItems else {
-            return components
+        guard let appKey = URLInfo.key, let queryItems = queryItems else {
+            return nil
         }
+        
+        var queries: [URLQueryItem] = [appKey]
+        
         for query in queryItems {
-            components?.queryItems?.append(URLQueryItem(name: query.key, value: query.value))
+            let item = URLQueryItem(name: query.key, value: query.value)
+            queries.append(item)
         }
+        
         return components
     }
 }
