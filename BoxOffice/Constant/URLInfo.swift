@@ -8,14 +8,29 @@
 import Foundation
 
 enum URLInfo {
+    static let baseURL = "http://www.kobis.or.kr/"
+    static let key: URLQueryItem? = {
+        guard let filePath = Bundle.main.url(forResource: "Info", withExtension: "plist") else {
+            return nil
+        }
+        guard let plist = NSDictionary(contentsOf: filePath) else {
+            return nil
+        }
+        guard let key = plist.object(forKey: "APP_KEY") as? String else {
+            return nil
+        }
+        return URLQueryItem(name: "key", value: key)
+    }()
+    
     case searchDailyBoxOffice
     case searchDetailMovieInfo
-    var urlString: String {
+    
+    var path: String {
         switch self {
         case .searchDailyBoxOffice:
-            return "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
+            return "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         case .searchDetailMovieInfo:
-            return "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?"
+            return "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
         }
     }
 }
