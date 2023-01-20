@@ -68,6 +68,7 @@ final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
             let item = URLQueryItem(name: query.key, value: query.value)
             queries.append(item)
         }
+        components?.queryItems = queries
         
         return components
     }
