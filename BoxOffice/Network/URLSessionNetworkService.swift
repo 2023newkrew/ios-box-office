@@ -8,7 +8,7 @@
 import Foundation
 
 final class URLSessionNetworkService: URLSessionNetworkServiceProtocol {
-    let session: URLSession
+    private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
     }
