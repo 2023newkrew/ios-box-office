@@ -10,18 +10,27 @@ import Foundation
 struct APIDataTaskProvider {
     let session: URLSessionCallable
     let baseURL: String
-    let query: QueryItems?
+    let query: [URLQueryItem]?
     let method: HTTPMethod
     
     init(session: URLSessionCallable = URLSession.shared,
          baseURL: String,
-         query: QueryItems? = nil,
+         query: [URLQueryItem]? = nil,
          method: HTTPMethod = .get) {
         
         self.session = session
         self.baseURL = baseURL
         self.query = query
         self.method = method
+    }
+    
+    init(session: URLSessionCallable = URLSession.shared,
+         apiInfo: APIInfo) {
+        
+        self.session = session
+        self.baseURL = apiInfo.urlString
+        self.query = apiInfo.query
+        self.method = apiInfo.method
     }
         
     func dataTask(completion: @escaping (Data) -> ()) -> URLSessionDataTask? {
@@ -53,7 +62,7 @@ struct APIDataTaskProvider {
     private func urlRequest() -> URLRequest? {
         var urlComponents = URLComponents(string: self.baseURL)
         if let query = self.query {
-            urlComponents?.queryItems = query.items
+            urlComponents?.queryItems = query
         }
         guard let url = urlComponents?.url else {
             return nil

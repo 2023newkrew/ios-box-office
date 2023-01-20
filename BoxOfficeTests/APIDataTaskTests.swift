@@ -27,11 +27,12 @@ final class APIDataTaskTests: XCTestCase {
                                        headerFields: nil)
         let session = MockURLSession(data: data, urlResponse: response, error: nil)
         
-        let query = DailyBoxOfficeAPIQuery(key: SecretKey.boxOfficeAPIKey ?? "", targetDate: "20120101")
-        let dailyBoxOfficeAPI = DailyBoxOfficeAPI(session: session, query: query)
+        let apiInfo = APIInfo.getDailyBoxOffice(key: SecretKey.boxOfficeAPIKey ?? "",
+                                                targetDate: "20120101")
+        let dataTaskProvider = APIDataTaskProvider(session: session, apiInfo: apiInfo)
         
         //when
-        let dataTask = dailyBoxOfficeAPI.dataTask { data in
+        let dataTask = dataTaskProvider.dataTask { data in
             do {
                 let parsed = try JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data)
                 XCTAssertNotNil(parsed)
@@ -63,11 +64,12 @@ final class APIDataTaskTests: XCTestCase {
                                        headerFields: nil)
         let session = MockURLSession(data: data, urlResponse: response, error: nil)
         
-        let query = MovieDetailAPIQuery(key: SecretKey.boxOfficeAPIKey ?? "", movieCode: "20194403")
-        let movieDetailAPI = MovieDetailAPI(session: session, query: query)
+        let apiInfo = APIInfo.getMovieDetail(key: SecretKey.boxOfficeAPIKey ?? "",
+                                             movieCode: "20194403")
+        let dataTaskProvider = APIDataTaskProvider(session: session, apiInfo: apiInfo)
         
         //when
-        let dataTask = movieDetailAPI.dataTask { data in
+        let dataTask = dataTaskProvider.dataTask { data in
             do {
                 let parsed = try JSONDecoder().decode(MovieDetailResult.self, from: data)
                 XCTAssertNotNil(parsed)
