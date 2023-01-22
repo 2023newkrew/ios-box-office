@@ -8,7 +8,7 @@
 import XCTest
 
 final class NetworkMockTests: XCTestCase {
-    var urlSession: URLSessionNetworkServiceProtocol!
+    var urlSession: NetworkServiceProtocol!
     override func setUp() {
         super.setUp()
         let config = URLSessionConfiguration.ephemeral
@@ -16,7 +16,7 @@ final class NetworkMockTests: XCTestCase {
         
         let mockURLSession = URLSession(configuration: config)
         
-        urlSession = URLSessionNetworkService(session: mockURLSession)
+        urlSession = NetworkService(session: mockURLSession)
     }
     
     func test_영화_내용_잘_받아_오는_지() {

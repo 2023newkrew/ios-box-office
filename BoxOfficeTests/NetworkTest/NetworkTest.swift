@@ -8,10 +8,10 @@
 import XCTest
 
 final class NetworkTest: XCTestCase {
-    var sut: URLSessionNetworkServiceProtocol!
+    var sut: NetworkServiceProtocol!
     
     override func setUp() {
-        sut = URLSessionNetworkService()
+        sut = NetworkService()
     }
     
     func test_영화_내용_잘_받아_오는_지() {

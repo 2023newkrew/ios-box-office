@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLSessionNetworkServiceProtocol {
+protocol NetworkServiceProtocol {
     func fetch<T: Decodable> (
         searchTarget: URLInfo,
         queryItems: [String: String]?,
