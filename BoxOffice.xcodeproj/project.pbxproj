@@ -15,7 +15,7 @@
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		C200490B2976BB8E00012C3F /* NetworkMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200490A2976BB8E00012C3F /* NetworkMockTests.swift */; };
 		C200490C2976BB9200012C3F /* NetworkMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200490A2976BB8E00012C3F /* NetworkMockTests.swift */; };
-		C200490D2976BC4A00012C3F /* URLSessionNetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF3129765462002971B4 /* URLSessionNetworkServiceError.swift */; };
+		C200490D2976BC4A00012C3F /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF3129765462002971B4 /* NetworkServiceError.swift */; };
 		C200490F2976F1BF00012C3F /* MovieListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200490E2976F1BF00012C3F /* MovieListResult.swift */; };
 		C20049102976F7F200012C3F /* MovieListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200490E2976F1BF00012C3F /* MovieListResult.swift */; };
 		C20049132977828F00012C3F /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20049122977828F00012C3F /* NetworkServiceProtocol.swift */; };
@@ -28,7 +28,7 @@
 		C22297E12978570000D3FBC1 /* URLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22297DF297856F500D3FBC1 /* URLInfo.swift */; };
 		C23FCF2F29764EAC002971B4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF2E29764EAC002971B4 /* NetworkService.swift */; };
 		C23FCF3029764EB0002971B4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF2E29764EAC002971B4 /* NetworkService.swift */; };
-		C23FCF3229765462002971B4 /* URLSessionNetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF3129765462002971B4 /* URLSessionNetworkServiceError.swift */; };
+		C23FCF3229765462002971B4 /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FCF3129765462002971B4 /* NetworkServiceError.swift */; };
 		C25A6AE929758BFA00C0E5C2 /* BoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A6AE829758BFA00C0E5C2 /* BoxOfficeSearchResult.swift */; };
 		C25A6AF629758CEA00C0E5C2 /* BoxOfficeResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A6AF529758CEA00C0E5C2 /* BoxOfficeResultTests.swift */; };
 		C25A6B032975922400C0E5C2 /* BoxOfficeResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A6AF529758CEA00C0E5C2 /* BoxOfficeResultTests.swift */; };
@@ -67,7 +67,7 @@
 		C22297DC297856D500D3FBC1 /* QueryKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryKeys.swift; sourceTree = "<group>"; };
 		C22297DF297856F500D3FBC1 /* URLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInfo.swift; sourceTree = "<group>"; };
 		C23FCF2E29764EAC002971B4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		C23FCF3129765462002971B4 /* URLSessionNetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionNetworkServiceError.swift; sourceTree = "<group>"; };
+		C23FCF3129765462002971B4 /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
 		C25A6AE829758BFA00C0E5C2 /* BoxOfficeSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSearchResult.swift; sourceTree = "<group>"; };
 		C25A6AF329758CEA00C0E5C2 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C25A6AF529758CEA00C0E5C2 /* BoxOfficeResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResultTests.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			children = (
 				C20049112977828300012C3F /* Protocol */,
 				C23FCF2E29764EAC002971B4 /* NetworkService.swift */,
-				C23FCF3129765462002971B4 /* URLSessionNetworkServiceError.swift */,
+				C23FCF3129765462002971B4 /* NetworkServiceError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -296,7 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C270BDEF297BCEDF00362D16 /* jsonMockData.swift in Sources */,
-				C23FCF3229765462002971B4 /* URLSessionNetworkServiceError.swift in Sources */,
+				C23FCF3229765462002971B4 /* NetworkServiceError.swift in Sources */,
 				C25A6AE929758BFA00C0E5C2 /* BoxOfficeSearchResult.swift in Sources */,
 				C200490C2976BB9200012C3F /* NetworkMockTests.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
@@ -318,7 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C200490D2976BC4A00012C3F /* URLSessionNetworkServiceError.swift in Sources */,
+				C200490D2976BC4A00012C3F /* NetworkServiceError.swift in Sources */,
 				C25A6B042975924F00C0E5C2 /* BoxOfficeSearchResult.swift in Sources */,
 				C25A6AF629758CEA00C0E5C2 /* BoxOfficeResultTests.swift in Sources */,
 				C270BDEE297BCEC500362D16 /* jsonMockData.swift in Sources */,

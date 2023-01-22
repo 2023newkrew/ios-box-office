@@ -1,5 +1,5 @@
 //
-//  URLSessionNetworkServiceError.swift
+//  NetworkServiceError.swift
 //  BoxOffice
 //
 //  Created by kakao on 2023/01/17.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum URLSessionNetworkServiceError: Error {
+enum NetworkServiceError: Error {
     case invalidURLError
     case transportError
     case serverError(code: Int)
@@ -16,7 +16,7 @@ enum URLSessionNetworkServiceError: Error {
     case unknownError
 }
 
-extension URLSessionNetworkServiceError: LocalizedError {
+extension NetworkServiceError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURLError:

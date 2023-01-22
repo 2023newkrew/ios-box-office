@@ -19,7 +19,7 @@ final class NetworkTest: XCTestCase {
         
         sut.fetch(searchTarget: .searchDetailMovieInfo,
                          queryItems: [QueryKeys.movieCode: "20124079"]) {
-            (networkResult: Result<MovieInfoDetailResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<MovieInfoDetailResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual("20124079", success.movieInfoResult.movieInfo.movieCode)
@@ -37,7 +37,7 @@ final class NetworkTest: XCTestCase {
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual(success.result.type, "일별 박스오피스")
@@ -55,7 +55,7 @@ final class NetworkTest: XCTestCase {
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual(success.result.searchRange, "\(Date.today)~\(Date.today)")
@@ -73,7 +73,7 @@ final class NetworkTest: XCTestCase {
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual(success.result.dailyList.count, 0)

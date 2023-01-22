@@ -35,7 +35,7 @@ final class NetworkMockTests: XCTestCase {
         let expects = XCTestExpectation(description: "영화 정보 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDetailMovieInfo,
                          queryItems: [QueryKeys.movieCode: "20124079"]) {
-            (networkResult: Result<MovieInfoDetailResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<MovieInfoDetailResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual("20124079", success.movieInfoResult.movieInfo.movieCode)
@@ -64,7 +64,7 @@ final class NetworkMockTests: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual(success.result.type, "일별 박스오피스")
@@ -93,7 +93,7 @@ final class NetworkMockTests: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertEqual(success.result.searchRange, "20220121~20220121")
@@ -122,7 +122,7 @@ final class NetworkMockTests: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
                          queryItems: [QueryKeys.targetDate: Date.today]) {
-            (networkResult: Result<BoxOfficeSearchResult, URLSessionNetworkServiceError>) -> Void in
+            (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
                 XCTAssertNotEqual(success.result.dailyList.count, 0)

@@ -11,6 +11,6 @@ protocol NetworkServiceProtocol {
     func fetch<T: Decodable> (
         searchTarget: URLInfo,
         queryItems: [String: String]?,
-        completion: @escaping (Result<T, URLSessionNetworkServiceError>) -> Void
+        completion: @escaping (Result<T, NetworkServiceError>) -> Void
     )
 }

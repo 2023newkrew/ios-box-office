@@ -17,7 +17,7 @@ final class NetworkService: NetworkServiceProtocol {
         searchTarget: URLInfo,
         queryItems: [String: String]? = nil,
         completion: @escaping (Result<T,
-                               URLSessionNetworkServiceError>) -> Void) {
+                               NetworkServiceError>) -> Void) {
         guard let urlComponent = establishURLComponents(searchTarget: searchTarget,
                                                         queryItems: queryItems),
               let url = urlComponent.url
