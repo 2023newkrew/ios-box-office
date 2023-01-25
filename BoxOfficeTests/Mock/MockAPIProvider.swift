@@ -9,16 +9,11 @@ import Foundation
 import UIKit
 
 class MockAPIProvider {
-    let session: URLSession
-    var dataTask: URLSessionDataTask?
     let baseURL: String
     let query: [URLQueryItem]?
     let method: HTTPMethod
     
-    init(session: URLSession = URLSession.shared,
-         request: APIRequest) {
-        
-        self.session = session
+    init(request: APIRequest) {
         self.baseURL = request.urlString
         self.query = request.query
         self.method = request.method
