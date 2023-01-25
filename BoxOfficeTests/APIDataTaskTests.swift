@@ -28,8 +28,11 @@ final class APIDataTaskTests: XCTestCase {
                 
                 let parsed = try JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data)
                 XCTAssertNotNil(parsed)
-                
-                
+                XCTAssertEqual(parsed.dailyList.count, 10)
+                XCTAssertEqual(parsed.searchRange, "20120101~20120101")
+                XCTAssertTrue(parsed.dailyList.contains(where: { dailyOffice in
+                    dailyOffice.movieName == "미션임파서블:고스트프로토콜"
+                }))
             } catch {
                 print("error", error)
                 XCTAssertTrue(false)
@@ -56,8 +59,8 @@ final class APIDataTaskTests: XCTestCase {
                 
                 let parsed = try JSONDecoder().decode(MovieDetailResult.self, from: data)
                 XCTAssertNotNil(parsed)
-                
-                
+                XCTAssertEqual(parsed.movieName, "광해, 왕이 된 남자")
+                XCTAssertEqual(parsed.staffs.count, 345)
             } catch {
                 print("error", error)
                 XCTAssertTrue(false)
