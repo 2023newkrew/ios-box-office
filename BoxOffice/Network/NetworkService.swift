@@ -62,7 +62,7 @@ final class NetworkService: NetworkServiceProtocol {
             return nil
         }
         
-        components?.queryItems?.append(appKey)
+        components?.queryItems = [appKey]
         components?.queryItems?.append(contentsOf: quries(items: queryItems))
         
         return components
