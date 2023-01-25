@@ -8,7 +8,7 @@
 import XCTest
 
 final class BoxOfficeSearchResultParsingTests: XCTestCase {
-    let data = NSDataAsset(name: "SampleData", bundle: Bundle(for: ViewController.self))?.data
+    let data = NSDataAsset(name: "SampleData", bundle: Bundle(for: BoxOfficeListViewController.self))?.data
     
     func test_데이터불러오기테스트() {
         XCTAssertNotNil(data)
