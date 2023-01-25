@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct BoxofficeEndpoint: MovieAPIGetEndpoint {
+struct BoxofficeEndpoint: MovieAPIEndpoint {
     typealias APIResponse = BoxofficeResponse
     
+    let method: HTTPMethod = .get
     let path: String = "/boxoffice/searchDailyBoxOfficeList.json"
     let headers: [String : String]? = nil
     let date: Date
@@ -17,6 +18,7 @@ struct BoxofficeEndpoint: MovieAPIGetEndpoint {
     let movieType: MovieType?
     let nationType: NationType?
     let areaCode: String?
+    let body: Data? = nil
     var queries: [String: String?] {
         [
             "key": self.serviceKey,

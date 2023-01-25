@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct MovieInformationEndpoint: MovieAPIGetEndpoint {
+struct MovieInformationEndpoint: MovieAPIEndpoint {
     typealias APIResponse = MovieInformationResponse
     
+    let method: HTTPMethod = .get
+    let body: Data? = nil
     let path: String = "/movie/searchMovieInfo.json"
     let headers: [String : String]? = nil
     let movieCode: String

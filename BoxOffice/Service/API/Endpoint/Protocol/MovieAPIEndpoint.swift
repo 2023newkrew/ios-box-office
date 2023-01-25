@@ -8,5 +8,3 @@
 import Foundation
 
 protocol MovieAPIEndpoint: APIEndpoint, MovieAPIInformationOwner { }
-
-protocol MovieAPIGetEndpoint: MovieAPIEndpoint, APIGetEndpoint { }
