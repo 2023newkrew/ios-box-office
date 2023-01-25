@@ -58,18 +58,28 @@ final class NetworkService: NetworkServiceProtocol {
         var components = URLComponents(string: URLInfo.baseURL)
         components?.path = searchTarget.path
         
-        guard let appKey = URLInfo.key, let queryItems = queryItems else {
+        guard let appKey = URLInfo.key else {
             return nil
         }
         
-        var queries: [URLQueryItem] = [appKey]
-        
-        for query in queryItems {
-            let item = URLQueryItem(name: query.key, value: query.value)
-            queries.append(item)
-        }
-        components?.queryItems = queries
+        components?.queryItems?.append(appKey)
+        components?.queryItems?.append(contentsOf: quries(items: queryItems))
         
         return components
+    }
+    
+    private func quries(items: [String: String]?) -> [URLQueryItem] {
+        var queryItems: [URLQueryItem] = []
+        
+        guard let items = items else {
+            return []
+        }
+        
+        for item in items {
+            let query = URLQueryItem(name: item.key, value: item.value)
+            queryItems.append(query)
+        }
+        
+        return queryItems
     }
 }
