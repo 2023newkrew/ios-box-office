@@ -25,12 +25,8 @@ final class NetworkMockTests: XCTestCase {
             return
         }
         
-        var compo: URLComponents? = URLComponents(string: URLInfo.baseURL)
-        compo?.path = URLInfo.searchDetailMovieInfo.path
-        compo?.queryItems = [URLInfo.key!]
-        compo?.queryItems?.append(URLQueryItem(name: QueryKeys.movieCode, value: "20124079"))
-        guard let url = compo?.url else { return }
-        MockURLProtocol.successMock[url.absoluteString] = jsonDetailData
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=1a82fdb5f1e1ef5882cd8325ecb30e91&movieCd=20124079"
+        MockURLProtocol.successMock[url] = jsonDetailData
 
         let expects = XCTestExpectation(description: "영화 정보 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDetailMovieInfo,
@@ -54,12 +50,8 @@ final class NetworkMockTests: XCTestCase {
             return
         }
         
-        var compo: URLComponents? = URLComponents(string: URLInfo.baseURL)
-        compo?.path = URLInfo.searchDailyBoxOffice.path
-        compo?.queryItems = [URLInfo.key!]
-        compo?.queryItems?.append(URLQueryItem(name: QueryKeys.targetDate, value: Date.today))
-        guard let url = compo?.url else { return }
-        MockURLProtocol.successMock[url.absoluteString] = jsonDailyData
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=1a82fdb5f1e1ef5882cd8325ecb30e91&targetDt=20230125"
+        MockURLProtocol.successMock[url] = jsonDailyData
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
@@ -83,12 +75,8 @@ final class NetworkMockTests: XCTestCase {
             return
         }
         
-        var compo: URLComponents? = URLComponents(string: URLInfo.baseURL)
-        compo?.path = URLInfo.searchDailyBoxOffice.path
-        compo?.queryItems = [URLInfo.key!]
-        compo?.queryItems?.append(URLQueryItem(name: QueryKeys.targetDate, value: Date.today))
-        guard let url = compo?.url else { return }
-        MockURLProtocol.successMock[url.absoluteString] = jsonDailyData
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=1a82fdb5f1e1ef5882cd8325ecb30e91&targetDt=20230125"
+        MockURLProtocol.successMock[url] = jsonDailyData
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
@@ -112,12 +100,8 @@ final class NetworkMockTests: XCTestCase {
             return
         }
         
-        var compo: URLComponents? = URLComponents(string: URLInfo.baseURL)
-        compo?.path = URLInfo.searchDailyBoxOffice.path
-        compo?.queryItems = [URLInfo.key!]
-        compo?.queryItems?.append(URLQueryItem(name: QueryKeys.targetDate, value: Date.today))
-        guard let url = compo?.url else { return }
-        MockURLProtocol.successMock[url.absoluteString] = jsonDailyData
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=1a82fdb5f1e1ef5882cd8325ecb30e91&targetDt=20230125"
+        MockURLProtocol.successMock[url] = jsonDailyData
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
