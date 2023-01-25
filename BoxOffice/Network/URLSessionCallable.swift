@@ -8,8 +8,6 @@
 import Foundation
 
 protocol URLSessionCallable {
-    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
-}
-
-extension URLSession: URLSessionCallable {
+    func startLoading(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void)
+    func stopLoading()
 }

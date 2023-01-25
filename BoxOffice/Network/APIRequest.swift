@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum APIInfo {
+enum APIRequest {
     case getDailyBoxOffice(key: String,
                            targetDate: String,
                            itemPerPage: Int? = nil,
@@ -17,13 +17,11 @@ enum APIInfo {
                         movieCode: String)
     
     var urlString: String {
-        let boxOfficeBaseURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest"
-        
         switch self {
         case .getDailyBoxOffice:
-            return "\(boxOfficeBaseURL)/boxoffice/searchDailyBoxOfficeList.json"
+            return APIURL.dailyBoxOffice
         case .getMovieDetail:
-            return "\(boxOfficeBaseURL)/movie/searchMovieInfo.json"
+            return APIURL.movieDetail
         }
     }
     
