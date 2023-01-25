@@ -33,7 +33,6 @@
 		C223C703297935AE00FC3E9E /* DecodingUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6F2297915A000FC3E9E /* DecodingUtility.swift */; };
 		C223C7052979365B00FC3E9E /* MockingNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C7042979365B00FC3E9E /* MockingNetworkTests.swift */; };
 		C223C70A297937A500FC3E9E /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C709297937A500FC3E9E /* DateFormatter+Extension.swift */; };
-		C223C70C297937B500FC3E9E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C70B297937B500FC3E9E /* Date+Extension.swift */; };
 		C223C70F29793C2E00FC3E9E /* MockNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C70E29793C2E00FC3E9E /* MockNetworkProvider.swift */; };
 		C223C71029793CC500FC3E9E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6D72978FE0B00FC3E9E /* HTTPMethod.swift */; };
 		C223C71129793CC500FC3E9E /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6D12978D29400FC3E9E /* APIEndpoint.swift */; };
@@ -54,7 +53,6 @@
 		C223C722297948BE00FC3E9E /* MovieInformationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6D52978FD2700FC3E9E /* MovieInformationEndpoint.swift */; };
 		C223C723297948D700FC3E9E /* MovieAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6DD29790A0300FC3E9E /* MovieAPIEndpoint.swift */; };
 		C223C724297948DE00FC3E9E /* MovieAPIInformationOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C6E129790B1B00FC3E9E /* MovieAPIInformationOwner.swift */; };
-		C223C725297948EB00FC3E9E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C70B297937B500FC3E9E /* Date+Extension.swift */; };
 		C223C726297948EE00FC3E9E /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C709297937A500FC3E9E /* DateFormatter+Extension.swift */; };
 		C223C7282979492800FC3E9E /* DefaultMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223C7272979492800FC3E9E /* DefaultMovieService.swift */; };
 		C23A7FEF297505A600F0F348 /* BoxofficeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23A7FEE297505A600F0F348 /* BoxofficeResponse.swift */; };
@@ -102,7 +100,6 @@
 		C223C70029792C3A00FC3E9E /* MovieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieType.swift; sourceTree = "<group>"; };
 		C223C7042979365B00FC3E9E /* MockingNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingNetworkTests.swift; sourceTree = "<group>"; };
 		C223C709297937A500FC3E9E /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
-		C223C70B297937B500FC3E9E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		C223C70E29793C2E00FC3E9E /* MockNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkProvider.swift; sourceTree = "<group>"; };
 		C223C7182979436900FC3E9E /* URLSessionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionable.swift; sourceTree = "<group>"; };
 		C223C71A297943A200FC3E9E /* URLSession+URLSessionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+URLSessionable.swift"; sourceTree = "<group>"; };
@@ -263,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				C223C709297937A500FC3E9E /* DateFormatter+Extension.swift */,
-				C223C70B297937B500FC3E9E /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -391,7 +387,6 @@
 				C223C6DE29790A0300FC3E9E /* MovieAPIEndpoint.swift in Sources */,
 				C23A7FF329767EF600F0F348 /* JSONDecodingUtility.swift in Sources */,
 				C223C6E429790BF900FC3E9E /* BoxofficeEndpoint.swift in Sources */,
-				C223C70C297937B500FC3E9E /* Date+Extension.swift in Sources */,
 				C223C6EF2979133600FC3E9E /* URLSessionTask+Cancellable.swift in Sources */,
 				C223C70A297937A500FC3E9E /* DateFormatter+Extension.swift in Sources */,
 				C223C70129792C3A00FC3E9E /* MovieType.swift in Sources */,
@@ -425,7 +420,6 @@
 				C223C71E297948A700FC3E9E /* NationType.swift in Sources */,
 				C223C71C297943F600FC3E9E /* URLSessionable.swift in Sources */,
 				C223C703297935AE00FC3E9E /* DecodingUtility.swift in Sources */,
-				C223C725297948EB00FC3E9E /* Date+Extension.swift in Sources */,
 				C223C71229793CC500FC3E9E /* NetworkProvider.swift in Sources */,
 				C223C71029793CC500FC3E9E /* HTTPMethod.swift in Sources */,
 				C23A80022976832000F0F348 /* BoxofficeResponse.swift in Sources */,

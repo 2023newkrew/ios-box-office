@@ -20,7 +20,7 @@ struct BoxofficeEndpoint: MovieAPIGetEndpoint {
     var queries: [String: String?] {
         [
             "key": self.serviceKey,
-            "targetDt": self.date.convertToLiteral(),
+            "targetDt": DateFormatter.yearMonthDay.string(from: self.date),
             "itemPerPage": String(self.itemPerPage ?? 10),
             "multiMovieYn": self.movieType?.typeCode,
             "repNationCd": self.nationType?.typeCode,
