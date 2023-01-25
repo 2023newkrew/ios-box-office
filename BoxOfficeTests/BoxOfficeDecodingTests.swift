@@ -8,7 +8,7 @@
 import XCTest
 
 final class BoxOfficeDecodingTests: XCTestCase {
-    let sut = CodingUtility()
+    let sut = JSONDecodingUtility()
     var jsonData: NSDataAsset?
     
     override func setUpWithError() throws {
