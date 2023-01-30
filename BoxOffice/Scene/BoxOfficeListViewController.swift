@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BoxOfficeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
