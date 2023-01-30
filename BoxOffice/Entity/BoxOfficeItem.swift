@@ -25,4 +25,62 @@ struct BoxOfficeItem: Hashable {
         self.rank = rank
         self.rankDescription = rankDescription
     }
+    
+    init(_ dailyItem: DailyBoxOffice) {
+        let todayShowCount = dailyItem.audienceCount.thousandComma
+        let totalShowCount = dailyItem.audienceAccumulate.thousandComma
+        let isNewItem = dailyItem.rankType == "NEW"
+        let description = isNewItem ? "신작".colorNSAttributedString(.red) : dailyItem.rankChange.coloredDescription
+        
+        self.title = dailyItem.movieName
+        self.showCountInformation = "오늘 \(todayShowCount) / 총 \(totalShowCount)"
+        self.rank = dailyItem.rank
+        self.rankDescription = description
+    }
+}
+
+private extension String {
+    var thousandComma: String {
+        guard let value = Int(self) else {
+            return ""
+        }
+        
+        let numberFormmater = NumberFormatter()
+        numberFormmater.numberStyle = .decimal
+        
+        guard let thousandCommaResult = numberFormmater.string(from: NSNumber(value: value)) else {
+            return ""
+        }
+        
+        return thousandCommaResult
+    }
+    
+    var coloredDescription: NSAttributedString {
+        if self == "0" { return NSAttributedString(string: "-") }
+        guard let value = Int(self) else { return NSAttributedString(string: "-") }
+        if value < 0 {
+            let mutableString = NSMutableAttributedString(string: "▼")
+            mutableString.addAttribute(.foregroundColor,
+                                       value: UIColor.blue,
+                                       range: NSRange(location: 0, length: mutableString.length))
+            mutableString.append(NSAttributedString(string: "\(-value)"))
+            return NSAttributedString(attributedString: mutableString)
+        } else {
+            let mutableString = NSMutableAttributedString(string: "▲")
+            mutableString.addAttribute(.foregroundColor,
+                                       value: UIColor.red,
+                                       range: NSRange(location: 0, length: mutableString.length))
+            mutableString.append(NSAttributedString(string: description))
+            return NSAttributedString(attributedString: mutableString)
+        }
+    }
+    
+    func colorNSAttributedString(_ color: UIColor) -> NSAttributedString {
+        let mutableString = NSMutableAttributedString(string: self)
+        let range = NSRange(location: 0, length: self.count)
+        mutableString.addAttribute(.foregroundColor,
+                                   value: color,
+                                   range: range)
+        return mutableString
+    }
 }
