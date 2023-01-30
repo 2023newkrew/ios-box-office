@@ -12,18 +12,25 @@ class BoxOfficeListViewController: UIViewController {
         case main
     }
     
+    private lazy var refresh: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
+        
+        return refreshControl
+    }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: self.createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
+        collectionView.refreshControl = self.refresh
         
         return collectionView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<Section,
                                                                BoxOfficeItem>?
-    private let networkService: NetworkServiceProtocol? = NetworkService()
     private var items: [BoxOfficeItem] = []
+    private let networkService: NetworkServiceProtocol? = NetworkService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +54,11 @@ class BoxOfficeListViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    @objc func refreshCollectionView() {
+        loadData()
+        refresh.endRefreshing()
     }
 }
 
