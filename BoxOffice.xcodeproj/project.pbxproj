@@ -40,6 +40,8 @@
 		C270BDF1297BD01D00362D16 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270BDF0297BD01D00362D16 /* NetworkTest.swift */; };
 		C270BDF2297BD01D00362D16 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270BDF0297BD01D00362D16 /* NetworkTest.swift */; };
 		C2A9C85B2988038000895BE5 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A9C85A2988038000895BE5 /* BoxOfficeListCell.swift */; };
+		C2A9C85E2988059E00895BE5 /* BoxOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A9C85D2988059E00895BE5 /* BoxOfficeItem.swift */; };
+		C2A9C85F2988059E00895BE5 /* BoxOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A9C85D2988059E00895BE5 /* BoxOfficeItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,7 @@
 		C270BDED297BCEC500362D16 /* jsonMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonMockData.swift; sourceTree = "<group>"; };
 		C270BDF0297BD01D00362D16 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		C2A9C85A2988038000895BE5 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
+		C2A9C85D2988059E00895BE5 /* BoxOfficeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,7 @@
 				C23FCF2D29764E8E002971B4 /* Network */,
 				C2A9C8532987674100895BE5 /* Scene */,
 				C25A6AE729754EBF00C0E5C2 /* Models */,
+				C2A9C85C2988058800895BE5 /* Entity */,
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
@@ -211,6 +215,14 @@
 				C2A9C85A2988038000895BE5 /* BoxOfficeListCell.swift */,
 			);
 			path = CellConfigurations;
+			sourceTree = "<group>";
+		};
+		C2A9C85C2988058800895BE5 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C2A9C85D2988059E00895BE5 /* BoxOfficeItem.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +342,7 @@
 				C23FCF2F29764EAC002971B4 /* NetworkService.swift in Sources */,
 				C22297D92978553700D3FBC1 /* Ext+Date.swift in Sources */,
 				C200490F2976F1BF00012C3F /* MovieListResult.swift in Sources */,
+				C2A9C85E2988059E00895BE5 /* BoxOfficeItem.swift in Sources */,
 				C22297E0297856F500D3FBC1 /* URLInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +355,7 @@
 				C25A6B042975924F00C0E5C2 /* BoxOfficeSearchResult.swift in Sources */,
 				C25A6AF629758CEA00C0E5C2 /* BoxOfficeResultTests.swift in Sources */,
 				C270BDEE297BCEC500362D16 /* jsonMockData.swift in Sources */,
+				C2A9C85F2988059E00895BE5 /* BoxOfficeItem.swift in Sources */,
 				C22297DA2978554500D3FBC1 /* Ext+Date.swift in Sources */,
 				C2004914297785C100012C3F /* NetworkServiceProtocol.swift in Sources */,
 				C22297E12978570000D3FBC1 /* URLInfo.swift in Sources */,
