@@ -8,10 +8,12 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
+    enum Section {
+        case main
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
 
