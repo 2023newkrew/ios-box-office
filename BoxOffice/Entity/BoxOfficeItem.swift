@@ -15,6 +15,18 @@ struct BoxOfficeItem: Hashable {
     
     private let identifier = UUID()
     
+    private enum BoxOfficeContents {
+        static let newContents = "신작"
+        
+        static func showCountInformation(_ todayShowCount: String,
+                                         _ totalShowCount: String) -> String {
+            return "오늘 \(totalShowCount) / 총 \(totalShowCount)"
+        }
+        static func isNew(_ rankType: String) -> Bool {
+            return rankType == "NEW"
+        }
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }
@@ -29,11 +41,14 @@ struct BoxOfficeItem: Hashable {
     init(_ dailyItem: DailyBoxOffice) {
         let todayShowCount = dailyItem.audienceCount.thousandComma
         let totalShowCount = dailyItem.audienceAccumulate.thousandComma
-        let isNewItem = dailyItem.rankType == "NEW"
-        let description = isNewItem ? "신작".colorNSAttributedString(.red) : dailyItem.rankChange.coloredDescription
+        let isNewItem = BoxOfficeContents.isNew(dailyItem.rankType)
+        let description = isNewItem ?
+        BoxOfficeContents
+            .newContents.colorNSAttributedString(.red) : dailyItem.rankChange.coloredDescription
         
         self.title = dailyItem.movieName
-        self.showCountInformation = "오늘 \(todayShowCount) / 총 \(totalShowCount)"
+        self.showCountInformation = BoxOfficeContents
+            .showCountInformation(todayShowCount, totalShowCount)
         self.rank = dailyItem.rank
         self.rankDescription = description
     }
