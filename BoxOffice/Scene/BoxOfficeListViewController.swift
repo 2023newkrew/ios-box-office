@@ -20,10 +20,13 @@ class BoxOfficeListViewController: UIViewController {
         
         return collectionView
     }()
+    private var dataSource: UICollectionViewDiffableDataSource<Section,
+                                                               BoxOfficeItem>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
+        configureDataSource()
     }
 }
 
@@ -54,6 +57,32 @@ extension BoxOfficeListViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
+    }
+    
+    func configureDataSource() {
+        let cellRegistration = UICollectionView
+            .CellRegistration<BoxOfficeListCell,
+                              BoxOfficeItem> {
+                                  (cell, indexPath, newItem) in
+                                  cell.titleLabel.text = newItem.title
+                                  cell.rankLabel.text = newItem.rank
+                                  cell.rankDescriptionLabel
+                                      .attributedText = newItem.rankDescription
+                                  cell.showCountLabel.text = newItem.showCountInformation
+                                  cell.showsSeparator = true
+                              }
+        
+        dataSource = UICollectionViewDiffableDataSource
+        <Section,
+         BoxOfficeItem>(collectionView: collectionView) {
+             (collectionView: UICollectionView,
+              indexPath: IndexPath,
+              item: BoxOfficeItem) -> UICollectionViewCell? in
+             return collectionView
+                 .dequeueConfiguredReusableCell(using: cellRegistration,
+                                                for: indexPath,
+                                                item: item)
+         }
     }
 }
 
