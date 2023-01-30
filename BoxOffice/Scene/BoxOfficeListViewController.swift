@@ -22,11 +22,29 @@ class BoxOfficeListViewController: UIViewController {
     }()
     private var dataSource: UICollectionViewDiffableDataSource<Section,
                                                                BoxOfficeItem>?
+    private let networkService: NetworkServiceProtocol? = NetworkService()
+    private var items: [BoxOfficeItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
+    }
+    
+    func loadData() {
+        networkService?.fetch(searchTarget: .searchDailyBoxOffice,
+                              queryItems: [QueryKeys.targetDate: Date.yesterday]) {
+            [weak self] (response: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
+            switch response {
+            case .success(let data):
+                self?.items = data.result.dailyList.map { dailyItem in
+                    return BoxOfficeItem(dailyItem)
+                }
+                self?.updateUI()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -84,5 +102,20 @@ extension BoxOfficeListViewController {
                                                 item: item)
          }
     }
+    
+    func updateUI() {
+        var snapShot = NSDiffableDataSourceSnapshot<Section,
+                                                    BoxOfficeItem>()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(items)
+        dataSource?.apply(snapShot, animatingDifferences: false)
+    }
 }
 
+private extension Date {
+    static var titleDay: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: Self() - 86400)
+    }
+}
