@@ -13,4 +13,9 @@ extension Date {
         formatter.dateFormat = "yyyyMMdd"
         return formatter.string(from: Self())
     }
+    static var yesterday: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.string(from: Self() - 86400)
+    }
 }
