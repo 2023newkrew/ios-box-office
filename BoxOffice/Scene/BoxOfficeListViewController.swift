@@ -27,8 +27,10 @@ class BoxOfficeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureAttribute()
         configureHierarchy()
         configureDataSource()
+        loadData()
     }
     
     func loadData() {
@@ -65,6 +67,10 @@ extension BoxOfficeListViewController {
         section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+    
+    func configureAttribute() {
+        title = Date.titleDay
     }
     
     func configureHierarchy() {
