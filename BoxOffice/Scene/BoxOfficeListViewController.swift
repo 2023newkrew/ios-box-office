@@ -23,6 +23,7 @@ class BoxOfficeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureHierarchy()
     }
 }
 
@@ -43,6 +44,16 @@ extension BoxOfficeListViewController {
         section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+    
+    func configureHierarchy() {
+        view.addSubview(collectionView)
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
     }
 }
 
