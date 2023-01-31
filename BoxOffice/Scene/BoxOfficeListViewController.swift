@@ -42,7 +42,8 @@ class BoxOfficeListViewController: UIViewController {
     
     func loadData() {
         networkService?.fetch(searchTarget: .searchDailyBoxOffice,
-                              queryItems: [QueryKeys.targetDate: Date.yesterday]) {
+                              queryItems: [QueryKeys.targetDate: Date
+                                .dayString(.yesterday,format: .yyyyMMdd)]) {
             [weak self] (response: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch response {
             case .success(let data):
@@ -82,7 +83,7 @@ extension BoxOfficeListViewController {
     }
     
     func configureAttribute() {
-        title = Date.titleDay
+        title = Date.dayString(.yesterday, format: .yyyy_MM_dd)
     }
     
     func configureHierarchy() {
@@ -127,13 +128,5 @@ extension BoxOfficeListViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
         dataSource?.apply(snapShot, animatingDifferences: false)
-    }
-}
-
-private extension Date {
-    static var titleDay: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: Self() - 86400)
     }
 }
