@@ -59,7 +59,9 @@ class BoxOfficeListCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureAttribute()
+        configureHierarchy()
+        configureConstraints()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -67,7 +69,7 @@ class BoxOfficeListCell: UICollectionViewCell {
 }
 
 extension BoxOfficeListCell {
-    func configure() {
+    private func configureAttribute() {
         rankLabel.textAlignment = .center
         rankDescriptionLabel.textAlignment = .center
         
@@ -99,7 +101,9 @@ extension BoxOfficeListCell {
         
         accessoryImageView.image = chevronImage
         accessoryImageView.tintColor = UIColor.lightGray.withAlphaComponent(0.7)
-        
+    }
+    
+    private func configureHierarchy() {
         [titleLabel, showCountLabel].forEach { subView in
             movieInfoView.addArrangedSubview(subView)
         }
@@ -118,7 +122,9 @@ extension BoxOfficeListCell {
             }
         
         contentView.addSubview(stackView)
-        
+    }
+    
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -132,7 +138,7 @@ extension BoxOfficeListCell {
         ])
     }
     
-    func updateSeparator() {
+    private func updateSeparator() {
         separatorView.isHidden = !showsSeparator
     }
 }
