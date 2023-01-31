@@ -20,7 +20,7 @@ struct BoxOfficeItem: Hashable {
         
         static func showCountInformation(_ todayShowCount: String,
                                          _ totalShowCount: String) -> String {
-            return "오늘 \(totalShowCount) / 총 \(totalShowCount)"
+            return "오늘 \(todayShowCount) / 총 \(totalShowCount)"
         }
         static func isNew(_ rankType: String) -> Bool {
             return rankType == "NEW"
