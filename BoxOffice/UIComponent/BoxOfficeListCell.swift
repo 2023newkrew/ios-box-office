@@ -28,13 +28,13 @@ class BoxOfficeListCell: UICollectionViewListCell {
         static let rankWidthRatio = CGFloat(0.2)
     }
     
-    let rankLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rank)
+    private let rankLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rank)
     
-    let rankStatusLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rankStatus)
+    private let rankStatusLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rankStatus)
     
-    let titleLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.title)
+    private let titleLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.title)
     
-    let audienceStatisticsLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.audienceStatistics)
+    private let audienceStatisticsLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.audienceStatistics)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
