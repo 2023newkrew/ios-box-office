@@ -60,7 +60,7 @@ class BoxOfficeListViewController: UIViewController {
         <BoxOfficeListCell, BoxOfficeSummary> { (cell, indexPath, data) in
             cell.setData(data)
         }
-        self.dataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>(collectionView: boxOfficeCollectionView) {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>(collectionView: self.boxOfficeCollectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: BoxOfficeSummary) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
         }
@@ -85,7 +85,7 @@ class BoxOfficeListViewController: UIViewController {
         self.boxOfficeCollectionView.delegate = self
     }
     
-    @objc func loadData() {
+    @objc private func loadData() {
         self.refresher.beginRefreshing()
         
         let formatter = DateFormatter()

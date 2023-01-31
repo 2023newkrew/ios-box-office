@@ -102,10 +102,10 @@ class BoxOfficeListCell: UICollectionViewListCell {
     }
     
     private func setHierachy() {
-        self.addSubview(rankLabel)
-        self.addSubview(rankStatusLabel)
-        self.addSubview(titleLabel)
-        self.addSubview(audienceStatisticsLabel)
+        self.addSubview(self.rankLabel)
+        self.addSubview(self.rankStatusLabel)
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.audienceStatisticsLabel)
     }
     
     private func setConstraint() {
