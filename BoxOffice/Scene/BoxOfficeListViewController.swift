@@ -121,12 +121,8 @@ extension BoxOfficeListViewController {
             .CellRegistration<BoxOfficeListCell,
                               BoxOfficeItem> {
                                   (cell, indexPath, newItem) in
-                                  cell.titleLabel.text = newItem.title
-                                  cell.rankLabel.text = newItem.rank
-                                  cell.rankDescriptionLabel
-                                      .attributedText = newItem.rankDescription
-                                  cell.showCountLabel.text = newItem.showCountInformation
-                                  cell.showsSeparator = true
+                                  cell
+                                      .fillContents(newItem: newItem)
                               }
         
         dataSource = UICollectionViewDiffableDataSource
