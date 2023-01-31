@@ -127,32 +127,25 @@ class BoxOfficeListCell: UICollectionViewListCell {
     private func rankStatus(rankType: String, rankChange: Int) -> NSAttributedString {
         if rankType == "NEW" {
             return NSMutableAttributedString(string: "신작")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.red)
         }
         if rankType == "OLD" && rankChange > 0 {
             return NSMutableAttributedString(string: "▲")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.red)
             + NSMutableAttributedString(string: "\(rankChange)")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.black)
         }
         if rankType == "OLD" && rankChange < 0 {
             return NSMutableAttributedString(string: "▼")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.blue)
             + NSMutableAttributedString(string: "\(abs(rankChange))")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.black)
         }
         if rankType == "OLD" && rankChange == 0 {
             return NSMutableAttributedString(string: "-")
-                .applyFont(LabelFont.rankStatus)
                 .applyColor(.black)
         }
         return NSMutableAttributedString(string: "Error")
-            .applyFont(LabelFont.rankStatus)
             .applyColor(.green)
     }
 }

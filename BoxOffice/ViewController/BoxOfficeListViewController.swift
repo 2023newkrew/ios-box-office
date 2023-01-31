@@ -123,14 +123,6 @@ class BoxOfficeListViewController: UIViewController {
             }
         }
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        guard previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory else {
-            return
-        }
-        self.boxOfficeCollectionView.collectionViewLayout.invalidateLayout()
-    }
 }
 
 extension BoxOfficeListViewController: UICollectionViewDelegate {

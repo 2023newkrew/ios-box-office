@@ -7,23 +7,7 @@
 
 import UIKit
 
-extension NSMutableAttributedString {
-    func applyFont(_ font: UIFont) -> NSMutableAttributedString {
-        let range = NSRange(location: 0, length: self.string.count)
-        self.addAttribute(.font,
-                          value: font,
-                          range: range)
-        return self
-    }
-    
-    func applyPreferredFont(_ font: UIFont.TextStyle) -> NSMutableAttributedString {
-        let range = NSRange(location: 0, length: self.string.count)
-        self.addAttribute(.font,
-                          value: UIFont.preferredFont(forTextStyle: font),
-                          range: range)
-        return self
-    }
-    
+extension NSMutableAttributedString {    
     func applyColor(_ color: UIColor) -> NSMutableAttributedString {
         self.addAttribute(.foregroundColor,
                           value: color,
