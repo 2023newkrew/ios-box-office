@@ -21,7 +21,9 @@ class BoxOfficeListCell: UICollectionViewListCell {
         static let horizontalPadding = CGFloat(15)
         
         static let itemVertialMargin = CGFloat(5)
-        static let itemHorizontalMargin = CGFloat(20)
+        static let itemHorizontalMargin = CGFloat(10)
+        
+        static let accessoryWidth = CGFloat(30)
         
         static let rankWidthRatio = CGFloat(0.2)
     }
@@ -94,10 +96,9 @@ class BoxOfficeListCell: UICollectionViewListCell {
     }
     
     private func setAttribute() {
-        self.layoutMargins = .init(top: 0, left: 0, bottom: 0, right: Constraint.horizontalPadding)
         self.layer.borderColor = UIColor.systemGray4.cgColor
         self.layer.borderWidth = 0.5
-        self.accessories = [.disclosureIndicator(options: .init(tintColor: .systemGray))]
+        self.accessories = [.disclosureIndicator(options: .init(reservedLayoutWidth: .custom(Constraint.accessoryWidth), tintColor: .systemGray))]
         self.backgroundColor = .white
     }
     
@@ -139,7 +140,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
                 .constraint(equalTo: self.rankLabel.centerYAnchor),
             self.titleLabel.trailingAnchor
                 .constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                            constant: -Constraint.horizontalPadding),
+                            constant: -Constraint.horizontalPadding - Constraint.accessoryWidth),
             
             self.audienceStatisticsLabel.topAnchor
                 .constraint(equalTo: self.titleLabel.bottomAnchor,
@@ -151,7 +152,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
                             constant: -Constraint.verticalPadding),
             self.audienceStatisticsLabel.trailingAnchor
                 .constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                            constant: -Constraint.horizontalPadding)
+                            constant: -Constraint.horizontalPadding - Constraint.accessoryWidth),
         ])
     }
     

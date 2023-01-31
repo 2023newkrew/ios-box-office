@@ -20,7 +20,7 @@ class BoxOfficeListViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>?
     
     private let boxOfficeCollectionView: UICollectionView = {
-        let heightDimension = NSCollectionLayoutDimension.estimated(100)
+        let heightDimension = NSCollectionLayoutDimension.estimated(50)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: heightDimension)
@@ -122,6 +122,14 @@ class BoxOfficeListViewController: UIViewController {
                 self.refresher.endRefreshing()
             }
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory else {
+            return
+        }
+        self.boxOfficeCollectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
