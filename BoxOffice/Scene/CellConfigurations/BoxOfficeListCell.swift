@@ -51,7 +51,7 @@ class BoxOfficeListCell: UICollectionViewCell {
     private let rankLabel = UILabel()
     private let rankDescriptionLabel = UILabel()
     
-    var showsSeparator = true {
+    private var showsSeparator = true {
         didSet {
             updateSeparator()
         }
@@ -65,6 +65,15 @@ class BoxOfficeListCell: UICollectionViewCell {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func fillContents(newItem: BoxOfficeItem) {
+        titleLabel.text = newItem.title
+        rankLabel.text = newItem.rank
+        rankDescriptionLabel
+            .attributedText = newItem.rankDescription
+        showCountLabel.text = newItem.showCountInformation
+        showsSeparator = true
     }
 }
 
