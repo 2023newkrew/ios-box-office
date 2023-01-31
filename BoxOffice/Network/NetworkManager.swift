@@ -14,27 +14,28 @@ enum NetworkError: Error {
 }
 
 class NetworkManager {
-    func load(api: API, yyyyMMdd: String, completion: @escaping (Result<String, NetworkError>) -> Void) {
-        guard let url = URL(string: api.url(yyyyMMdd: yyyyMMdd)) else {
-            completion(.failure(.wrongURL))
-            return
+    func apiURL(api: API, yyyyMMdd: String) -> URL? {
+        return URL(string: api.finalURL(yyyyMMdd: yyyyMMdd))
+    }
+    
+    func load(url: URL?, completion: @escaping (Result<String, NetworkError>) -> Void) {
+        guard let url = url else {
+            return completion(.failure(.wrongURL))
         }
         
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error {
-                completion(.failure(.some))
-                return
+                return completion(.failure(.some))
             }
             guard let httpResponse = response as? HTTPURLResponse,
                 (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(.wrongResponse))
-                return
+                return completion(.failure(.wrongResponse))
             }
             if let mimeType = httpResponse.mimeType,
                 mimeType == "application/json",
                 let data = data,
                 let dataString = String(data: data, encoding: .utf8) {
-                completion(.success(dataString))
+                return completion(.success(dataString))
             }
         }
         task.resume()

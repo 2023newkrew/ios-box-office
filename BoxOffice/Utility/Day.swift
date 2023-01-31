@@ -7,24 +7,16 @@
 
 import Foundation
 
-enum DateString {
+enum Day {
     case today
     case yesterday
     
     var date: Date {
         switch self {
         case .today:
-            if #available(iOS 15, *) {
-                return Date.now
-            } else {
-                return Date()
-            }
+            return Date()
         case .yesterday:
-            if #available(iOS 15, *) {
-                return Calendar.current.date(byAdding: .day, value: -1, to: Date.now) ?? Date()
-            } else {
-                return Date()
-            }
+            return Date(timeIntervalSinceNow: -86400)
         }
     }
     var dateFormatter: DateFormatter {
@@ -37,7 +29,7 @@ enum DateString {
         }
         return formatter
     }
-    var value: String {
+    var formattedDate: String {
         return dateFormatter.string(from: date)
     }
 }

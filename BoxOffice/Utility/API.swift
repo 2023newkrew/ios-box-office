@@ -11,16 +11,20 @@ enum API {
     case dailyBoxOffice
     case movie
     
-    var baseURL: String {
+    private var baseURL: String {
+        return "https://www.kobis.or.kr/kobisopenapi/webservice/rest/"
+    }
+    
+    private var url: String {
         switch self {
         case .dailyBoxOffice:
-            return "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
+            return baseURL + "boxoffice/searchDailyBoxOfficeList.json?"
         case .movie:
-            return "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?"
+            return baseURL + "movie/searchMovieInfo.json?"
         }
     }
     
-    func url(yyyyMMdd: String) -> String {
-        return self.baseURL + "key=" + Storage.koficAPIKey + "&targetDt=" + yyyyMMdd
+    func finalURL(yyyyMMdd: String) -> String {
+        return self.url + "key=" + Storage.koficAPIKey + "&targetDt=" + yyyyMMdd
     }
 }
