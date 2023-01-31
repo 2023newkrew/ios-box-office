@@ -82,3 +82,14 @@ struct DailyBoxOfficeSearchResult: Decodable {
     }
 }
 
+
+extension DailyBoxOfficeSearchResult.DailyBoxOffice {
+    func summary() -> BoxOfficeSummary {
+        return BoxOfficeSummary(title: self.movieName,
+                                rank: self.rank,
+                                rankChange: self.rankChange,
+                                rankType: self.rankType,
+                                audienceCount: self.audienceCount,
+                                audienceTotal: self.audienceAccumulate)
+    }
+}

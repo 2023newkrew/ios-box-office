@@ -1,5 +1,5 @@
 //
-//  String+Extention.swift
+//  String+Extension.swift
 //  BoxOffice
 //
 //  Created by john-lim on 2023/01/30.
