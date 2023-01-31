@@ -10,11 +10,11 @@ import UIKit
 class BoxOfficeListCell: UICollectionViewCell {
     static let reuseIdentifier = "box-office-list-cell-reuseidentifier"
     
-    let accessoryImageView = UIImageView()
+    private let accessoryImageView = UIImageView()
     
-    let separatorView = UIView()
+    private let separatorView = UIView()
     
-    let stackView:  UIStackView = {
+    private let stackView:  UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -22,7 +22,7 @@ class BoxOfficeListCell: UICollectionViewCell {
         return stackView
     }()
     
-    let labelStackView: UIStackView = {
+    private let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -32,24 +32,24 @@ class BoxOfficeListCell: UICollectionViewCell {
         return stackView
     }()
     
-    let movieInfoView: UIStackView = {
+    private let movieInfoView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         
         return stackView
     }()
     
-    let titleLabel = UILabel()
-    let showCountLabel = UILabel()
+    private let titleLabel = UILabel()
+    private let showCountLabel = UILabel()
     
-    let rankInfoView: UIStackView = {
+    private let rankInfoView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         
         return stackView
     }()
-    let rankLabel = UILabel()
-    let rankDescriptionLabel = UILabel()
+    private let rankLabel = UILabel()
+    private let rankDescriptionLabel = UILabel()
     
     var showsSeparator = true {
         didSet {
