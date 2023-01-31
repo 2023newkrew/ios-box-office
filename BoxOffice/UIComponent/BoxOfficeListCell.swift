@@ -28,45 +28,13 @@ class BoxOfficeListCell: UICollectionViewListCell {
         static let rankWidthRatio = CGFloat(0.2)
     }
     
-    let rankLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = LabelFont.rank
-        label.adjustsFontForContentSizeCategory = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
+    let rankLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rank)
     
-    let rankStatusLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = LabelFont.rankStatus
-        label.adjustsFontForContentSizeCategory = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
+    let rankStatusLabel: UILabel = UILabel(textAlignment: .center, font: LabelFont.rankStatus)
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = LabelFont.title
-        label.adjustsFontForContentSizeCategory = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
+    let titleLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.title)
     
-    let audienceStatisticsLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = LabelFont.audienceStatistics
-        label.adjustsFontForContentSizeCategory = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
+    let audienceStatisticsLabel: UILabel = UILabel(textAlignment: .left, font: LabelFont.audienceStatistics)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -186,5 +154,16 @@ class BoxOfficeListCell: UICollectionViewListCell {
         return NSMutableAttributedString(string: "Error")
             .applyFont(LabelFont.rankStatus)
             .applyColor(.green)
+    }
+}
+
+private extension UILabel {
+    convenience init(textAlignment: NSTextAlignment, font: UIFont){
+        self.init()
+        self.textAlignment = textAlignment
+        self.font = font
+        self.adjustsFontForContentSizeCategory = true
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.numberOfLines = 0
     }
 }
