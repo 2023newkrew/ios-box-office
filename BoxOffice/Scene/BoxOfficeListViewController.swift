@@ -8,22 +8,28 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
-    enum Section {
+    private enum Section {
         case main
     }
     
-    private lazy var refresh: UIRefreshControl = {
+    private lazy var refreshBoxOfficeList: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         return refreshControl
+    }()
+    private let activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return activityView
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: self.createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
-        collectionView.refreshControl = self.refresh
+        collectionView.refreshControl = self.refreshBoxOfficeList
         
         return collectionView
     }()
@@ -35,12 +41,16 @@ class BoxOfficeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureAttribute()
-        configureHierarchy()
+        configureConstraints()
         configureDataSource()
-        loadData()
+        loadData { [weak self] in
+            DispatchQueue.main.async {
+                self?.activityView.stopAnimating()
+            }
+        }
     }
     
-    func loadData() {
+    private func loadData(_ completion: @escaping () -> Void) {
         networkService?.fetch(searchTarget: .searchDailyBoxOffice,
                               queryItems: [QueryKeys.targetDate: Date
                                 .dayString(.yesterday,format: .yyyyMMdd)]) {
@@ -51,20 +61,24 @@ class BoxOfficeListViewController: UIViewController {
                     return BoxOfficeItem(dailyItem)
                 }
                 self?.updateUI()
+                completion()
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    @objc func refreshCollectionView() {
-        loadData()
-        refresh.endRefreshing()
+    @objc private func refreshCollectionView() {
+        loadData { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshBoxOfficeList.endRefreshing()
+            }
+        }
     }
 }
 
 extension BoxOfficeListViewController {
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let estimatedHeight = CGFloat(100)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .estimated(estimatedHeight))
@@ -82,13 +96,19 @@ extension BoxOfficeListViewController {
         return layout
     }
     
-    func configureAttribute() {
+    private func configureAttribute() {
+        activityView.startAnimating()
         title = Date.dayString(.yesterday, format: .yyyy_MM_dd)
     }
     
-    func configureHierarchy() {
-        view.addSubview(collectionView)
+    private func configureConstraints() {
+        [collectionView, activityView].forEach { subview in
+            view.addSubview(subview)
+        }
+        
         NSLayoutConstraint.activate([
+            activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -96,7 +116,7 @@ extension BoxOfficeListViewController {
         ])
     }
     
-    func configureDataSource() {
+    private func configureDataSource() {
         let cellRegistration = UICollectionView
             .CellRegistration<BoxOfficeListCell,
                               BoxOfficeItem> {
@@ -122,7 +142,7 @@ extension BoxOfficeListViewController {
          }
     }
     
-    func updateUI() {
+    private func updateUI() {
         var snapShot = NSDiffableDataSourceSnapshot<Section,
                                                     BoxOfficeItem>()
         snapShot.appendSections([.main])
