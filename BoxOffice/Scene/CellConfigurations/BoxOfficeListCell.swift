@@ -32,7 +32,7 @@ class BoxOfficeListCell: UICollectionViewCell {
         return stackView
     }()
     
-    let rightStackView: UIStackView = {
+    let movieInfoView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         
@@ -42,7 +42,7 @@ class BoxOfficeListCell: UICollectionViewCell {
     let titleLabel = UILabel()
     let showCountLabel = UILabel()
     
-    let leftStackView: UIStackView = {
+    let rankInfoView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         
@@ -101,14 +101,14 @@ extension BoxOfficeListCell {
         accessoryImageView.tintColor = UIColor.lightGray.withAlphaComponent(0.7)
         
         [titleLabel, showCountLabel].forEach { subView in
-            rightStackView.addArrangedSubview(subView)
+            movieInfoView.addArrangedSubview(subView)
         }
         
         [rankLabel, rankDescriptionLabel].forEach { subView in
-            leftStackView.addArrangedSubview(subView)
+            rankInfoView.addArrangedSubview(subView)
         }
         
-        [leftStackView, rightStackView, accessoryImageView].forEach { subStackView in
+        [rankInfoView, movieInfoView, accessoryImageView].forEach { subStackView in
             labelStackView.addArrangedSubview(subStackView)
         }
         
@@ -126,7 +126,7 @@ extension BoxOfficeListCell {
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             labelStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            leftStackView.widthAnchor.constraint(equalTo: labelStackView.widthAnchor, multiplier: 0.2),
+            rankInfoView.widthAnchor.constraint(equalTo: labelStackView.widthAnchor, multiplier: 0.2),
             accessoryImageView.widthAnchor.constraint(equalToConstant: 13),
             accessoryImageView.heightAnchor.constraint(equalToConstant: 20)
         ])
