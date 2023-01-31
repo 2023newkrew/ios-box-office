@@ -13,8 +13,6 @@ struct BoxOfficeItem: Hashable {
     let rank: String
     let rankDescription: NSAttributedString
     
-    private let identifier = UUID()
-    
     private enum BoxOfficeContents {
         static let newContents = "신작"
         
@@ -27,11 +25,10 @@ struct BoxOfficeItem: Hashable {
         }
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(identifier)
-    }
-    
-    init(title: String, showCountInformation: String, rank: String, rankDescription: NSAttributedString) {
+    init(title: String,
+         showCountInformation: String,
+         rank: String,
+         rankDescription: NSAttributedString) {
         self.title = title
         self.showCountInformation = showCountInformation
         self.rank = rank
@@ -39,8 +36,8 @@ struct BoxOfficeItem: Hashable {
     }
     
     init(_ dailyItem: DailyBoxOffice) {
-        let todayShowCount = dailyItem.audienceCount.thousandComma
-        let totalShowCount = dailyItem.audienceAccumulate.thousandComma
+        let todayShowCount = dailyItem.audienceCount.thousandSeparator
+        let totalShowCount = dailyItem.audienceAccumulate.thousandSeparator
         let isNewItem = BoxOfficeContents.isNew(dailyItem.rankType)
         let description = (isNewItem ?
         BoxOfficeContents
@@ -56,7 +53,7 @@ struct BoxOfficeItem: Hashable {
 }
 
 private extension String {
-    var thousandComma: String {
+    var thousandSeparator: String {
         guard let value = Int(self) else {
             return ""
         }
