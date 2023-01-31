@@ -42,9 +42,10 @@ struct BoxOfficeItem: Hashable {
         let todayShowCount = dailyItem.audienceCount.thousandComma
         let totalShowCount = dailyItem.audienceAccumulate.thousandComma
         let isNewItem = BoxOfficeContents.isNew(dailyItem.rankType)
-        let description = isNewItem ?
+        let description = (isNewItem ?
         BoxOfficeContents
-            .newContents.colorNSAttributedString(.red) : dailyItem.rankChange.coloredDescription
+            .newContents.colorNSAttributedString(.red) : dailyItem.rankChange.coloredDescription)
+            .addLabelFont
         
         self.title = dailyItem.movieName
         self.showCountInformation = BoxOfficeContents
@@ -97,5 +98,18 @@ private extension String {
                                    value: color,
                                    range: range)
         return mutableString
+    }
+}
+
+private extension NSAttributedString {
+    var addLabelFont: NSAttributedString {
+        let mutable = NSMutableAttributedString(attributedString: self)
+        let length = mutable.length
+        let range = NSRange(location: 0, length: length)
+        
+        mutable.addAttribute(.font,
+                             value: UIFont.preferredFont(forTextStyle: .caption1),
+                             range: range)
+        return mutable
     }
 }
