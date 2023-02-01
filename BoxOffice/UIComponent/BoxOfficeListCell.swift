@@ -23,8 +23,6 @@ class BoxOfficeListCell: UICollectionViewListCell {
         static let itemVertialMargin = CGFloat(5)
         static let itemHorizontalMargin = CGFloat(10)
         
-        static let accessoryWidth = CGFloat(30)
-        
         static let rankWidthRatio = CGFloat(0.2)
     }
     
@@ -66,27 +64,28 @@ class BoxOfficeListCell: UICollectionViewListCell {
     private func setAttribute() {
         self.layer.borderColor = UIColor.systemGray4.cgColor
         self.layer.borderWidth = 0.5
-        self.accessories = [.disclosureIndicator(options: .init(reservedLayoutWidth: .custom(Constraint.accessoryWidth), tintColor: .systemGray))]
+        self.accessories = [.disclosureIndicator(options: .init(tintColor: .systemGray))]
         self.backgroundColor = .white
     }
     
     private func setHierachy() {
-        self.addSubview(self.rankLabel)
-        self.addSubview(self.rankStatusLabel)
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.audienceStatisticsLabel)
+        self.contentView.addSubview(self.rankLabel)
+        self.contentView.addSubview(self.rankStatusLabel)
+        self.contentView.addSubview(self.titleLabel)
+        self.contentView.addSubview(self.audienceStatisticsLabel)
     }
     
     private func setConstraint() {
+        let safeArea = self.contentView.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             self.rankLabel.topAnchor
-                .constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.topAnchor,
+                .constraint(greaterThanOrEqualTo: safeArea.topAnchor,
                             constant: Constraint.verticalPadding),
             self.rankLabel.leadingAnchor
-                .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                .constraint(equalTo: safeArea.leadingAnchor,
                             constant: Constraint.horizontalPadding),
             self.rankLabel.widthAnchor
-                .constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor,
+                .constraint(equalTo: safeArea.widthAnchor,
                             multiplier: Constraint.rankWidthRatio),
             
             self.rankStatusLabel.topAnchor
@@ -95,11 +94,11 @@ class BoxOfficeListCell: UICollectionViewListCell {
             self.rankStatusLabel.centerXAnchor
                 .constraint(equalTo: self.rankLabel.centerXAnchor),
             self.rankStatusLabel.bottomAnchor
-                .constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor,
+                .constraint(lessThanOrEqualTo: safeArea.bottomAnchor,
                             constant: -Constraint.verticalPadding),
             
             self.titleLabel.topAnchor
-                .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                .constraint(equalTo: safeArea.topAnchor,
                             constant: Constraint.verticalPadding),
             self.titleLabel.leadingAnchor
                 .constraint(equalTo: self.rankLabel.trailingAnchor,
@@ -107,8 +106,8 @@ class BoxOfficeListCell: UICollectionViewListCell {
             self.titleLabel.centerYAnchor
                 .constraint(equalTo: self.rankLabel.centerYAnchor),
             self.titleLabel.trailingAnchor
-                .constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                            constant: -Constraint.horizontalPadding - Constraint.accessoryWidth),
+                .constraint(lessThanOrEqualTo: safeArea.trailingAnchor,
+                            constant: -Constraint.horizontalPadding),
             
             self.audienceStatisticsLabel.topAnchor
                 .constraint(equalTo: self.titleLabel.bottomAnchor,
@@ -116,11 +115,11 @@ class BoxOfficeListCell: UICollectionViewListCell {
             self.audienceStatisticsLabel.leadingAnchor
                 .constraint(equalTo: self.titleLabel.leadingAnchor),
             self.audienceStatisticsLabel.bottomAnchor
-                .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                .constraint(equalTo: safeArea.bottomAnchor,
                             constant: -Constraint.verticalPadding),
             self.audienceStatisticsLabel.trailingAnchor
-                .constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor,
-                            constant: -Constraint.horizontalPadding - Constraint.accessoryWidth),
+                .constraint(lessThanOrEqualTo: safeArea.trailingAnchor,
+                            constant: -Constraint.horizontalPadding),
         ])
     }
     
