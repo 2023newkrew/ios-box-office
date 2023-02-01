@@ -72,7 +72,7 @@ class BoxOfficeListViewController: UIViewController {
         self.boxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
     }
     
-    private func setAttribute(){
+    private func setAttribute() {
         self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
         
         self.boxOfficeCollectionView.refreshControl = refresher
