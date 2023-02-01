@@ -93,24 +93,19 @@ class BoxOfficeListViewController: UIViewController {
         let apiProvider = APIProvider(request: request)
         
         apiProvider.startLoading { data, _, _ in
-            guard let data = data else {
-                return
-            }
-            guard let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) else {
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.title = formatter.yesterday(format: DateFormat.title)
-                let summarys = boxOfficeList.dailyList.map { boxOffice in
-                    boxOffice.summary()
+                if let data = data,
+                   let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
+                    self.title = formatter.yesterday(format: DateFormat.title)
+                    let summarys = boxOfficeList.dailyList.map { boxOffice in
+                        boxOffice.summary()
+                    }
+                    
+                    var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
+                    snapshot.appendSections([.main])
+                    snapshot.appendItems(summarys)
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
                 }
-                
-                var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
-                snapshot.appendSections([.main])
-                snapshot.appendItems(summarys)
-                self.dataSource.apply(snapshot, animatingDifferences: true)
-                
                 self.refresher.endRefreshing()
             }
         }
