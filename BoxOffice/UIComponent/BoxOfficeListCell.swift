@@ -128,22 +128,28 @@ class BoxOfficeListCell: UICollectionViewListCell {
             return NSMutableAttributedString(string: "신작")
                 .applyColor(.red)
         }
-        if rankType == "OLD" && rankChange > 0 {
-            return NSMutableAttributedString(string: "▲")
-                .applyColor(.red)
-            + NSMutableAttributedString(string: "\(rankChange)")
-                .applyColor(.black)
+        
+        if rankType == "OLD" {
+            switch rankChange.signum() {
+            case 1:
+                return NSMutableAttributedString(string: "▲")
+                    .applyColor(.red)
+                + NSMutableAttributedString(string: "\(rankChange)")
+                    .applyColor(.black)
+            case -1:
+                return NSMutableAttributedString(string: "▼")
+                    .applyColor(.blue)
+                + NSMutableAttributedString(string: "\(abs(rankChange))")
+                    .applyColor(.black)
+            case 0:
+                return NSMutableAttributedString(string: "-")
+                    .applyColor(.black)
+            default:
+                return NSMutableAttributedString(string: "Error")
+                    .applyColor(.green)
+            }
         }
-        if rankType == "OLD" && rankChange < 0 {
-            return NSMutableAttributedString(string: "▼")
-                .applyColor(.blue)
-            + NSMutableAttributedString(string: "\(abs(rankChange))")
-                .applyColor(.black)
-        }
-        if rankType == "OLD" && rankChange == 0 {
-            return NSMutableAttributedString(string: "-")
-                .applyColor(.black)
-        }
+        
         return NSMutableAttributedString(string: "Error")
             .applyColor(.green)
     }
