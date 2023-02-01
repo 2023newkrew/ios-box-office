@@ -8,9 +8,24 @@
 import Foundation
 
 extension Date {
-    static var today: String {
+    enum Days {
+        case today
+        case yesterday
+    }
+    
+    enum DayFormat: String {
+        case yyyyMMdd = "yyyyMMdd"
+        case yyyy_MM_dd = "yyyy-MM-dd"
+    }
+    
+    static func dayString(_ day: Days, format: DayFormat) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.string(from: Self())
+        formatter.dateFormat = format.rawValue
+        switch day {
+        case .today:
+            return formatter.string(from: Self())
+        case .yesterday:
+            return formatter.string(from: Self() - 86400)
+        }
     }
 }

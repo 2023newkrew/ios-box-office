@@ -36,7 +36,7 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -54,11 +54,12 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                  queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
-                XCTAssertEqual(success.result.searchRange, "\(Date.today)~\(Date.today)")
+                let today = Date.dayString(.today, format: .yyyyMMdd)
+                XCTAssertEqual(success.result.searchRange, "\(today)~\(today)")
                 expects.fulfill()
             case .failure(let failure):
                 XCTFail(failure.localizedDescription)
@@ -72,7 +73,7 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):

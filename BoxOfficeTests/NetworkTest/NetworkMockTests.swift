@@ -55,7 +55,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -80,7 +80,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -105,7 +105,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.today]) {
+                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
