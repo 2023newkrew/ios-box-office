@@ -37,7 +37,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setAttribute()
-        self.setHierachy()
+        self.setHierarchy()
         self.setConstraint()
     }
     
@@ -68,7 +68,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
         self.backgroundColor = .white
     }
     
-    private func setHierachy() {
+    private func setHierarchy() {
         self.contentView.addSubview(self.rankLabel)
         self.contentView.addSubview(self.rankStatusLabel)
         self.contentView.addSubview(self.titleLabel)
@@ -150,7 +150,7 @@ class BoxOfficeListCell: UICollectionViewListCell {
 }
 
 private extension UILabel {
-    convenience init(textAlignment: NSTextAlignment, font: UIFont){
+    convenience init(textAlignment: NSTextAlignment, font: UIFont) {
         self.init()
         self.textAlignment = textAlignment
         self.font = font
