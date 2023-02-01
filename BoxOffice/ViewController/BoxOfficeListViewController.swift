@@ -17,7 +17,15 @@ class BoxOfficeListViewController: UIViewController {
         case main
     }
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>?
+    private let cellRegistration = UICollectionView.CellRegistration
+    <BoxOfficeListCell, BoxOfficeSummary> { (cell, indexPath, data) in
+        cell.setData(data)
+    }
+    
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, BoxOfficeSummary> = UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>(collectionView: self.boxOfficeCollectionView) {
+        (collectionView: UICollectionView, indexPath: IndexPath, identifier: BoxOfficeSummary) -> UICollectionViewCell? in
+        return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
+    }
     
     private let boxOfficeCollectionView: UICollectionView = {
         let heightDimension = NSCollectionLayoutDimension.estimated(50)
@@ -37,14 +45,10 @@ class BoxOfficeListViewController: UIViewController {
         return collectionView
     }()
     
-    private let refresher: UIRefreshControl = {
-        let refresh = UIRefreshControl()
-        return refresh
-    }()
+    private let refresher: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setDataSource()
         self.setHierarchy()
         self.setConstraint()
         self.setAttribute()
@@ -53,17 +57,6 @@ class BoxOfficeListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.loadData()
-    }
-    
-    private func setDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration
-        <BoxOfficeListCell, BoxOfficeSummary> { (cell, indexPath, data) in
-            cell.setData(data)
-        }
-        self.dataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeSummary>(collectionView: self.boxOfficeCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: BoxOfficeSummary) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
-        }
     }
     
     private func setHierarchy() {
@@ -81,6 +74,7 @@ class BoxOfficeListViewController: UIViewController {
     
     private func setAttribute(){
         self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        
         self.boxOfficeCollectionView.refreshControl = refresher
         self.boxOfficeCollectionView.delegate = self
     }
@@ -89,7 +83,6 @@ class BoxOfficeListViewController: UIViewController {
         self.refresher.beginRefreshing()
         
         let formatter = DateFormatter()
-        self.title = formatter.yesterday(format: DateFormat.title)
         
         guard let key = SecretKey.boxOfficeAPIKey else {
             return
@@ -108,6 +101,7 @@ class BoxOfficeListViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
+                self.title = formatter.yesterday(format: DateFormat.title)
                 let summarys = boxOfficeList.dailyList.map { boxOffice in
                     boxOffice.summary()
                 }
@@ -115,10 +109,8 @@ class BoxOfficeListViewController: UIViewController {
                 var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(summarys)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
                 
-                if let dataSource  = self.dataSource {
-                    dataSource.apply(snapshot, animatingDifferences: true)
-                }
                 self.refresher.endRefreshing()
             }
         }
