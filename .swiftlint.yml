@@ -24,7 +24,7 @@ file_length:
   warning: 500
   error: 1200
 type_name:
-  min_length: 4
+  min_length: 3
   max_length:
     warning: 40
     error: 50
@@ -32,7 +32,7 @@ type_name:
   allowed_symbols: ["_"]
 identifier_name:
   min_length:
-    error: 4
+    error: 3
   excluded:
     - id
     - URL

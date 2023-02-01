@@ -129,4 +129,7 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcwork
+
+Storage.swift
+
 ???END
