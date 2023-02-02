@@ -58,22 +58,16 @@ extension APIProvider: URLSessionCallable {
         }
         
         self.dataTask = session.dataTask(with: urlRequest){ data, response, error in
-            guard error == nil else {
+            if error != nil {
                 print("fail : ", error?.localizedDescription ?? "")
-                return
             }
             
             let successsRange = 200..<300
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode)
-            else {
+            if let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode) == false {
                 print("error : ", (response as? HTTPURLResponse)?.statusCode ?? 0)
                 print("msg : ", (response as? HTTPURLResponse)?.description ?? "")
-                return
             }
             
-            guard let data = data else {
-                return
-            }
             completion(data, response, error)
         }
         
