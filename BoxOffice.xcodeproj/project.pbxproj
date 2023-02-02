@@ -24,6 +24,7 @@
 		D7459ED3298B550200E78040 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779AC5129874E8D00F10A50 /* String+Extension.swift */; };
 		D7459ED4298B550400E78040 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D12982593600B4189E /* NSMutableAttributedString+Extension.swift */; };
 		D7459ED5298B550600E78040 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D02982593600B4189E /* NSAttributedString+Extension.swift */; };
+		D7459ED8298B90D700E78040 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7459ED7298B90D700E78040 /* DateFormat.swift */; };
 		D76B9B0B29754637003380BB /* DailyBoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */; };
 		D76B9B0C29757063003380BB /* DailyBoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */; };
 		D779AC5229874E8D00F10A50 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779AC5129874E8D00F10A50 /* String+Extension.swift */; };
@@ -73,6 +74,7 @@
 		D70EB8D02982593600B4189E /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		D70EB8D12982593600B4189E /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		D7459ECC298B4D1300E78040 /* MovieDetailSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSummary.swift; sourceTree = "<group>"; };
+		D7459ED7298B90D700E78040 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeSearchResult.swift; sourceTree = "<group>"; };
 		D779AC5129874E8D00F10A50 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D779AC53298752E100F10A50 /* BoxOfficeSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSummary.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				D785918E297650660071CD1F /* Secret.plist */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				D7FBB3DA2974D2040033619E /* Application */,
+				D7459ED6298B908D00E78040 /* Constant */,
 				D70EB8CF2982593600B4189E /* Extension */,
 				D7FBB3DB2974D21A0033619E /* Model */,
 				D76B9B11297627B1003380BB /* Network */,
@@ -156,6 +159,14 @@
 				D779AC5129874E8D00F10A50 /* String+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D7459ED6298B908D00E78040 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				D7459ED7298B90D700E78040 /* DateFormat.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 		D76B9B11297627B1003380BB /* Network */ = {
@@ -363,6 +374,7 @@
 				D76B9B0B29754637003380BB /* DailyBoxOfficeSearchResult.swift in Sources */,
 				D779ACA6298944D800F10A50 /* MovieDetailViewController.swift in Sources */,
 				D70EB8D22982593600B4189E /* NSAttributedString+Extension.swift in Sources */,
+				D7459ED8298B90D700E78040 /* DateFormat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

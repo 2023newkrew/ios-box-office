@@ -200,7 +200,7 @@ extension MovieDetailResult {
         return MovieDetailSummary(title: self.movieName,
                                   director: directorSummary,
                                   productYear: "\(self.productYear)년",
-                                  openYear: "\(DateFormatter().changeFormat(of: self.openYear))년",
+                                  openYear: DateFormatter().changeFormat(of: self.openYear),
                                   showTime: "\(self.showTime)분",
                                   watchGrade: watchGradeSummary,
                                   productNation: nationSummary,
@@ -211,11 +211,11 @@ extension MovieDetailResult {
 
 private extension DateFormatter {
     func changeFormat(of dateString: String) -> String {
-        self.dateFormat = "yyyyMMdd"
+        self.dateFormat = DateFormat.plain
         guard let date = self.date(from: dateString) else {
             return dateString
         }
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.dashed
         return self.string(from: date)
     }
 }

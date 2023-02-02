@@ -8,11 +8,6 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
-    private enum DateFormat {
-        static let title = "yyyy-MM-dd"
-        static let target = "yyyyMMdd"
-    }
-    
     private enum Section: CaseIterable {
         case main
     }
@@ -42,6 +37,8 @@ class BoxOfficeListViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: customLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.layer.borderColor = UIColor.systemGray5.cgColor
+        collectionView.layer.borderWidth = 0.5
         return collectionView
     }()
     
@@ -89,14 +86,14 @@ class BoxOfficeListViewController: UIViewController {
         }
         let request = APIRequest
             .getDailyBoxOffice(key: key,
-                               targetDate: formatter.yesterday(format: DateFormat.target))
+                               targetDate: formatter.yesterday(format: DateFormat.plain))
         let apiProvider = APIProvider(request: request)
         
         apiProvider.startLoading { data, _, _ in
             DispatchQueue.main.async {
                 if let data = data,
                    let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
-                    self.title = formatter.yesterday(format: DateFormat.title)
+                    self.title = formatter.yesterday(format: DateFormat.dashed)
                     let summarys = boxOfficeList.dailyList.map { boxOffice in
                         boxOffice.summary()
                     }
