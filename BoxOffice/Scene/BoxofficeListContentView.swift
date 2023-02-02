@@ -16,6 +16,7 @@ final class BoxofficeListContentView: UIView, UIContentView {
         label.textAlignment = .center
         return label
     }()
+    
     private let rankDescriptionLabel = {
         let label = UILabel()
         
@@ -25,6 +26,7 @@ final class BoxofficeListContentView: UIView, UIContentView {
         label.adjustsFontForContentSizeCategory = true
         return label
     }()
+    
     private let titleLabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
