@@ -11,40 +11,45 @@ class APIProvider {
     let session: URLSession
     var dataTask: URLSessionDataTask?
     let baseURL: String
-    let query: [URLQueryItem]?
+    let header: [String: String]
+    let query: [URLQueryItem]
     let method: HTTPMethod
     
     init(session: URLSession = URLSession.shared,
          baseURL: String,
-         query: [URLQueryItem]? = nil,
+         header: [String: String] = [:],
+         query: [URLQueryItem] = [],
          method: HTTPMethod = .get) {
-        
         self.session = session
         self.baseURL = baseURL
+        self.header = header
         self.query = query
         self.method = method
     }
     
     init(session: URLSession = URLSession.shared,
          request: APIRequest) {
-        
         self.session = session
         self.baseURL = request.urlString
+        self.header = request.header
         self.query = request.query
         self.method = request.method
     }
     
     private func urlRequest() -> URLRequest? {
         var urlComponents = URLComponents(string: self.baseURL)
-        if let query = self.query {
-            urlComponents?.queryItems = query
-        }
+        urlComponents?.queryItems = query
+        
         guard let url = urlComponents?.url else {
             return nil
         }
-        
         var request = URLRequest(url: url)
+        
         request.httpMethod = self.method.rawValue
+        
+        self.header.forEach { (key, value) in
+            request.addValue(key, forHTTPHeaderField: value)
+        }
         return request
     }
 }
