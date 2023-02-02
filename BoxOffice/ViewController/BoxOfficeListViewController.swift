@@ -114,6 +114,10 @@ class BoxOfficeListViewController: UIViewController {
 
 extension BoxOfficeListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movieCode = self.dataSource.itemIdentifier(for: indexPath)?.movieCode {
+            self.navigationController?.pushViewController(MovieDetailViewController(movieCode: movieCode), animated: true)
+        }
+        
         self.boxOfficeCollectionView.deselectItem(at: indexPath, animated: true)
     }
 }
