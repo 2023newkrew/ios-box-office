@@ -126,7 +126,7 @@ final class BoxofficeListContentView: UIView, UIContentView {
         } else {
             let imageAttachment = NSTextAttachment()
             let imageConfig = UIImage.SymbolConfiguration(
-                pointSize: 10,
+                pointSize: 14,
                 weight: .regular,
                 scale: .default
             )
