@@ -85,7 +85,8 @@ struct DailyBoxOfficeSearchResult: Decodable {
 
 extension DailyBoxOfficeSearchResult.DailyBoxOffice {
     func summary() -> BoxOfficeSummary {
-        return BoxOfficeSummary(title: self.movieName,
+        return BoxOfficeSummary(movieCode: self.movieCode,
+                                title: self.movieName,
                                 rank: self.rank,
                                 rankChange: self.rankChange,
                                 rankType: self.rankType,

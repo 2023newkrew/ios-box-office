@@ -8,6 +8,7 @@
 import Foundation
 
 struct BoxOfficeSummary: Hashable {
+    let movieCode: String
     let title: String
     let rank: String
     let rankChange: String
