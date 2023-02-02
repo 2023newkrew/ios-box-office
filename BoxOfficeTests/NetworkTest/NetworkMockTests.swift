@@ -30,6 +30,7 @@ final class NetworkMockTests: XCTestCase {
 
         let expects = XCTestExpectation(description: "영화 정보 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDetailMovieInfo,
+                         headers: nil,
                          queryItems: [QueryKeys.movieCode: "20124079"]) {
             (networkResult: Result<MovieInfoDetailResult, NetworkServiceError>) -> Void in
             switch networkResult {
@@ -55,6 +56,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
+                         headers: nil,
                          queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
@@ -80,6 +82,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
+                         headers: nil,
                          queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
@@ -105,6 +108,7 @@ final class NetworkMockTests: XCTestCase {
         
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         urlSession.fetch(searchTarget: .searchDailyBoxOffice,
+                         headers: nil,
                          queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
