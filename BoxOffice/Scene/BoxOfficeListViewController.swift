@@ -52,6 +52,7 @@ class BoxOfficeListViewController: UIViewController {
     
     private func loadData(_ completion: @escaping () -> Void) {
         networkService?.fetch(searchTarget: .searchDailyBoxOffice,
+                              headers: nil,
                               queryItems: [QueryKeys.targetDate: Date
                                 .dayString(.yesterday,format: .yyyyMMdd)]) {
             [weak self] (response: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
