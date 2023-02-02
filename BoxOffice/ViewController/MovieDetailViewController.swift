@@ -13,16 +13,19 @@ class MovieDetailViewController: UIViewController {
     
     private let scrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemGray
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    private let detailStackView: UIStackView = UIStackView(axis: .vertical)
+    private let detailStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
     
     private let posterImageView: UIImageView = {
-        let image = UIImage.init(systemName: "pencil")
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -51,17 +54,21 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
-        
+        self.setHierarchy()
+        self.setConstraint()
+        self.setAttribute()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.loadData()
+    }
+    
+    private func setHierarchy() {
         self.view.addSubview(self.scrollView)
         
-        self.scrollView.backgroundColor = .systemGray5
-        self.scrollView.refreshControl = self.refresher
         self.scrollView.addSubview(self.detailStackView)
         
-        detailStackView.addArrangedSubview(posterImageView)
+        self.detailStackView.addArrangedSubview(self.posterImageView)
         [self.directorStackView,
          self.productYearStackView,
          self.openYearStackView,
@@ -70,42 +77,47 @@ class MovieDetailViewController: UIViewController {
          self.nationStackView,
          self.genreStackView,
          self.actorStackView
-        ].forEach { stack in
-            detailStackView.addArrangedSubview(stack)
-            stack.setText(key: "상영시간", value: "asdfasdfsadfasd")
-        }
-        
-        
-        
-        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        self.detailStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        self.detailStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -20).isActive = true
-        self.detailStackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        self.detailStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        
-        
-        
-        
-        detailStackView.subviews.forEach { sub in
-            if let sub = sub as? MovieDetailRowStackView {
-                sub.setKeyLabelWidth(constraintAnchor: self.scrollView.widthAnchor, multiplier: 0.2)
-            }
+        ].forEach { row in
+            self.detailStackView.addArrangedSubview(row)
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.loadData()
+    private func setConstraint() {
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        self.scrollView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
+        self.scrollView.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
+        self.scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+        
+        self.detailStackView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor).isActive = true
+        self.detailStackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -20).isActive = true
+        self.detailStackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
+        self.detailStackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        
+        [self.directorStackView,
+         self.productYearStackView,
+         self.openYearStackView,
+         self.showTimeStackView,
+         self.watchGradeStackView,
+         self.nationStackView,
+         self.genreStackView,
+         self.actorStackView
+        ].forEach { row in
+            row.setKeyLabelWidth(constraintAnchor: self.scrollView.widthAnchor, multiplier: 0.2)
+        }
+    }
+    
+    private func setAttribute() {
+        self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        self.scrollView.refreshControl = self.refresher
     }
     
     @objc private func loadData() {
         self.refresher.beginRefreshing()
         
         posterImageView.image = UIImage(named: "SampleImage")
-
+        
         guard let key = SecretKey.boxOfficeAPIKey else {
             return
         }
@@ -138,13 +150,5 @@ class MovieDetailViewController: UIViewController {
                 }
             }
         }
-    }
-}
-
-private extension UIStackView {
-    convenience init(axis: NSLayoutConstraint.Axis) {
-        self.init()
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = axis
     }
 }
