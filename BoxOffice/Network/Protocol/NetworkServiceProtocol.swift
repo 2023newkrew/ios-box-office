@@ -10,6 +10,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     func fetch<T: Decodable> (
         searchTarget: URLInfo,
+        headers: [String: String]?,
         queryItems: [String: String]?,
         completion: @escaping (Result<T, NetworkServiceError>) -> Void
     )
