@@ -15,6 +15,15 @@
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		D70EB8D22982593600B4189E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D02982593600B4189E /* NSAttributedString+Extension.swift */; };
 		D70EB8D32982593600B4189E /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D12982593600B4189E /* NSMutableAttributedString+Extension.swift */; };
+		D7459ECD298B4D1300E78040 /* MovieDetailSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7459ECC298B4D1300E78040 /* MovieDetailSummary.swift */; };
+		D7459ECE298B54AE00E78040 /* BoxOfficeSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779AC53298752E100F10A50 /* BoxOfficeSummary.swift */; };
+		D7459ECF298B54B100E78040 /* MovieDetailSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7459ECC298B4D1300E78040 /* MovieDetailSummary.swift */; };
+		D7459ED0298B54BA00E78040 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779ACA5298944D800F10A50 /* MovieDetailViewController.swift */; };
+		D7459ED1298B54C900E78040 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BBAF6029810F5200E44D9C /* BoxOfficeListCell.swift */; };
+		D7459ED2298B54D500E78040 /* MovieDetailRowStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779ACA72989F38300F10A50 /* MovieDetailRowStackView.swift */; };
+		D7459ED3298B550200E78040 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779AC5129874E8D00F10A50 /* String+Extension.swift */; };
+		D7459ED4298B550400E78040 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D12982593600B4189E /* NSMutableAttributedString+Extension.swift */; };
+		D7459ED5298B550600E78040 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70EB8D02982593600B4189E /* NSAttributedString+Extension.swift */; };
 		D76B9B0B29754637003380BB /* DailyBoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */; };
 		D76B9B0C29757063003380BB /* DailyBoxOfficeSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */; };
 		D779AC5229874E8D00F10A50 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779AC5129874E8D00F10A50 /* String+Extension.swift */; };
@@ -63,6 +72,7 @@
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D70EB8D02982593600B4189E /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		D70EB8D12982593600B4189E /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		D7459ECC298B4D1300E78040 /* MovieDetailSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSummary.swift; sourceTree = "<group>"; };
 		D76B9B0A29754637003380BB /* DailyBoxOfficeSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeSearchResult.swift; sourceTree = "<group>"; };
 		D779AC5129874E8D00F10A50 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D779AC53298752E100F10A50 /* BoxOfficeSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeSummary.swift; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 				D779AC53298752E100F10A50 /* BoxOfficeSummary.swift */,
 				D7859197297658100071CD1F /* MovieAPIFault.swift */,
 				D78591A42976754E0071CD1F /* MovieDetailResult.swift */,
+				D7459ECC298B4D1300E78040 /* MovieDetailSummary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -348,6 +359,7 @@
 				D78591922976515C0071CD1F /* SecretKey.swift in Sources */,
 				D7BBAF4D297AD33200E44D9C /* APIRequest.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				D7459ECD298B4D1300E78040 /* MovieDetailSummary.swift in Sources */,
 				D76B9B0B29754637003380BB /* DailyBoxOfficeSearchResult.swift in Sources */,
 				D779ACA6298944D800F10A50 /* MovieDetailViewController.swift in Sources */,
 				D70EB8D22982593600B4189E /* NSAttributedString+Extension.swift in Sources */,
@@ -359,9 +371,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7BBAF4E297ADB1500E44D9C /* APIRequest.swift in Sources */,
+				D7459ED3298B550200E78040 /* String+Extension.swift in Sources */,
 				D7A904332978FD31006B8F49 /* URLSessionCallable.swift in Sources */,
 				D76B9B0C29757063003380BB /* DailyBoxOfficeSearchResult.swift in Sources */,
+				D7459ED5298B550600E78040 /* NSAttributedString+Extension.swift in Sources */,
 				D7BBAF582980C52200E44D9C /* MockAPIProvider.swift in Sources */,
+				D7459ECE298B54AE00E78040 /* BoxOfficeSummary.swift in Sources */,
+				D7459ED4298B550400E78040 /* NSMutableAttributedString+Extension.swift in Sources */,
 				D7BBAF53297AEB9D00E44D9C /* AppDelegate.swift in Sources */,
 				D78591A629768E7E0071CD1F /* MovieDetailResult.swift in Sources */,
 				D7BBAF54297AEB9F00E44D9C /* SceneDelegate.swift in Sources */,
@@ -372,6 +388,10 @@
 				D7FBB3F72974D7510033619E /* BoxOfficeListViewController.swift in Sources */,
 				D7A904342978FD3D006B8F49 /* APIProvider.swift in Sources */,
 				D7BBAF5C2980C8AC00E44D9C /* APIURL.swift in Sources */,
+				D7459ECF298B54B100E78040 /* MovieDetailSummary.swift in Sources */,
+				D7459ED2298B54D500E78040 /* MovieDetailRowStackView.swift in Sources */,
+				D7459ED0298B54BA00E78040 /* MovieDetailViewController.swift in Sources */,
+				D7459ED1298B54C900E78040 /* BoxOfficeListCell.swift in Sources */,
 				D7FBB3F32974D42B0033619E /* BoxOfficeSearchResultTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
