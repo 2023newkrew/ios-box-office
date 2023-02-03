@@ -30,7 +30,6 @@ final class NetworkService: NetworkServiceProtocol {
             completion(.failure(.invalidURLError))
             return
         }
-        print(url.description)
         let urlRequest = createHTTPRequest(of: url,
                                            with: headers,
                                            httpMethod: HTTPMethod.get)
