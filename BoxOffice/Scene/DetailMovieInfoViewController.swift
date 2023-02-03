@@ -13,7 +13,6 @@ class DetailMovieInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(movieCode, movieName)
         configureAttribute()
         configureHierarchy()
         configureLayout()
