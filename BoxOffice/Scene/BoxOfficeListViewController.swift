@@ -30,6 +30,7 @@ class BoxOfficeListViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
         collectionView.refreshControl = self.refreshBoxOfficeList
+        collectionView.delegate = self
         
         return collectionView
     }()
@@ -145,5 +146,14 @@ extension BoxOfficeListViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
         dataSource?.apply(snapShot, animatingDifferences: false)
+    }
+}
+
+extension BoxOfficeListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
+        let vc = DetailMovieInfoViewController(movieCode: items[row].movieCode,
+                                               movieName: items[row].title)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
