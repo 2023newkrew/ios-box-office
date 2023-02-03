@@ -12,6 +12,7 @@ struct BoxOfficeItem: Hashable {
     let showCountInformation: String
     let rank: String
     let rankDescription: NSAttributedString
+    let movieCode: String
     
     private enum BoxOfficeContents {
         static let newContents = "신작"
@@ -28,11 +29,13 @@ struct BoxOfficeItem: Hashable {
     init(title: String,
          showCountInformation: String,
          rank: String,
-         rankDescription: NSAttributedString) {
+         rankDescription: NSAttributedString,
+         movieCode: String) {
         self.title = title
         self.showCountInformation = showCountInformation
         self.rank = rank
         self.rankDescription = rankDescription
+        self.movieCode = movieCode
     }
     
     init(_ dailyItem: DailyBoxOffice) {
@@ -49,6 +52,7 @@ struct BoxOfficeItem: Hashable {
             .showCountInformation(todayShowCount, totalShowCount)
         self.rank = dailyItem.rank
         self.rankDescription = description
+        self.movieCode = dailyItem.movieCode
     }
 }
 
