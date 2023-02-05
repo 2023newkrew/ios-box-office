@@ -194,9 +194,7 @@ extension MovieDetailResult {
             .map { actor in
                 actor.peopleName
             }.joined(separator: ", ")
-        
-        print(self)
-        
+
         return MovieDetailSummary(title: self.movieName,
                                   director: directorSummary,
                                   productYear: "\(self.productYear)년",

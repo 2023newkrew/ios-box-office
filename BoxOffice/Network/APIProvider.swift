@@ -10,6 +10,7 @@ import Foundation
 class APIProvider {
     let session: URLSession
     var dataTask: URLSessionDataTask?
+    let group: DispatchGroup?
     let baseURL: String
     let header: [String: String]
     let query: [URLQueryItem]
@@ -19,21 +20,27 @@ class APIProvider {
          baseURL: String,
          header: [String: String] = [:],
          query: [URLQueryItem] = [],
-         method: HTTPMethod = .get) {
+         method: HTTPMethod = .get,
+         queueGroup: DispatchGroup? = nil) {
         self.session = session
         self.baseURL = baseURL
         self.header = header
         self.query = query
         self.method = method
+        
+        self.group = queueGroup
     }
     
     init(session: URLSession = URLSession.shared,
-         request: APIRequest) {
+         request: APIRequest,
+         queueGroup: DispatchGroup? = nil) {
         self.session = session
         self.baseURL = request.urlString
         self.header = request.header
         self.query = request.query
         self.method = request.method
+        
+        self.group = queueGroup
     }
     
     private func urlRequest() -> URLRequest? {
@@ -48,7 +55,7 @@ class APIProvider {
         request.httpMethod = self.method.rawValue
         
         self.header.forEach { (key, value) in
-            request.addValue(key, forHTTPHeaderField: value)
+            request.addValue(value, forHTTPHeaderField: key)
         }
         return request
     }
@@ -56,6 +63,7 @@ class APIProvider {
 
 extension APIProvider: URLSessionCallable {
     func startLoading(completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        self.group?.enter()
         self.dataTask?.cancel()
         
         guard let urlRequest = self.urlRequest() else {
@@ -74,6 +82,7 @@ extension APIProvider: URLSessionCallable {
             }
             
             completion(data, response, error)
+            self.group?.leave()
         }
         
         self.dataTask?.resume()

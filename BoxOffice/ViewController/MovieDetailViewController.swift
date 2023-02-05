@@ -8,7 +8,30 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+    private let movieTitle: String
     private let movieCode: String
+    
+    private let queueGroup = DispatchGroup()
+    
+    private lazy var movieDetailAPIProvider: APIProvider? = {
+        guard let key = SecretKey.boxOfficeAPIKey else {
+            return nil
+        }
+        let request = APIRequest.getMovieDetail(key: key, movieCode: self.movieCode)
+        let apiProvider = APIProvider(request: request, queueGroup: self.queueGroup)
+        return apiProvider
+    }()
+    
+    private lazy var imageSearchAPIProvider: APIProvider? = {
+        guard let key = SecretKey.daumKaKaoAPIKey else {
+            return nil
+        }
+        let request = APIRequest.getDaumImageSearch(key: key, searchQuery: "\(self.movieTitle) 영화 포스터")
+        let apiProvider = APIProvider(request: request, queueGroup: self.queueGroup)
+        return apiProvider
+    }()
+    
+    
     private let refresher = UIRefreshControl()
     
     private let scrollView = {
@@ -21,15 +44,11 @@ class MovieDetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.spacing = CGFloat(5)
         return stackView
     }()
     
-    private let posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let posterImageView = DynamicFitImageView()
     
     private let directorStackView: MovieDetailRowStackView = MovieDetailRowStackView()
     private let productYearStackView: MovieDetailRowStackView = MovieDetailRowStackView()
@@ -40,10 +59,12 @@ class MovieDetailViewController: UIViewController {
     private let genreStackView: MovieDetailRowStackView = MovieDetailRowStackView()
     private let actorStackView: MovieDetailRowStackView = MovieDetailRowStackView()
     
-    init(movieCode: String){
+    init(movieCode: String, movieTitle: String) {
         self.movieCode = movieCode
+        self.movieTitle = movieTitle
         super.init(nibName: nil, bundle: nil)
         
+        self.title = movieTitle
         self.view.backgroundColor = .white
     }
     
@@ -116,38 +137,46 @@ class MovieDetailViewController: UIViewController {
     @objc private func loadData() {
         self.refresher.beginRefreshing()
         
-        posterImageView.image = UIImage(named: "SampleImage")
+        var posterImage: UIImage?
+        var summary: MovieDetailSummary?
         
-        guard let key = SecretKey.boxOfficeAPIKey else {
-            return
+        self.imageSearchAPIProvider?.startLoading { data, response, error in
+            if let data = data,
+               let detail = try? JSONDecoder().decode(ImageSearchResult.self, from: data),
+               let url = URL(string: detail.documents.first?.imageURL ?? ""),
+               let imageData = try? Data(contentsOf: url) {
+                posterImage = UIImage(data: imageData)
+            }
         }
-        let request = APIRequest.getMovieDetail(key: key, movieCode: self.movieCode)
         
-        let apiProvider = APIProvider(request: request)
+        self.movieDetailAPIProvider?.startLoading { data, _, _ in
+            if let data = data {
+                summary = try? JSONDecoder().decode(MovieDetailResult.self, from: data).summary()
+            }
+        }
         
-        apiProvider.startLoading { data, _, _ in
-            DispatchQueue.main.async {
-                self.refresher.endRefreshing()
-                if let data = data,
-                   let detail = try? JSONDecoder().decode(MovieDetailResult.self, from: data).summary() {
-                    self.title = detail.value(of: .title)
-                    self.directorStackView.setText(key: detail.key(of: .director),
-                                                   value: detail.value(of: .director))
-                    self.productYearStackView.setText(key: detail.key(of: .productYear),
-                                                      value: detail.value(of: .productYear))
-                    self.openYearStackView.setText(key: detail.key(of: .openYear),
-                                                   value: detail.value(of: .openYear))
-                    self.showTimeStackView.setText(key: detail.key(of: .showTime),
-                                                   value: detail.value(of: .showTime))
-                    self.watchGradeStackView.setText(key: detail.key(of: .watchGrade),
-                                                     value: detail.value(of: .watchGrade))
-                    self.nationStackView.setText(key: detail.key(of: .productNation),
-                                                 value: detail.value(of: .productNation))
-                    self.genreStackView.setText(key: detail.key(of: .genre),
-                                                value: detail.value(of: .genre))
-                    self.actorStackView.setText(key: detail.key(of: .actor),
-                                                value: detail.value(of: .actor))
-                }
+        self.queueGroup.notify(queue: .main) {
+            self.refresher.endRefreshing()
+
+            self.posterImageView.image = posterImage
+            
+            if let summary = summary {
+                self.directorStackView.setText(key: summary.key(of: .director),
+                                               value: summary.value(of: .director))
+                self.productYearStackView.setText(key: summary.key(of: .productYear),
+                                                  value: summary.value(of: .productYear))
+                self.openYearStackView.setText(key: summary.key(of: .openYear),
+                                               value: summary.value(of: .openYear))
+                self.showTimeStackView.setText(key: summary.key(of: .showTime),
+                                               value: summary.value(of: .showTime))
+                self.watchGradeStackView.setText(key: summary.key(of: .watchGrade),
+                                                 value: summary.value(of: .watchGrade))
+                self.nationStackView.setText(key: summary.key(of: .productNation),
+                                             value: summary.value(of: .productNation))
+                self.genreStackView.setText(key: summary.key(of: .genre),
+                                            value: summary.value(of: .genre))
+                self.actorStackView.setText(key: summary.key(of: .actor),
+                                            value: summary.value(of: .actor))
             }
         }
     }

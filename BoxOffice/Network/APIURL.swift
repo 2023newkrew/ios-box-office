@@ -9,7 +9,7 @@ import Foundation
 
 enum APIURL {
     private static let boxOfficeBaseURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest"
-    private static let daumAPIURL = "dapi.kakao.com"
+    private static let daumAPIURL = "https://dapi.kakao.com"
     
     static let dailyBoxOffice = "\(boxOfficeBaseURL)/boxoffice/searchDailyBoxOfficeList.json"
     static let movieDetail = "\(boxOfficeBaseURL)/movie/searchMovieInfo.json"

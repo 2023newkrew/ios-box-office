@@ -38,8 +38,10 @@ class MovieDetailRowStackView: UIStackView {
     private func setAttribute() {
         self.axis = .horizontal
         self.spacing = CGFloat(10)
-        self.alignment = .top
+        self.alignment = .center
         self.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.keyLabel.font = .preferredFont(forTextStyle: .headline)
     }
     
     private func setHierarchy() {
