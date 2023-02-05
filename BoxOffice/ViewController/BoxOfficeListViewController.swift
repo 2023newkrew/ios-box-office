@@ -37,7 +37,7 @@ class BoxOfficeListViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: customLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.layer.borderColor = UIColor.systemGray5.cgColor
+        collectionView.layer.borderColor = UIColor.systemGray4.cgColor
         collectionView.layer.borderWidth = 0.5
         return collectionView
     }()
@@ -111,8 +111,12 @@ class BoxOfficeListViewController: UIViewController {
 
 extension BoxOfficeListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let movieCode = self.dataSource.itemIdentifier(for: indexPath)?.movieCode {
-            self.navigationController?.pushViewController(MovieDetailViewController(movieCode: movieCode), animated: true)
+        
+        if let movieCode = self.dataSource.itemIdentifier(for: indexPath)?.movieCode,
+           let movieTitle = self.dataSource.itemIdentifier(for: indexPath)?.title {
+            
+            self.navigationController?
+                .pushViewController(MovieDetailViewController(movieCode: movieCode, movieTitle: movieTitle), animated: true)
         }
         
         self.boxOfficeCollectionView.deselectItem(at: indexPath, animated: true)
