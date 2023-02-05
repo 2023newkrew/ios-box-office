@@ -104,11 +104,10 @@ class BoxOfficeListViewController: UIViewController {
         }
         
         apiGroup.notify(queue: .main) {
+            self.refresher.endRefreshing()
+            self.title = dashedYesterday
+            
             if let summarys = summarys {
-                self.title = dashedYesterday
-                
-                self.refresher.endRefreshing()
-                
                 var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(summarys)
