@@ -8,6 +8,8 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
+    private let apiGroup = DispatchGroup()
+    
     private enum Section: CaseIterable {
         case main
     }
@@ -80,30 +82,37 @@ class BoxOfficeListViewController: UIViewController {
         self.refresher.beginRefreshing()
         
         let formatter = DateFormatter()
+        let dashedYesterday = formatter.yesterday(format: DateFormat.dashed)
+        let plainYesterday = formatter.yesterday(format: DateFormat.plain)
         
         guard let key = SecretKey.boxOfficeAPIKey else {
             return
         }
         let request = APIRequest
             .getDailyBoxOffice(key: key,
-                               targetDate: formatter.yesterday(format: DateFormat.plain))
-        let apiProvider = APIProvider(request: request)
+                               targetDate: plainYesterday)
+        let apiProvider = APIProvider(request: request, queueGroup: apiGroup)
         
+        var summarys: [BoxOfficeSummary]?
         apiProvider.startLoading { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data,
-                   let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
-                    self.title = formatter.yesterday(format: DateFormat.dashed)
-                    let summarys = boxOfficeList.dailyList.map { boxOffice in
-                        boxOffice.summary()
-                    }
-                    
-                    var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
-                    snapshot.appendSections([.main])
-                    snapshot.appendItems(summarys)
-                    self.dataSource.apply(snapshot, animatingDifferences: true)
+            if let data = data,
+               let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
+                summarys = boxOfficeList.dailyList.map { boxOffice in
+                    boxOffice.summary()
                 }
+            }
+        }
+        
+        apiGroup.notify(queue: .main) {
+            if let summarys = summarys {
+                self.title = dashedYesterday
+                
                 self.refresher.endRefreshing()
+                
+                var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(summarys)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
     }

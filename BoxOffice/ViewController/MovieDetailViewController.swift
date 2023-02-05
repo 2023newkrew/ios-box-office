@@ -157,7 +157,7 @@ class MovieDetailViewController: UIViewController {
         
         self.queueGroup.notify(queue: .main) {
             self.refresher.endRefreshing()
-
+            
             self.posterImageView.image = posterImage
             
             if let summary = summary {
