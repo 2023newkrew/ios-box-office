@@ -8,42 +8,52 @@
 import Foundation
 
 class APIProvider {
+    struct APIResult {
+        let data: Data?
+        let response: URLResponse?
+    }
+    
+    enum APIError: LocalizedError {
+        case invalidRequest
+        case apiConnectionFail(String)
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidRequest:
+                return "URLRequest is nil"
+            case let .apiConnectionFail(reason):
+                return reason
+            }
+        }
+    }
+    
     private let session: URLSession
-    private let group: DispatchGroup?
     private let baseURL: String
     private let header: [String: String]
     private let query: [URLQueryItem]
     private let method: HTTPMethod
     
-    private let cache: URLCache
+    private let cache: URLCache = NetworkCache.api ?? URLCache()
     
     init(session: URLSession = URLSession.shared,
          baseURL: String,
          header: [String: String] = [:],
          query: [URLQueryItem] = [],
-         method: HTTPMethod = .get,
-         queueGroup: DispatchGroup? = nil) {
+         method: HTTPMethod = .get) {
         self.session = session
         self.baseURL = baseURL
         self.header = header
         self.query = query
         self.method = method
-        self.group = queueGroup
-        
-        self.cache = NetworkCache.api ?? URLCache()
     }
     
     init(session: URLSession = URLSession.shared,
-         request: APIRequest,
-         queueGroup: DispatchGroup? = nil) {
+         request: APIRequest) {
         self.session = session
         self.baseURL = request.urlString
         self.header = request.header
         self.query = request.query
         self.method = request.method
-        self.group = queueGroup
-        
-        self.cache = NetworkCache.api ?? URLCache()
     }
     
     private func urlRequest() -> URLRequest? {
@@ -65,16 +75,7 @@ class APIProvider {
 }
 
 extension APIProvider {
-    struct APIResult {
-        let data: Data?
-        let response: URLResponse?
-    }
-    
-    enum APIError: Error {
-        case invalidRequest
-    }
-    
-    func startAsyncLoading() async -> Result<APIResult, Error> {
+    func startAsyncLoading() async -> Result<APIResult, APIError> {
         guard let urlRequest = self.urlRequest() else {
             return Result.failure(APIError.invalidRequest)
         }
@@ -90,7 +91,7 @@ extension APIProvider {
                                            for: urlRequest)
             return Result.success(APIResult(data: data, response: response))
         } catch {
-            return Result.failure(error)
+            return Result.failure(APIError.apiConnectionFail(error.localizedDescription))
         }
     }
 }

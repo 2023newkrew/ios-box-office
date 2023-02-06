@@ -91,7 +91,7 @@ class BoxOfficeListViewController: UIViewController {
         let request = APIRequest
             .getDailyBoxOffice(key: key,
                                targetDate: plainYesterday)
-        let apiProvider = APIProvider(request: request, queueGroup: apiGroup)
+        let apiProvider = APIProvider(request: request)
         
         Task {
             async let summaryList = Task {

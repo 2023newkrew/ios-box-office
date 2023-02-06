@@ -18,7 +18,7 @@ class MovieDetailViewController: UIViewController {
             return nil
         }
         let request = APIRequest.getMovieDetail(key: key, movieCode: self.movieCode)
-        let apiProvider = APIProvider(request: request, queueGroup: self.queueGroup)
+        let apiProvider = APIProvider(request: request)
         return apiProvider
     }()
     
@@ -27,7 +27,7 @@ class MovieDetailViewController: UIViewController {
             return nil
         }
         let request = APIRequest.getDaumImageSearch(key: key, searchQuery: "\(self.movieTitle) 영화 포스터")
-        let apiProvider = APIProvider(request: request, queueGroup: self.queueGroup)
+        let apiProvider = APIProvider(request: request)
         return apiProvider
     }()
     
