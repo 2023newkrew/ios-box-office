@@ -19,7 +19,6 @@ final class BoxofficeListContentView: UIView, UIContentView {
     
     private let rankDescriptionLabel = {
         let label = UILabel()
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .center
@@ -60,7 +59,6 @@ final class BoxofficeListContentView: UIView, UIContentView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .fill
         stackView.axis = .vertical
-        
         return stackView
     }()
     
