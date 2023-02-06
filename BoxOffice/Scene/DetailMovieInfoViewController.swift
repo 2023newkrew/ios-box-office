@@ -92,7 +92,6 @@ extension DetailMovieInfoViewController {
         posterImageView.contentMode = .scaleAspectFit
         
         activityView.translatesAutoresizingMaskIntoConstraints = false
-        activityView.startAnimating()
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -296,6 +295,7 @@ extension DetailMovieInfoViewController {
     }
     
     private func loadMoviePoster() {
+        activityView.startAnimating()
         networkService.fetch(searchTarget: .searchMoviePosterImage,
                              headers: AppKeys.kakaoAPI,
                              queryItems: [QueryKeys.imageKeyQuery: QueryKeys.imageQuery(movieName)]) {
