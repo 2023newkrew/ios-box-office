@@ -10,11 +10,7 @@ import UIKit
 class BoxofficeViewController: UIViewController {
     private let movieService: MovieService
     
-    private var collectionView: UICollectionView = {
-        let layout = UICollectionViewLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return collectionView
-    }()
+    private var collectionView: UICollectionView!
     private var boxofficeDataSource: UICollectionViewDiffableDataSource<Int, BoxofficeRecode>?
     private var boxofficeSnapshot = NSDiffableDataSourceSnapshot<Int, BoxofficeRecode>()
     private let refreshControl = UIRefreshControl()

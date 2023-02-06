@@ -89,17 +89,15 @@ final class BoxofficeListContentView: UIView, UIContentView {
     private func configure(_ configuration: UIContentConfiguration) {
         guard let configuration = configuration as? Configuration,
               let rank = configuration.recode?.rank,
-              let rankInten = configuration.recode?.rankInten,
+              let rankType = configuration.recode?.rankType,
               let title = configuration.recode?.movieName,
               let audienceCount = configuration.recode?.audienceCount,
-              let audienceAccumulation = configuration.recode?.audienceAccumulation,
-              let isNew = configuration.recode?.isNew
+              let audienceAccumulation = configuration.recode?.audienceAccumulation
         else { return }
         
         self.rankLabel.text = String(rank)
         self.rankDescriptionLabel.attributedText = self.configureRankDescription(
-            isNew: isNew,
-            rankInten: rankInten
+            rankType: rankType
         )
         self.titleLabel.text = title
         self.audienceLabel.text = self.configureAudienceLabel(
@@ -116,28 +114,31 @@ final class BoxofficeListContentView: UIView, UIContentView {
         return "오늘 \(count ?? "-") / 총 \(accumulation ?? "-")"
     }
     
-    private func configureRankDescription(isNew: Bool, rankInten: Int) -> NSAttributedString {
-        if isNew {
+    private func configureRankDescription(rankType: BoxofficeRecode.RankType) -> NSAttributedString {
+        switch rankType {
+        case .new:
             self.rankDescriptionLabel.textColor = .red
             return NSAttributedString(string: "신규")
-        } else if rankInten == 0 {
-            self.rankDescriptionLabel.textColor = .black
-            return NSAttributedString(string: "-")
-        } else {
-            let imageAttachment = NSTextAttachment()
-            let imageConfig = UIImage.SymbolConfiguration(
-                pointSize: 14,
-                weight: .regular,
-                scale: .default
-            )
-            let imageName = rankInten > 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill"
-            let imageColor = rankInten > 0 ? UIColor.red : UIColor.blue
-            imageAttachment.image = UIImage(systemName: imageName, withConfiguration: imageConfig)?
-                .withTintColor(imageColor)
-            let string = NSMutableAttributedString(string: "")
-            string.append(NSAttributedString(attachment: imageAttachment))
-            string.append(NSAttributedString(string: "\(abs(rankInten))"))
-            return string
+        case .old(let rankInten):
+            if rankInten == 0 {
+                self.rankDescriptionLabel.textColor = .black
+                return NSAttributedString(string: "-")
+            } else {
+                let imageAttachment = NSTextAttachment()
+                let imageConfig = UIImage.SymbolConfiguration(
+                    pointSize: 14,
+                    weight: .regular,
+                    scale: .default
+                )
+                let imageName = rankInten > 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill"
+                let imageColor = rankInten > 0 ? UIColor.red : UIColor.blue
+                imageAttachment.image = UIImage(systemName: imageName, withConfiguration: imageConfig)?
+                    .withTintColor(imageColor)
+                let string = NSMutableAttributedString(string: "")
+                string.append(NSAttributedString(attachment: imageAttachment))
+                string.append(NSAttributedString(string: "\(abs(rankInten))"))
+                return string
+            }
         }
     }
     

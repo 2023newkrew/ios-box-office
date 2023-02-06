@@ -84,11 +84,12 @@ extension MovieResponse {
               let audienceAccumulation = Int(self.audienceAccumulation) else {
             return nil
         }
+        
+        let rankType: BoxofficeRecode.RankType = self.rankOldAndNew == "new" ? .new : .old(rankInten: rankInten)
               
         return BoxofficeRecode(
             rank: rank,
-            rankInten: rankInten,
-            isNew: self.rankOldAndNew == "new",
+            rankType: rankType,
             movieCode: self.movieCode,
             movieName: self.movieName,
             openDate: openDate,

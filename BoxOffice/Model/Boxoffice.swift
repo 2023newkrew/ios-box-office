@@ -13,9 +13,13 @@ struct Boxoffice {
 }
 
 struct BoxofficeRecode {
+    enum RankType: Hashable {
+        case new
+        case old(rankInten: Int)
+    }
+    
     let rank: Int
-    let rankInten: Int
-    let isNew: Bool
+    let rankType: RankType
     let movieCode: String
     let movieName: String
     let openDate: Date
@@ -27,4 +31,8 @@ struct BoxofficeRecode {
     let showCount: String
 }
 
-extension BoxofficeRecode: Hashable { }
+extension BoxofficeRecode: Hashable {
+    static func == (lhs: BoxofficeRecode, rhs: BoxofficeRecode) -> Bool {
+        lhs.movieCode == rhs.movieCode
+    }
+}
