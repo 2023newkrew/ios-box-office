@@ -8,13 +8,14 @@
 import Foundation
 
 class APIProvider {
-    let session: URLSession
-    var dataTask: URLSessionDataTask?
-    let group: DispatchGroup?
-    let baseURL: String
-    let header: [String: String]
-    let query: [URLQueryItem]
-    let method: HTTPMethod
+    private let session: URLSession
+    private let group: DispatchGroup?
+    private let baseURL: String
+    private let header: [String: String]
+    private let query: [URLQueryItem]
+    private let method: HTTPMethod
+    
+    private let cache: URLCache
     
     init(session: URLSession = URLSession.shared,
          baseURL: String,
@@ -27,8 +28,9 @@ class APIProvider {
         self.header = header
         self.query = query
         self.method = method
-        
         self.group = queueGroup
+        
+        self.cache = NetworkCache.api ?? URLCache()
     }
     
     init(session: URLSession = URLSession.shared,
@@ -39,8 +41,9 @@ class APIProvider {
         self.header = request.header
         self.query = request.query
         self.method = request.method
-        
         self.group = queueGroup
+        
+        self.cache = NetworkCache.api ?? URLCache()
     }
     
     private func urlRequest() -> URLRequest? {
@@ -61,34 +64,35 @@ class APIProvider {
     }
 }
 
-extension APIProvider: URLSessionCallable {
-    func startLoading(completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        self.group?.enter()
-        self.dataTask?.cancel()
-        
-        guard let urlRequest = self.urlRequest() else {
-            return
-        }
-        
-        self.dataTask = session.dataTask(with: urlRequest){ data, response, error in
-            if error != nil {
-                print("fail : ", error?.localizedDescription ?? "")
-            }
-            
-            let successsRange = 200..<300
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode) == false {
-                print("error : ", (response as? HTTPURLResponse)?.statusCode ?? 0)
-                print("msg : ", (response as? HTTPURLResponse)?.description ?? "")
-            }
-            
-            completion(data, response, error)
-            self.group?.leave()
-        }
-        
-        self.dataTask?.resume()
+extension APIProvider {
+    struct APIResult {
+        let data: Data?
+        let response: URLResponse?
     }
     
-    func stopLoading() {
-        self.dataTask?.cancel()
+    enum APIError: Error {
+        case invalidRequest
+    }
+    
+    func startAsyncLoading() async -> Result<APIResult, Error> {
+        guard let urlRequest = self.urlRequest() else {
+            return Result.failure(APIError.invalidRequest)
+        }
+        
+        if let cachedResponse = self.cache.cachedResponse(for: urlRequest) {
+            return Result.success(APIResult(data: cachedResponse.data,
+                                            response: cachedResponse.response))
+        }
+        
+        do {
+            let (data, response) = try await self.session.data(for: urlRequest)
+            self.cache.storeCachedResponse(CachedURLResponse(response: response, data: data),
+                                           for: urlRequest)
+            return Result.success(APIResult(data: data, response: response))
+        } catch {
+            return Result.failure(error)
+        }
     }
 }
+
+

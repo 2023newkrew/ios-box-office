@@ -8,21 +8,27 @@
 import XCTest
 
 final class APIDataTaskTests: XCTestCase {
-    let mockURLString = "https://camp.yagom-academy.kr/mock/test"
-
+    let session: URLSession = {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        return URLSession(configuration: config)
+    }()
+    
     func test_DailyBoxOfficeAPI_성공() {
         //given
         let request = APIRequest.getDailyBoxOffice(key: SecretKey.boxOfficeAPIKey ?? "",
                                                 targetDate: "20120101")
         
         //when
-        let apiProvider = MockAPIProvider(request: request)
+        let apiProvider = APIProvider(session: session, request: request)
         
         //then
-        apiProvider.startLoading { data, _, _ in
+        Task {
+            let result = await apiProvider.startAsyncLoading().success()
+            
             do {
-                guard let data = data else {
-                    XCTAssertNotNil(data)
+                guard let data = result?.data else {
+                    XCTAssertNotNil(result?.data)
                     return
                 }
                 
@@ -45,15 +51,16 @@ final class APIDataTaskTests: XCTestCase {
         //given
         let request = APIRequest.getMovieDetail(key: SecretKey.boxOfficeAPIKey ?? "",
                                                    movieCode: "20194403")
-        
         //when
-        let apiProvider = MockAPIProvider(request: request)
+        let apiProvider = APIProvider(session: session, request: request)
         
         //then
-        apiProvider.startLoading { data, _, _ in
+        Task {
+            let result = await apiProvider.startAsyncLoading().success()
+            
             do {
-                guard let data = data else {
-                    XCTAssertNotNil(data)
+                guard let data = result?.data else {
+                    XCTAssertNotNil(result?.data)
                     return
                 }
                 
