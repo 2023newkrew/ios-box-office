@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+enum DateStore {
     static var yesterday: Date {
         return Date() - 24 * 3600
     }
