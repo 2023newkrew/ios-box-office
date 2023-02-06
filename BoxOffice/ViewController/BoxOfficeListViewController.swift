@@ -93,33 +93,33 @@ class BoxOfficeListViewController: UIViewController {
                                targetDate: plainYesterday)
         let apiProvider = APIProvider(request: request, queueGroup: apiGroup)
         
-        var summarys: [BoxOfficeSummary]?
-        apiProvider.startLoading { data, _, _ in
-            if let data = data,
-               let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
-                summarys = boxOfficeList.dailyList.map { boxOffice in
-                    boxOffice.summary()
+        Task {
+            async let summaryList = Task {
+                async let result = apiProvider.startAsyncLoading()
+                
+                if let data = await result.success()?.data,
+                   let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
+                    
+                    return boxOfficeList.dailyList.map { boxOffice in
+                        boxOffice.summary()
+                    }
                 }
-            }
-        }
-        
-        apiGroup.notify(queue: .main) {
+                return []
+            }.value
+            
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(await summaryList)
+            
             self.refresher.endRefreshing()
             self.title = dashedYesterday
-            
-            if let summarys = summarys {
-                var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
-                snapshot.appendSections([.main])
-                snapshot.appendItems(summarys)
-                self.dataSource.apply(snapshot, animatingDifferences: true)
-            }
+            self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
 }
 
 extension BoxOfficeListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let movieCode = self.dataSource.itemIdentifier(for: indexPath)?.movieCode,
            let movieTitle = self.dataSource.itemIdentifier(for: indexPath)?.title {
             

@@ -31,7 +31,6 @@ class MovieDetailViewController: UIViewController {
         return apiProvider
     }()
     
-    
     private let refresher = UIRefreshControl()
     
     private let scrollView = {
@@ -135,49 +134,80 @@ class MovieDetailViewController: UIViewController {
     }
     
     @objc private func loadData() {
-        self.refresher.beginRefreshing()
-        
-        var posterImage: UIImage?
-        var summary: MovieDetailSummary?
-        
-        self.imageSearchAPIProvider?.startLoading { data, response, error in
-            if let data = data,
-               let detail = try? JSONDecoder().decode(ImageSearchResult.self, from: data),
-               let url = URL(string: detail.documents.first?.imageURL ?? ""),
-               let imageData = try? Data(contentsOf: url) {
-                posterImage = UIImage(data: imageData)
+        Task {
+            self.refresher.beginRefreshing()
+            
+            async let posterImage = loadImage()
+            async let summary = loadDetailSummary()
+            
+            
+            guard let image = await posterImage,
+                let summary = await summary else {
+                return
             }
-        }
-        
-        self.movieDetailAPIProvider?.startLoading { data, _, _ in
-            if let data = data {
-                summary = try? JSONDecoder().decode(MovieDetailResult.self, from: data).summary()
-            }
-        }
-        
-        self.queueGroup.notify(queue: .main) {
+            
             self.refresher.endRefreshing()
-            
-            self.posterImageView.image = posterImage
-            
-            if let summary = summary {
-                self.directorStackView.setText(key: summary.key(of: .director),
-                                               value: summary.value(of: .director))
-                self.productYearStackView.setText(key: summary.key(of: .productYear),
-                                                  value: summary.value(of: .productYear))
-                self.openYearStackView.setText(key: summary.key(of: .openYear),
-                                               value: summary.value(of: .openYear))
-                self.showTimeStackView.setText(key: summary.key(of: .showTime),
-                                               value: summary.value(of: .showTime))
-                self.watchGradeStackView.setText(key: summary.key(of: .watchGrade),
-                                                 value: summary.value(of: .watchGrade))
-                self.nationStackView.setText(key: summary.key(of: .productNation),
-                                             value: summary.value(of: .productNation))
-                self.genreStackView.setText(key: summary.key(of: .genre),
-                                            value: summary.value(of: .genre))
-                self.actorStackView.setText(key: summary.key(of: .actor),
-                                            value: summary.value(of: .actor))
-            }
+            posterImageView.image = image
+            self.directorStackView.setText(key: summary.key(of: .director),
+                                           value: summary.value(of: .director))
+            self.productYearStackView.setText(key: summary.key(of: .productYear),
+                                              value: summary.value(of: .productYear))
+            self.openYearStackView.setText(key: summary.key(of: .openYear),
+                                           value: summary.value(of: .openYear))
+            self.showTimeStackView.setText(key: summary.key(of: .showTime),
+                                           value: summary.value(of: .showTime))
+            self.watchGradeStackView.setText(key: summary.key(of: .watchGrade),
+                                             value: summary.value(of: .watchGrade))
+            self.nationStackView.setText(key: summary.key(of: .productNation),
+                                         value: summary.value(of: .productNation))
+            self.genreStackView.setText(key: summary.key(of: .genre),
+                                        value: summary.value(of: .genre))
+            self.actorStackView.setText(key: summary.key(of: .actor),
+                                        value: summary.value(of: .actor))
         }
+    }
+    
+    private func loadDetailSummary() async -> MovieDetailSummary? {
+        let result = await self.movieDetailAPIProvider?.startAsyncLoading().success()
+        guard let data = result?.data,
+              let summary = try? JSONDecoder().decode(MovieDetailResult.self, from: data).summary() else {
+                  return nil
+        }
+        return summary
+    }
+    
+    private func loadImage() async -> UIImage? {
+        let result = await self.imageSearchAPIProvider?.startAsyncLoading().success()
+        
+        guard let data = result?.data,
+              let result = try? JSONDecoder().decode(ImageSearchResult.self, from: data),
+              let imageURLString = result.documents.first?.imageURL,
+              let url = URL(string: imageURLString),
+              let imageData = await dataWithContents(of: url) else {
+                  return nil
+        }
+        
+        return UIImage(data: imageData)
+    }
+    
+    func dataWithContents(of url: URL) async -> Data? {
+        async let data: Data? = Task.detached {
+            if let data = NetworkCache.image.cachedResponse(for: URLRequest(url: url))?.data {
+                return data
+            }
+            return try? Data(contentsOf: url)
+        }.value
+        
+        guard let data = await data else {
+            return nil
+        }
+        
+        if let response = HTTPURLResponse(url: url, statusCode: 200,
+                                          httpVersion: nil, headerFields: nil) {
+            let cachedResponse = CachedURLResponse(response: response, data: data)
+            NetworkCache.image.storeCachedResponse(cachedResponse, for: URLRequest(url: url))
+        }
+        
+        return data
     }
 }
