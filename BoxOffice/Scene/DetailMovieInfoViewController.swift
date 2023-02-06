@@ -228,48 +228,48 @@ extension DetailMovieInfoViewController {
     }
     
     private func updateLabel(_ target: MovieInfo) {
-        DispatchQueue.main.async { [weak self] in
-            self?.directorNameContentLabel.text = target.directors.map { $0.name }.reduce(nil) {
-                (prev, next) in
-                guard let prev = prev else { return "\(next)" }
-                return "\(prev), \(next)"
-            }
-            self?.produceYearContentLabel.text = target.produceYear
-            self?.openDateContentLabel.text = target.openDate
-            self?.showTimeContentLabel.text = target.showTime
-            self?.gradeContentLabel.text = target.audits.map { $0.watchGradeName }.reduce(nil) {
-                (prev, next) in
-                guard let prev = prev else { return "\(next)" }
-                return "\(prev), \(next)"
-            }
-            self?.nationContentLabel.text = target.nations.map { $0.name }.reduce(nil) {
-                (prev, next) in
-                guard let prev = prev else { return "\(next)" }
-                return "\(prev), \(next)"
-            }
-            self?.genreContentLabel.text = target.genres.map { $0.name }.reduce(nil) {
-                (prev, next) in
-                guard let prev = prev else { return "\(next)" }
-                return "\(prev), \(next)"
-            }
-            self?.actorContentLabel.text = target.actors.map { $0.name }.reduce(nil) {
-                (prev, next) in
-                guard let prev = prev else { return "\(next)" }
-                return "\(prev), \(next)"
-            }
+        directorNameContentLabel.text = target.directors.map { $0.name }.reduce(nil) {
+            (prev, next) in
+            guard let prev = prev else { return "\(next)" }
+            return "\(prev), \(next)"
+        }
+        produceYearContentLabel.text = target.produceYear
+        openDateContentLabel.text = target.openDate
+        showTimeContentLabel.text = target.showTime
+        gradeContentLabel.text = target.audits.map { $0.watchGradeName }.reduce(nil) {
+            (prev, next) in
+            guard let prev = prev else { return "\(next)" }
+            return "\(prev), \(next)"
+        }
+        nationContentLabel.text = target.nations.map { $0.name }.reduce(nil) {
+            (prev, next) in
+            guard let prev = prev else { return "\(next)" }
+            return "\(prev), \(next)"
+        }
+        genreContentLabel.text = target.genres.map { $0.name }.reduce(nil) {
+            (prev, next) in
+            guard let prev = prev else { return "\(next)" }
+            return "\(prev), \(next)"
+        }
+        actorContentLabel.text = target.actors.map { $0.name }.reduce(nil) {
+            (prev, next) in
+            guard let prev = prev else { return "\(next)" }
+            return "\(prev), \(next)"
         }
     }
     
     private func loadDetailInfo() {
         networkService.fetch(searchTarget: .searchDetailMovieInfo,
-                              headers: nil,
-                              queryItems: [QueryKeys.movieCode: movieCode]) {
+                             headers: nil,
+                             queryItems: [QueryKeys.movieCode: movieCode]) {
             [weak self] (networkResponse: Result<MovieInfoDetailResult,
                          NetworkServiceError>) -> Void in
             switch networkResponse {
             case .success(let success):
                 let info = success.movieInfoResult.movieInfo
-                self?.updateLabel(info)
+                DispatchQueue.main.async {
+                    self?.updateLabel(info)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -283,24 +283,31 @@ extension DetailMovieInfoViewController {
         if let data = try? Data(contentsOf: url) {
             if let image = UIImage(data: data) {
                 DispatchQueue.main.async { [weak self] in
-                    self?.activityView.stopAnimating()
                     self?.posterImageView.image = image
                 }
             }
         }
     }
     
+    private func stopAnimateLoadingImage() {
+        DispatchQueue.main.async { [weak self] in
+            self?.activityView.stopAnimating()
+        }
+    }
+    
     private func loadMoviePoster() {
         networkService.fetch(searchTarget: .searchMoviePosterImage,
-                              headers: AppKeys.kakaoAPI,
-                              queryItems: [QueryKeys.imageKeyQuery: QueryKeys.imageQuery(movieName)]) {
+                             headers: AppKeys.kakaoAPI,
+                             queryItems: [QueryKeys.imageKeyQuery: QueryKeys.imageQuery(movieName)]) {
             [weak self] (networkResponse: Result<ImageSearchResult,
                          NetworkServiceError>) -> Void in
             switch networkResponse {
             case .success(let success):
                 self?.updateImage(success.imageInfos.first)
+                self?.stopAnimateLoadingImage()
             case .failure(let failure):
                 print(failure.localizedDescription)
+                self?.stopAnimateLoadingImage()
             }
         }
     }
