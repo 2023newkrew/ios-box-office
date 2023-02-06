@@ -103,7 +103,7 @@ final class NetworkTest: XCTestCase {
                 print(success)
                 expects.fulfill()
             case .failure(let failure):
-                XCTFail()
+                XCTFail(failure.localizedDescription)
                 expects.fulfill()
             }
         }
