@@ -10,7 +10,13 @@ import Foundation
 extension DateFormatter {
     static let yearMonthDay: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyymmdd"
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter
+    }()
+    
+    static let yearMonthDayWithDash: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter
     }()
 }

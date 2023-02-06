@@ -9,13 +9,15 @@ import Foundation
 
 protocol MovieService {
     var networkProvider: NetworkProvider { get }
+    
+    @discardableResult
     func fetchBoxoffice(
         date: Date,
         itemPerPage: Int?,
         movieType: MovieType?,
         nationType: NationType?,
         areaCode: String?,
-        completion: @escaping ((Result<BoxofficeResponse, NetworkError>) -> Void)
+        completion: @escaping ((Result<Boxoffice, NetworkError>) -> Void)
     ) -> Cancellable?
     func fetchMovieInformation(
         for movieCode: String,
@@ -30,7 +32,7 @@ extension MovieService {
         movieType: MovieType? = nil,
         nationType: NationType? = nil,
         areaCode: String? = nil,
-        completion: @escaping ((Result<BoxofficeResponse, NetworkError>) -> Void)
+        completion: @escaping ((Result<Boxoffice, NetworkError>) -> Void)
     ) -> Cancellable? {
         let endpoint = BoxofficeEndpoint(
             date: date,
@@ -39,9 +41,8 @@ extension MovieService {
             nationType: nationType,
             areaCode: areaCode
         )
-        
         return self.networkProvider.request(endpoint) { result in
-            completion(result)
+            completion(result.map { $0.toModel(for: date) })
         }
     }
     

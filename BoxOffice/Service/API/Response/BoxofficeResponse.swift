@@ -15,6 +15,16 @@ struct BoxofficeResponse: Decodable {
     }
 }
 
+extension BoxofficeResponse {
+    func toModel(for date: Date) -> Boxoffice {
+        Boxoffice(
+            date: date,
+            boxofficeRecodes: self.boxofficeResultResponse.dailyBoxOfficeList
+                .compactMap { $0.toModel() }
+        )
+    }
+}
+
 struct BoxOfficeResultResponse: Decodable {
     let boxofficeType: String
     let showRange: String
@@ -60,5 +70,35 @@ struct MovieResponse: Decodable {
         case audienceAccumulation = "audiAcc"
         case screenCount = "scrnCnt"
         case showCount = "showCnt"
+    }
+}
+
+extension MovieResponse {
+    func toModel() -> BoxofficeRecode? {
+        guard let rank = Int(self.rank),
+              let rankInten = Int(self.rankInten),
+              let openDate = DateFormatter.yearMonthDayWithDash.date(from: self.openDate),
+              let audienceCount = Int(self.audienceCount),
+              let audienceInten = Int(self.audienceInten),
+              let audienceChange = Double(self.audienceChange),
+              let audienceAccumulation = Int(self.audienceAccumulation) else {
+            return nil
+        }
+        
+        let rankType: BoxofficeRecode.RankType = self.rankOldAndNew == "new" ? .new : .old(rankInten: rankInten)
+              
+        return BoxofficeRecode(
+            rank: rank,
+            rankType: rankType,
+            movieCode: self.movieCode,
+            movieName: self.movieName,
+            openDate: openDate,
+            audienceCount: audienceCount,
+            audienceInten: audienceInten,
+            audienceChange: audienceChange,
+            audienceAccumulation: audienceAccumulation,
+            screenCount: self.screenCount,
+            showCount: self.showCount
+        )
     }
 }
