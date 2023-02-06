@@ -13,7 +13,7 @@ enum NetworkCache {
            let target = URL(string: url.absoluteString + "preserved/") {
             return URLCache(memoryCapacity: 1024 * 1024 * 3,
                             diskCapacity: 1024 * 1024 * 10 * 3,
-                            directory: URL(string: "\(url.absoluteString)/preserved"))
+                            directory: target)
         }
         return nil
     }()
