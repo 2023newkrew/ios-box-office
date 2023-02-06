@@ -8,16 +8,23 @@
 import Foundation
 
 enum NetworkCache {
-    static let api: URLCache? = {
+    private enum MemoryCapacity {
+        static let api = 1024 * 1024 * 10
+        static let image = 1024 * 1024 * 30
+    }
+    
+    static let api: URLCache = {
         if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first,
-           let target = URL(string: url.absoluteString + "preserved/") {
-            return URLCache(memoryCapacity: 1024 * 1024 * 3,
-                            diskCapacity: 1024 * 1024 * 10 * 3,
-                            directory: target)
+           let target = URL(string: url.absoluteString + "preserved") {
+            let cache = URLCache(memoryCapacity: MemoryCapacity.api,
+                                 diskCapacity: MemoryCapacity.api * 3,
+                                 directory: target)
+            cache.removeAllCachedResponses()
+            return cache
         }
-        return nil
+        return URLCache()
     }()
     
-    static let image = URLCache(memoryCapacity: 1024 * 1024 * 10,
-                                    diskCapacity: 1024 * 1024 * 100)
+    static let image = URLCache(memoryCapacity: MemoryCapacity.image,
+                                diskCapacity: MemoryCapacity.image * 3)
 }

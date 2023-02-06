@@ -14,11 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        [NetworkCache.api, NetworkCache.image].forEach { cache in
-            cache?.removeCachedResponses(since: Date(timeIntervalSinceNow: -86400 * 7))
-        }
-
         return true
     }
 

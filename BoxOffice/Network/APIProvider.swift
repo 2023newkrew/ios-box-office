@@ -27,29 +27,36 @@ class APIProvider {
         }
     }
     
-    private let session: URLSession
+    private var session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.urlCache = NetworkCache.api
+        let session = URLSession.init(configuration: config)
+        return session
+    }()
     private let baseURL: String
     private let header: [String: String]
     private let query: [URLQueryItem]
     private let method: HTTPMethod
     
-    private let cache: URLCache = NetworkCache.api ?? URLCache()
-    
-    init(session: URLSession = URLSession.shared,
+    init(session: URLSession? = nil,
          baseURL: String,
          header: [String: String] = [:],
          query: [URLQueryItem] = [],
          method: HTTPMethod = .get) {
-        self.session = session
+        if let session = session {
+            self.session = session
+        }
         self.baseURL = baseURL
         self.header = header
         self.query = query
         self.method = method
     }
     
-    init(session: URLSession = URLSession.shared,
+    init(session: URLSession? = nil,
          request: APIRequest) {
-        self.session = session
+        if let session = session {
+            self.session = session
+        }
         self.baseURL = request.urlString
         self.header = request.header
         self.query = request.query
@@ -80,15 +87,15 @@ extension APIProvider {
             return Result.failure(APIError.invalidRequest)
         }
         
-        if let cachedResponse = self.cache.cachedResponse(for: urlRequest) {
+        if let cachedResponse =  self.session.configuration.urlCache?.cachedResponse(for: urlRequest) {
             return Result.success(APIResult(data: cachedResponse.data,
                                             response: cachedResponse.response))
         }
         
         do {
             let (data, response) = try await self.session.data(for: urlRequest)
-            self.cache.storeCachedResponse(CachedURLResponse(response: response, data: data),
-                                           for: urlRequest)
+            self.session.configuration.urlCache?.storeCachedResponse(CachedURLResponse(response: response, data: data),
+                                                                     for: urlRequest)
             return Result.success(APIResult(data: data, response: response))
         } catch {
             return Result.failure(APIError.apiConnectionFail(error.localizedDescription))

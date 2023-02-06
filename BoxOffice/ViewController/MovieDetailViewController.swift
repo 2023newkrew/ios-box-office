@@ -190,7 +190,7 @@ class MovieDetailViewController: UIViewController {
         return UIImage(data: imageData)
     }
     
-    func dataWithContents(of url: URL) async -> Data? {
+    private func dataWithContents(of url: URL) async -> Data? {
         async let data: Data? = Task.detached {
             if let data = NetworkCache.image.cachedResponse(for: URLRequest(url: url))?.data {
                 return data
