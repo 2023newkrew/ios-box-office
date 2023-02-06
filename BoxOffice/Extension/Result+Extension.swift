@@ -8,7 +8,6 @@
 import Foundation
 
 extension Result {
-    @discardableResult
     func success() -> Success? {
         if case .success(let value) = self {
             return value
@@ -16,7 +15,6 @@ extension Result {
         return nil
     }
     
-    @discardableResult
     func failure() -> Failure? {
         if case .failure(let error) = self {
             return error
