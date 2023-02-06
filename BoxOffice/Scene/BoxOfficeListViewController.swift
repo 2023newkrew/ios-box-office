@@ -37,7 +37,7 @@ class BoxOfficeListViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section,
                                                                BoxOfficeItem>?
     private var items: [BoxOfficeItem] = []
-    private let networkService: NetworkServiceProtocol? = NetworkService()
+    private let networkService: NetworkServiceProtocol = NetworkService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class BoxOfficeListViewController: UIViewController {
     }
     
     private func loadData(_ completion: @escaping () -> Void) {
-        networkService?.fetch(searchTarget: .searchDailyBoxOffice,
+        networkService.fetch(searchTarget: .searchDailyBoxOffice,
                               headers: nil,
                               queryItems: [QueryKeys.targetDate: Date
                                 .dayString(.yesterday,format: .yyyyMMdd)]) {
@@ -153,7 +153,8 @@ extension BoxOfficeListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         let vc = DetailMovieInfoViewController(movieCode: items[row].movieCode,
-                                               movieName: items[row].title)
+                                               movieName: items[row].title,
+                                               networkService: networkService)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

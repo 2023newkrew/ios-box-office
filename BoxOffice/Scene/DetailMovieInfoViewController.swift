@@ -21,7 +21,7 @@ class DetailMovieInfoViewController: UIViewController {
     private let movieCode: String
     private let movieName: String
     
-    private let networkService: NetworkServiceProtocol? = NetworkService()
+    private let networkService: NetworkServiceProtocol
     
     private let scrollView = UIScrollView()
     private let mainStackView = UIStackView()
@@ -70,9 +70,12 @@ class DetailMovieInfoViewController: UIViewController {
         loadMoviePoster()
     }
     
-    init(movieCode: String, movieName: String) {
+    init(movieCode: String,
+         movieName: String,
+         networkService: NetworkServiceProtocol) {
         self.movieCode = movieCode
         self.movieName = movieName
+        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -258,7 +261,7 @@ extension DetailMovieInfoViewController {
     }
     
     private func loadDetailInfo() {
-        networkService?.fetch(searchTarget: .searchDetailMovieInfo,
+        networkService.fetch(searchTarget: .searchDetailMovieInfo,
                               headers: nil,
                               queryItems: [QueryKeys.movieCode: movieCode]) {
             [weak self] (networkResponse: Result<MovieInfoDetailResult,
@@ -288,7 +291,7 @@ extension DetailMovieInfoViewController {
     }
     
     private func loadMoviePoster() {
-        networkService?.fetch(searchTarget: .searchMoviePosterImage,
+        networkService.fetch(searchTarget: .searchMoviePosterImage,
                               headers: AppKeys.kakaoAPI,
                               queryItems: [QueryKeys.imageKeyQuery: QueryKeys.imageQuery(movieName)]) {
             [weak self] (networkResponse: Result<ImageSearchResult,
