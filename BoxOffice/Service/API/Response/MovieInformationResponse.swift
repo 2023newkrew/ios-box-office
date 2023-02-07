@@ -150,3 +150,22 @@ struct Staff: Decodable {
         case staffRoleName = "staffRoleNm"
     }
 }
+
+extension MovieInfo {
+    func toModel() -> Movie {
+        return Movie(
+            movieCode: self.movieCode,
+            movieName: self.movieName,
+            movieNameEnglish: self.movieNameEnglish,
+            movieNameOriginal: self.movieNameOriginal,
+            showTime: self.showTime,
+            productionYear: self.productionYear,
+            openDate: DateFormatter.yearMonthDay.date(from: self.openDate),
+            nations: self.nations,
+            genres: self.genres,
+            directors: self.directors,
+            actors: self.actors,
+            audits: self.audits
+        )
+    }
+}
