@@ -198,27 +198,27 @@
 		C223C6DB297909C600FC3E9E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				C2B198662990968C00D7E0BB /* ImageSearchService */,
-				C223C6D9297909BA00FC3E9E /* MovieService.swift */,
-				C223C7272979492800FC3E9E /* DefaultMovieService.swift */,
-				C223C6DC297909F100FC3E9E /* API */,
+				C2B198662990968C00D7E0BB /* ImageSearch */,
+				C223C6DC297909F100FC3E9E /* Movie */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		C223C6DC297909F100FC3E9E /* API */ = {
+		C223C6DC297909F100FC3E9E /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				C223C6D9297909BA00FC3E9E /* MovieService.swift */,
+				C223C7272979492800FC3E9E /* DefaultMovieService.swift */,
+				C223C6E529790BFE00FC3E9E /* Protocol */,
 				C223C6DF29790A6400FC3E9E /* Endpoint */,
 				C223C6E029790A6800FC3E9E /* Response */,
 			);
-			path = API;
+			path = Movie;
 			sourceTree = "<group>";
 		};
 		C223C6DF29790A6400FC3E9E /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
-				C223C6E529790BFE00FC3E9E /* Protocol */,
 				C223C6E329790BF900FC3E9E /* BoxofficeEndpoint.swift */,
 				C223C6D52978FD2700FC3E9E /* MovieInformationEndpoint.swift */,
 			);
@@ -312,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				C22A17A92989037B00F7E792 /* BoxofficeViewController.swift */,
-				C22A17AF298A49A600F7E792 /* BoxofficeListContentView.swift */,
+				C2B1987F29926E7F00D7E0BB /* View */,
 			);
 			path = Boxoffice;
 			sourceTree = "<group>";
@@ -326,15 +326,15 @@
 			path = MovieDetail;
 			sourceTree = "<group>";
 		};
-		C2B198662990968C00D7E0BB /* ImageSearchService */ = {
+		C2B198662990968C00D7E0BB /* ImageSearch */ = {
 			isa = PBXGroup;
 			children = (
-				C2B1986C29909D0500D7E0BB /* Protocol */,
-				C2B1986B29909CF000D7E0BB /* Response */,
 				C2B19867299096A500D7E0BB /* ImageService.swift */,
-				C2B1986929909AD200D7E0BB /* ImageSearchEndpoint.swift */,
+				C2B1986C29909D0500D7E0BB /* Protocol */,
+				C2B1987E29926E3A00D7E0BB /* Endpoint */,
+				C2B1986B29909CF000D7E0BB /* Response */,
 			);
-			path = ImageSearchService;
+			path = ImageSearch;
 			sourceTree = "<group>";
 		};
 		C2B1986B29909CF000D7E0BB /* Response */ = {
@@ -358,6 +358,22 @@
 			isa = PBXGroup;
 			children = (
 				C2B198772992179F00D7E0BB /* MovieDetailFactorStackView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C2B1987E29926E3A00D7E0BB /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				C2B1986929909AD200D7E0BB /* ImageSearchEndpoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		C2B1987F29926E7F00D7E0BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C22A17AF298A49A600F7E792 /* BoxofficeListContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
