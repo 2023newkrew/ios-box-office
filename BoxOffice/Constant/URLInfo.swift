@@ -8,22 +8,27 @@
 import Foundation
 
 enum URLInfo {
-    static let baseURL = "http://www.kobis.or.kr/"
-    static let key: URLQueryItem? = {
-        guard let filePath = Bundle.main.url(forResource: "Info", withExtension: "plist") else {
-            return nil
-        }
-        guard let plist = NSDictionary(contentsOf: filePath) else {
-            return nil
-        }
-        guard let key = plist.object(forKey: "APP_KEY") as? String else {
-            return nil
-        }
-        return URLQueryItem(name: "key", value: key)
-    }()
-    
     case searchDailyBoxOffice
     case searchDetailMovieInfo
+    case searchMoviePosterImage
+    
+    var scheme: String {
+        switch self {
+        case .searchDailyBoxOffice, .searchDetailMovieInfo:
+            return "http"
+        case .searchMoviePosterImage:
+            return "https"
+        }
+    }
+    
+    var host: String {
+        switch self {
+        case .searchDailyBoxOffice, .searchDetailMovieInfo:
+            return "kobis.or.kr"
+        case .searchMoviePosterImage:
+            return "dapi.kakao.com"
+        }
+    }
     
     var path: String {
         switch self {
@@ -31,6 +36,25 @@ enum URLInfo {
             return "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         case .searchDetailMovieInfo:
             return "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        case .searchMoviePosterImage:
+            return "/v2/search/image"
+        }
+    }
+    
+    var defaultQuery: [URLQueryItem] {
+        switch self {
+        case .searchDailyBoxOffice, .searchDetailMovieInfo:
+            var queryItem: [URLQueryItem] = []
+            guard let keyQuery = AppKeys.boxOfficeAPI else {
+                return []
+            }
+            for query in keyQuery {
+                let appKey = URLQueryItem(name: query.key, value: query.value)
+                queryItem.append(appKey)
+            }
+            return queryItem
+        case .searchMoviePosterImage:
+            return []
         }
     }
 }

@@ -18,7 +18,8 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "영화 정보 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDetailMovieInfo,
-                         queryItems: [QueryKeys.movieCode: "20124079"]) {
+                  headers: nil,
+                  queryItems: [QueryKeys.movieCode: "20124079"]) {
             (networkResult: Result<MovieInfoDetailResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -36,7 +37,8 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
+                  headers: nil,
+                  queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -54,11 +56,12 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                  queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
+                  headers: nil,
+                  queryItems: [QueryKeys.targetDate: Date.dayString(.yesterday, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
-                let today = Date.dayString(.today, format: .yyyyMMdd)
+                let today = Date.dayString(.yesterday, format: .yyyyMMdd)
                 XCTAssertEqual(success.result.searchRange, "\(today)~\(today)")
                 expects.fulfill()
             case .failure(let failure):
@@ -73,7 +76,8 @@ final class NetworkTest: XCTestCase {
         let expects = XCTestExpectation(description: "오늘의 박스 오피스 TEST Expecatation")
         
         sut.fetch(searchTarget: .searchDailyBoxOffice,
-                         queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
+                  headers: nil,
+                  queryItems: [QueryKeys.targetDate: Date.dayString(.today, format: .yyyyMMdd)]) {
             (networkResult: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
             switch networkResult {
             case .success(let success):
@@ -86,6 +90,23 @@ final class NetworkTest: XCTestCase {
         }
         wait(for: [expects], timeout: 5.0)
     }
-
-
+    
+    func test_images_잘_받아_오나() {
+        let expects = XCTestExpectation(description: "오늘의 이미지 렌더링")
+        
+        sut.fetch(searchTarget: .searchMoviePosterImage,
+                  headers: AppKeys.kakaoAPI,
+                  queryItems: ["query": "슬램덩크 영화 포스터"]) {
+            (networkResult: Result<ImageSearchResult, NetworkServiceError>) -> Void in
+            switch networkResult {
+            case .success(let success):
+                print(success)
+                expects.fulfill()
+            case .failure(let failure):
+                XCTFail(failure.localizedDescription)
+                expects.fulfill()
+            }
+        }
+        wait(for: [expects], timeout: 5.0)
+    }
 }

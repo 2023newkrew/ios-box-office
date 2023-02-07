@@ -7,8 +7,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>APP_KEY</key>
+	<key>BOXOFFICE_APP_KEY</key>
 	<string>1a82fdb5f1e1ef5882cd8325ecb30e91</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>ea216c079af4fa1b402818a6db6c04b8</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

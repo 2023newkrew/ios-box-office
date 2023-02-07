@@ -30,13 +30,14 @@ class BoxOfficeListViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
         collectionView.refreshControl = self.refreshBoxOfficeList
+        collectionView.delegate = self
         
         return collectionView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<Section,
                                                                BoxOfficeItem>?
     private var items: [BoxOfficeItem] = []
-    private let networkService: NetworkServiceProtocol? = NetworkService()
+    private let networkService: NetworkServiceProtocol = NetworkService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,8 @@ class BoxOfficeListViewController: UIViewController {
     }
     
     private func loadData(_ completion: @escaping () -> Void) {
-        networkService?.fetch(searchTarget: .searchDailyBoxOffice,
+        networkService.fetch(searchTarget: .searchDailyBoxOffice,
+                              headers: nil,
                               queryItems: [QueryKeys.targetDate: Date
                                 .dayString(.yesterday,format: .yyyyMMdd)]) {
             [weak self] (response: Result<BoxOfficeSearchResult, NetworkServiceError>) -> Void in
@@ -144,5 +146,15 @@ extension BoxOfficeListViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
         dataSource?.apply(snapShot, animatingDifferences: false)
+    }
+}
+
+extension BoxOfficeListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
+        let vc = DetailMovieInfoViewController(movieCode: items[row].movieCode,
+                                               movieName: items[row].title,
+                                               networkService: networkService)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
