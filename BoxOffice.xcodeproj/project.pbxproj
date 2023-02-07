@@ -50,6 +50,8 @@
 		D78591A52976754E0071CD1F /* MovieDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78591A42976754E0071CD1F /* MovieDetailResult.swift */; };
 		D78591A629768E7E0071CD1F /* MovieDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78591A42976754E0071CD1F /* MovieDetailResult.swift */; };
 		D78591AD2976A3820071CD1F /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78591AC2976A3820071CD1F /* APIProvider.swift */; };
+		D795D4632991E5E800DFD6B6 /* DatePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795D4622991E5E800DFD6B6 /* DatePickViewController.swift */; };
+		D795D4652991E77600DFD6B6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795D4642991E77600DFD6B6 /* NetworkService.swift */; };
 		D7A904342978FD3D006B8F49 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78591AC2976A3820071CD1F /* APIProvider.swift */; };
 		D7A9043B2979092E006B8F49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7A9043A2979092E006B8F49 /* TestAssets.xcassets */; };
 		D7A9043D29790A2E006B8F49 /* APIDataTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A9043C29790A2E006B8F49 /* APIDataTaskTests.swift */; };
@@ -93,6 +95,8 @@
 		D78591912976515C0071CD1F /* SecretKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKey.swift; sourceTree = "<group>"; };
 		D78591A42976754E0071CD1F /* MovieDetailResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailResult.swift; sourceTree = "<group>"; };
 		D78591AC2976A3820071CD1F /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
+		D795D4622991E5E800DFD6B6 /* DatePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickViewController.swift; sourceTree = "<group>"; };
+		D795D4642991E77600DFD6B6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		D7A9043A2979092E006B8F49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
 		D7A9043C29790A2E006B8F49 /* APIDataTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataTaskTests.swift; sourceTree = "<group>"; };
 		D7BBAF4C297AD33200E44D9C /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				D78591AC2976A3820071CD1F /* APIProvider.swift */,
 				D785918529762B690071CD1F /* HTTPMethod.swift */,
 				D762213D29911EA700BEFE30 /* NetworkCache.swift */,
+				D795D4642991E77600DFD6B6 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 			children = (
 				63DF20F22970E1A0005DF7D1 /* BoxOfficeListViewController.swift */,
 				D779ACA5298944D800F10A50 /* MovieDetailViewController.swift */,
+				D795D4622991E5E800DFD6B6 /* DatePickViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 				D779ACA82989F38300F10A50 /* MovieDetailRowStackView.swift in Sources */,
 				D779AC5229874E8D00F10A50 /* String+Extension.swift in Sources */,
 				D762213E29911EA700BEFE30 /* NetworkCache.swift in Sources */,
+				D795D4652991E77600DFD6B6 /* NetworkService.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				D70EB8D32982593600B4189E /* NSMutableAttributedString+Extension.swift in Sources */,
 				D78591A52976754E0071CD1F /* MovieDetailResult.swift in Sources */,
@@ -380,6 +387,7 @@
 				D7459EDA298BAF1900E78040 /* ImageSearchResult.swift in Sources */,
 				D7459ECD298B4D1300E78040 /* MovieDetailSummary.swift in Sources */,
 				D76B9B0B29754637003380BB /* DailyBoxOfficeSearchResult.swift in Sources */,
+				D795D4632991E5E800DFD6B6 /* DatePickViewController.swift in Sources */,
 				D7459EDC298BE72A00E78040 /* DynamicFitImageView.swift in Sources */,
 				D779ACA6298944D800F10A50 /* MovieDetailViewController.swift in Sources */,
 				D70EB8D22982593600B4189E /* NSAttributedString+Extension.swift in Sources */,

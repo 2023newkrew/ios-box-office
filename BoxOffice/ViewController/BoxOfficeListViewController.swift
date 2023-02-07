@@ -8,8 +8,6 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
-    private let apiGroup = DispatchGroup()
-    
     private enum Section: CaseIterable {
         case main
     }
@@ -80,41 +78,25 @@ class BoxOfficeListViewController: UIViewController {
     
     @objc private func loadData() {
         self.refresher.beginRefreshing()
-        
-        let formatter = DateFormatter()
-        let dashedYesterday = formatter.yesterday(format: DateFormat.dashed)
-        let plainYesterday = formatter.yesterday(format: DateFormat.plain)
-        
-        guard let key = SecretKey.boxOfficeAPIKey else {
-            return
-        }
-        let request = APIRequest
-            .getDailyBoxOffice(key: key,
-                               targetDate: plainYesterday)
-        let apiProvider = APIProvider(request: request)
-        
         Task {
-            async let summaryList = Task {
-                async let result = apiProvider.startAsyncLoading()
-                
-                if let data = await result.success()?.data,
-                   let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
-                    
-                    return boxOfficeList.dailyList.map { boxOffice in
-                        boxOffice.summary()
-                    }
-                }
-                return []
-            }.value
+            let formatter = DateFormatter()
+            let dashedYesterday = formatter.yesterday(format: DateFormat.dashed)
+            let plainYesterday = formatter.yesterday(format: DateFormat.plain)
+            
+            async let summaryList = NetworkService.boxOfficeSummaryList(atPlainDate: plainYesterday)
             
             var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
             snapshot.appendSections([.main])
-            snapshot.appendItems(await summaryList)
+            snapshot.appendItems(await summaryList ?? [])
             
             self.refresher.endRefreshing()
-            self.title = dashedYesterday
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            self.updateUI(title: dashedYesterday, snapshot: snapshot)
         }
+    }
+    
+    private func updateUI(title: String, snapshot: NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>) {
+        self.title = title
+        self.dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
