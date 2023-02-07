@@ -14,16 +14,10 @@ struct Movie {
     let movieNameOriginal: String
     let showTime: String
     let productionYear: String
-    let openDate: String
-    let productionStateName: String
-    let typeName: String
+    let openDate: Date?
     let nations: [Nation]
     let genres: [Genre]
     let directors: [Director]
     let actors: [Actor]
-    let showTypes: [ShowType]
-    let companies: [Company]
     let audits: [Audit]
-    let staffs: [Staff]
 }
-
