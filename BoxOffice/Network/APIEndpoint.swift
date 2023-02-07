@@ -10,6 +10,7 @@ import Foundation
 protocol APIEndpoint {
     associatedtype APIResponse: Decodable
     
+    var decoder: DecodingUtility { get }
     var method: HTTPMethod { get }
     var baseURLLiteral: String { get }
     var path: String { get }
@@ -20,6 +21,10 @@ protocol APIEndpoint {
 }
 
 extension APIEndpoint {
+    var decoder: DecodingUtility {
+        return JSONDecodingUtility()
+    }
+    
     var url: URL? {
         guard let url = URL(string: baseURLLiteral)?.appendingPathComponent(path) else {
             return nil
