@@ -19,9 +19,11 @@ protocol MovieService {
         areaCode: String?,
         completion: @escaping ((Result<Boxoffice, NetworkError>) -> Void)
     ) -> Cancellable?
+    
+    @discardableResult
     func fetchMovieInformation(
         for movieCode: String,
-        completion: @escaping ((Result<MovieInformationResponse, NetworkError>) -> Void)
+        completion: @escaping ((Result<Movie, NetworkError>) -> Void)
     ) -> Cancellable?
 }
 
@@ -48,12 +50,12 @@ extension MovieService {
     
     func fetchMovieInformation(
         for movieCode: String,
-        completion: @escaping ((Result<MovieInformationResponse, NetworkError>) -> Void)
+        completion: @escaping ((Result<Movie, NetworkError>) -> Void)
     ) -> Cancellable? {
         let endpoint = MovieInformationEndpoint(movieCode: movieCode)
         
         return self.networkProvider.request(endpoint) { result in
-            completion(result)
+            completion(result.map { $0.movieInformationResult.movieInformation.toModel() })
         }
     }
 }
