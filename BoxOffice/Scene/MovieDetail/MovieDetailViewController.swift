@@ -8,6 +8,13 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+    struct MovieDetailConstructor {
+        let movieService: MovieService
+        let imageService: ImageService
+        let movieCode: String
+        let movieTitle: String
+    }
+
     private let movieService: MovieService
     private let imageService: ImageService
     private let movieCode: String
@@ -45,16 +52,11 @@ class MovieDetailViewController: UIViewController {
     private let genreStackView = MovieDetailFactorStackView(titleText: "장르")
     private let actorStackView = MovieDetailFactorStackView(titleText: "배우")
     
-    init(
-        movieService: MovieService,
-        imageService: ImageService,
-        movieCode: String,
-        movieTitle: String
-    ) {
-        self.movieService = movieService
-        self.imageService = imageService
-        self.movieCode = movieCode
-        self.movieTitle = movieTitle
+    init(movieDetailConstructor: MovieDetailConstructor) {
+        self.movieService = movieDetailConstructor.movieService
+        self.imageService = movieDetailConstructor.imageService
+        self.movieCode = movieDetailConstructor.movieCode
+        self.movieTitle = movieDetailConstructor.movieTitle
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -155,10 +155,12 @@ extension BoxofficeViewController: UICollectionViewDelegate {
         }
         let imageService = DefaultImageService()
         let movieDetailViewController = MovieDetailViewController(
-            movieService: self.movieService,
-            imageService: imageService,
-            movieCode: movieCode,
-            movieTitle: movieTitle
+            movieDetailConstructor: .init(
+                movieService: self.movieService,
+                imageService: imageService,
+                movieCode: movieCode,
+                movieTitle: movieTitle
+            )
         )
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
