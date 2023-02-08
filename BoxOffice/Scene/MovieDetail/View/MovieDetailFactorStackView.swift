@@ -36,8 +36,8 @@ class MovieDetailFactorStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setContentLabel(_ text: String) {
-        self.contentLabel.text = text
+    func setContentLabel(_ text: String?) {
+        self.contentLabel.text = text ?? "-"
     }
     
     private func configureStackView() {

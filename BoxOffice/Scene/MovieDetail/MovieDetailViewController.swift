@@ -132,7 +132,7 @@ class MovieDetailViewController: UIViewController {
         }
 
         self.runningTimeStackView.setContentLabel(movie.showTime)
-        self.auditGradeStackView.setContentLabel(movie.audits[0].watchGradeName)
+        self.auditGradeStackView.setContentLabel(movie.audits.first?.watchGradeName)
         self.nationStackView.setContentLabel(movie.nations.map { $0.nationName }.joined(separator: ", "))
         self.genreStackView.setContentLabel(movie.genres.map { $0.genreName }.joined(separator: ", "))
         self.actorStackView.setContentLabel(movie.actors.map { $0.peopleName }.joined(separator: ", "))
