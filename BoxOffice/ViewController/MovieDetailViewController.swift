@@ -57,9 +57,7 @@ class MovieDetailViewController: UIViewController {
         self.setHierarchy()
         self.setConstraint()
         self.setAttribute()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        
         self.loadData()
     }
     
