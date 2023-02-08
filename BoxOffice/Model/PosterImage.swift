@@ -8,8 +8,8 @@
 import Foundation
 
 struct PosterImage {
-    let imageURL: String
-    let thumbnailURL: String
+    let imageURLString: String
+    let thumbnailURLString: String
     let height: Int
     let width: Int
 }

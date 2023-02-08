@@ -35,8 +35,8 @@ struct Document: Decodable {
 extension Document {
     func toModel() -> PosterImage {
         return PosterImage(
-            imageURL: self.imageURL,
-            thumbnailURL: self.thumbnailURL,
+            imageURLString: self.imageURL,
+            thumbnailURLString: self.thumbnailURL,
             height: self.height,
             width: self.width
         )

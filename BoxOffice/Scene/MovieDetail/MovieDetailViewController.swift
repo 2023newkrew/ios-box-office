@@ -108,7 +108,7 @@ class MovieDetailViewController: UIViewController {
                         multiplier: posterImage.aspectRatio
                     ).isActive = true
                 }
-                guard let url = URL(string: posterImage.imageURL) else { return }
+                guard let url = URL(string: posterImage.imageURLString) else { return }
                 ImageLoadUtility.fetchImage(imageURL: url) { data in
                     DispatchQueue.main.async {
                         self.posterImageView.image = UIImage(data: data)
