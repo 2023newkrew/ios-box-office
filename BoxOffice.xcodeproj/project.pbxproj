@@ -154,6 +154,7 @@
 				D7FBB3DB2974D21A0033619E /* Model */,
 				D76B9B11297627B1003380BB /* Network */,
 				D78591902976514C0071CD1F /* Secret */,
+				D7EA848B2993BB090008263F /* Service */,
 				D7FBB3DD2974D2400033619E /* UIComponent */,
 				D7FBB3DC2974D2340033619E /* ViewController */,
 			);
@@ -187,7 +188,6 @@
 				D78591AC2976A3820071CD1F /* APIProvider.swift */,
 				D785918529762B690071CD1F /* HTTPMethod.swift */,
 				D762213D29911EA700BEFE30 /* NetworkCache.swift */,
-				D795D4642991E77600DFD6B6 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -206,6 +206,14 @@
 				D73EFD2429907F9600C851BE /* MockURLProtocol.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		D7EA848B2993BB090008263F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D795D4642991E77600DFD6B6 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		D7FBB3DA2974D2040033619E /* Application */ = {
