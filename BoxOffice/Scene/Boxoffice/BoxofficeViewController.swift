@@ -7,12 +7,6 @@
 
 import UIKit
 
-fileprivate extension Date {
-    static var yesterday: Date {
-        return Date() - 24 * 3600
-    }
-}
-
 class BoxofficeViewController: UIViewController {
     private let movieService: MovieService
     
@@ -163,5 +157,11 @@ extension BoxofficeViewController: UICollectionViewDelegate {
             )
         )
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+    }
+}
+
+fileprivate extension Date {
+    static var yesterday: Date {
+        return Date() - 24 * 3600
     }
 }
