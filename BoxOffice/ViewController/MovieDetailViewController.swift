@@ -19,7 +19,7 @@ class MovieDetailViewController: UIViewController {
         return scrollView
     }()
     
-    private let detailStackView: UIStackView = {
+    private let detailStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -29,14 +29,14 @@ class MovieDetailViewController: UIViewController {
     
     private let posterImageView = DynamicFitImageView()
     
-    private let directorStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let productYearStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let openYearStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let showTimeStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let watchGradeStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let nationStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let genreStackView: MovieDetailRowStackView = MovieDetailRowStackView()
-    private let actorStackView: MovieDetailRowStackView = MovieDetailRowStackView()
+    private let directorStackView = MovieDetailRowStackView()
+    private let productYearStackView = MovieDetailRowStackView()
+    private let openYearStackView = MovieDetailRowStackView()
+    private let showTimeStackView = MovieDetailRowStackView()
+    private let watchGradeStackView = MovieDetailRowStackView()
+    private let nationStackView = MovieDetailRowStackView()
+    private let genreStackView = MovieDetailRowStackView()
+    private let actorStackView = MovieDetailRowStackView()
     
     init(movieCode: String, movieTitle: String) {
         self.movieCode = movieCode

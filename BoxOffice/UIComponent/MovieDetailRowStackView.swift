@@ -8,12 +8,12 @@
 import UIKit
 
 class MovieDetailRowStackView: UIStackView {
-    private let keyLabel: UILabel = UILabel(textAlignment: .center,
-                                 font: .preferredFont(forTextStyle: .body))
+    private let keyLabel = UILabel(textAlignment: .center,
+                                   font: .preferredFont(forTextStyle: .body))
     
-    private let valueLabel: UILabel = UILabel(textAlignment: .left,
-                             font: .preferredFont(forTextStyle: .body))
-
+    private let valueLabel = UILabel(textAlignment: .left,
+                                     font: .preferredFont(forTextStyle: .body))
+    
     init() {
         super.init(frame: .zero)
         self.setAttribute()
@@ -27,7 +27,7 @@ class MovieDetailRowStackView: UIStackView {
     
     func setKeyLabelWidth(constraintAnchor: NSLayoutDimension, multiplier: CGFloat) {
         keyLabel.widthAnchor.constraint(equalTo: constraintAnchor,
-                                              multiplier: multiplier).isActive = true
+                                        multiplier: multiplier).isActive = true
     }
     
     func setText(key: String, value: String) {
@@ -49,7 +49,7 @@ class MovieDetailRowStackView: UIStackView {
             self.addArrangedSubview(element)
         }
     }
-
+    
 }
 
 private extension UILabel {

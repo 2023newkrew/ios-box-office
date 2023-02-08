@@ -27,9 +27,10 @@ class APIProvider {
         }
     }
     
-    private var session: URLSession = {
+    private var session = {
         let config = URLSessionConfiguration.default
         config.urlCache = NetworkCache.api
+        config.requestCachePolicy = .returnCacheDataElseLoad
         let session = URLSession.init(configuration: config)
         return session
     }()

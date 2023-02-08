@@ -22,7 +22,7 @@ class BoxOfficeListViewController: UIViewController {
         return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
     }
     
-    private let boxOfficeCollectionView: UICollectionView = {
+    private let boxOfficeCollectionView = {
         let heightDimension = NSCollectionLayoutDimension.estimated(50)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -42,7 +42,7 @@ class BoxOfficeListViewController: UIViewController {
         return collectionView
     }()
     
-    private let refresher: UIRefreshControl = UIRefreshControl()
+    private let refresher = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
