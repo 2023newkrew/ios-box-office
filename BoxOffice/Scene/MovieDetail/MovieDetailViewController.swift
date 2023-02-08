@@ -84,8 +84,10 @@ class MovieDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.configureContent(for: movie)
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                DispatchQueue.main.async {
+                    self.presentErrorAlert(for: "영화 정보를 불러올 수 없습니다.")
+                }
             }
         }
     }
@@ -110,8 +112,10 @@ class MovieDetailViewController: UIViewController {
                         self.posterImageView.image = UIImage(data: data)
                     }
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                DispatchQueue.main.async {
+                    self.presentErrorAlert(for: "포스터 이미지를 불러올 수 없습니다.")
+                }
             }
         }
     }
@@ -166,5 +170,16 @@ class MovieDetailViewController: UIViewController {
     private func configureLoadingIndicator() {
         let loadingIndicator = UIActivityIndicatorView(frame: self.posterImageView.frame)
         self.loadingIndicator = loadingIndicator
+    }
+    
+    private func presentErrorAlert(for title: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
