@@ -8,10 +8,10 @@
 import UIKit
 
 class MovieDetailRowStackView: UIStackView {
-    private let keyLabel = UILabel(textAlignment: .center,
+    private let categoryLabel = UILabel(textAlignment: .center,
                                    font: .preferredFont(forTextStyle: .body))
     
-    private let valueLabel = UILabel(textAlignment: .left,
+    private let contentsLabel = UILabel(textAlignment: .left,
                                      font: .preferredFont(forTextStyle: .body))
     
     init() {
@@ -25,14 +25,14 @@ class MovieDetailRowStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setKeyLabelWidth(constraintAnchor: NSLayoutDimension, multiplier: CGFloat) {
-        keyLabel.widthAnchor.constraint(equalTo: constraintAnchor,
+    func setCategoryLabelWidth(constraintAnchor: NSLayoutDimension, multiplier: CGFloat) {
+        categoryLabel.widthAnchor.constraint(equalTo: constraintAnchor,
                                         multiplier: multiplier).isActive = true
     }
     
     func setText(key: String, value: String) {
-        self.keyLabel.text = key
-        self.valueLabel.text = value
+        self.categoryLabel.text = key
+        self.contentsLabel.text = value
     }
     
     private func setAttribute() {
@@ -41,11 +41,11 @@ class MovieDetailRowStackView: UIStackView {
         self.alignment = .center
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        self.keyLabel.font = .preferredFont(forTextStyle: .headline)
+        self.categoryLabel.font = .preferredFont(forTextStyle: .headline)
     }
     
     private func setHierarchy() {
-        [self.keyLabel, self.valueLabel].forEach { element in
+        [self.categoryLabel, self.contentsLabel].forEach { element in
             self.addArrangedSubview(element)
         }
     }

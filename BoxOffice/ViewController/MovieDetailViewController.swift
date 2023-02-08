@@ -102,7 +102,7 @@ class MovieDetailViewController: UIViewController {
          self.genreStackView,
          self.actorStackView
         ].forEach { row in
-            row.setKeyLabelWidth(constraintAnchor: self.scrollView.widthAnchor, multiplier: 0.2)
+            row.setCategoryLabelWidth(constraintAnchor: self.scrollView.widthAnchor, multiplier: 0.2)
         }
     }
     
