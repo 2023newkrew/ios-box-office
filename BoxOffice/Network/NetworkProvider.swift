@@ -9,7 +9,6 @@ import Foundation
 
 protocol NetworkProvider {
     var session: URLSessionable { get }
-    var decoder: DecodingUtility { get }
     func request<T: APIEndpoint>(
         _ request: T,
         completion: @escaping (Result<T.APIResponse, NetworkError>) -> Void
@@ -48,7 +47,7 @@ extension NetworkProvider {
             }
             
             do {
-                let decoded: T.APIResponse = try self.decoder.decode(data: data)
+                let decoded: T.APIResponse = try request.decoder.decode(data: data)
                 completion(.success(decoded))
                 return
             } catch let error {

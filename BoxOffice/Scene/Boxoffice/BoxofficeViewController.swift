@@ -61,6 +61,7 @@ class BoxofficeViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         self.collectionView = collectionView
+        self.collectionView.delegate = self
     }
     
     private func configureRefreshControl() {
@@ -135,5 +136,32 @@ class BoxofficeViewController: UIViewController {
                 print(error)
             }
         }
+    }
+}
+
+extension BoxofficeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.boxofficeDataSource?.itemIdentifier(for: indexPath)
+        guard let movieCode = item?.movieCode,
+              let movieTitle = item?.movieName
+        else {
+            return
+        }
+        let imageService = DefaultImageService()
+        let movieDetailViewController = MovieDetailViewController(
+            movieDetailConstructor: .init(
+                movieService: self.movieService,
+                imageService: imageService,
+                movieCode: movieCode,
+                movieTitle: movieTitle
+            )
+        )
+        self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+    }
+}
+
+fileprivate extension Date {
+    static var yesterday: Date {
+        return Date() - 24 * 3600
     }
 }
