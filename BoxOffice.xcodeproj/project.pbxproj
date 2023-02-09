@@ -16,14 +16,19 @@
 		C25843FF29766B5A00AC1A83 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25DE2BC29764E6C00FCD317 /* DailyBoxOffice.swift */; };
 		C25DE2B8297635A900FCD317 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C25DE2B7297635A900FCD317 /* .swiftlint.yml */; };
 		C25DE2BD29764E6C00FCD317 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25DE2BC29764E6C00FCD317 /* DailyBoxOffice.swift */; };
-		C25DE2BF29765EE900FCD317 /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = C25DE2BE29765EE900FCD317 /* box_office_sample.json */; };
 		C2875F722978E41C00E136B5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F712978E41C00E136B5 /* Movie.swift */; };
 		C2875F742978E50800E136B5 /* movie.json in Resources */ = {isa = PBXBuildFile; fileRef = C2875F732978E50800E136B5 /* movie.json */; };
 		C2875F762978EE7400E136B5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F752978EE7400E136B5 /* NetworkManager.swift */; };
 		C2875F7A29790B7B00E136B5 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F7929790B7B00E136B5 /* Storage.swift */; };
 		C2875F7D29791C8700E136B5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F7C29791C8700E136B5 /* API.swift */; };
 		C2875F7F2979245400E136B5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F7E2979245400E136B5 /* Day.swift */; };
-		C2875F8329793DE200E136B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F8229793DE200E136B5 /* ViewController.swift */; };
+		C2875F8329793DE200E136B5 /* BoxOfficeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2875F8229793DE200E136B5 /* BoxOfficeListViewController.swift */; };
+		C2B63EDA298B43260090F0A0 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B63ED9298B43260090F0A0 /* VerticalAlignLabel.swift */; };
+		C2B63EDB298B43260090F0A0 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B63ED9298B43260090F0A0 /* VerticalAlignLabel.swift */; };
+		C2B63EDD298BB3680090F0A0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B63EDC298BB3680090F0A0 /* LoadingView.swift */; };
+		C2B63EDE298BB3680090F0A0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B63EDC298BB3680090F0A0 /* LoadingView.swift */; };
+		C2E2C5E729947F06000E7CF8 /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = C2E2C5E629947F06000E7CF8 /* box_office_sample.json */; };
+		C2F3BB272988F68E00A1F5F2 /* BoxOfficeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F3BB262988F68E00A1F5F2 /* BoxOfficeListCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,14 +53,17 @@
 		C25843F829766A1600AC1A83 /* JsonDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodingTests.swift; sourceTree = "<group>"; };
 		C25DE2B7297635A900FCD317 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C25DE2BC29764E6C00FCD317 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
-		C25DE2BE29765EE900FCD317 /* box_office_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = box_office_sample.json; path = ../../../../Downloads/box_office_sample.json; sourceTree = "<group>"; };
 		C2875F712978E41C00E136B5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C2875F732978E50800E136B5 /* movie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = movie.json; sourceTree = "<group>"; };
 		C2875F752978EE7400E136B5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C2875F7929790B7B00E136B5 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C2875F7C29791C8700E136B5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		C2875F7E2979245400E136B5 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		C2875F8229793DE200E136B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C2875F8229793DE200E136B5 /* BoxOfficeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListViewController.swift; sourceTree = "<group>"; };
+		C2B63ED9298B43260090F0A0 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
+		C2B63EDC298BB3680090F0A0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C2E2C5E629947F06000E7CF8 /* box_office_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = box_office_sample.json; sourceTree = "<group>"; };
+		C2F3BB262988F68E00A1F5F2 /* BoxOfficeListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +112,12 @@
 				C2875F80297934C600E136B5 /* Network */,
 				C25DE2B929763CE800FCD317 /* Model */,
 				C2875F7B29791C7A00E136B5 /* Utility */,
+				C2B63ED8298B43020090F0A0 /* Extensions */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
-				C25DE2BE29765EE900FCD317 /* box_office_sample.json */,
+				C2E2C5E629947F06000E7CF8 /* box_office_sample.json */,
 				C2875F732978E50800E136B5 /* movie.json */,
 			);
 			path = BoxOffice;
@@ -152,9 +161,19 @@
 		C2875F81297934D400E136B5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C2875F8229793DE200E136B5 /* ViewController.swift */,
+				C2875F8229793DE200E136B5 /* BoxOfficeListViewController.swift */,
+				C2F3BB262988F68E00A1F5F2 /* BoxOfficeListCollectionViewCell.swift */,
+				C2B63EDC298BB3680090F0A0 /* LoadingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C2B63ED8298B43020090F0A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C2B63ED9298B43260090F0A0 /* VerticalAlignLabel.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,8 +259,8 @@
 			files = (
 				C2875F742978E50800E136B5 /* movie.json in Resources */,
 				C25DE2B8297635A900FCD317 /* .swiftlint.yml in Resources */,
+				C2E2C5E729947F06000E7CF8 /* box_office_sample.json in Resources */,
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
-				C25DE2BF29765EE900FCD317 /* box_office_sample.json in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
 				63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */,
 			);
@@ -282,10 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F3BB272988F68E00A1F5F2 /* BoxOfficeListCollectionViewCell.swift in Sources */,
 				C2875F762978EE7400E136B5 /* NetworkManager.swift in Sources */,
 				C2875F7A29790B7B00E136B5 /* Storage.swift in Sources */,
 				C25DE2BD29764E6C00FCD317 /* DailyBoxOffice.swift in Sources */,
-				C2875F8329793DE200E136B5 /* ViewController.swift in Sources */,
+				C2B63EDA298B43260090F0A0 /* VerticalAlignLabel.swift in Sources */,
+				C2B63EDD298BB3680090F0A0 /* LoadingView.swift in Sources */,
+				C2875F8329793DE200E136B5 /* BoxOfficeListViewController.swift in Sources */,
 				C2875F722978E41C00E136B5 /* Movie.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				C2875F7D29791C8700E136B5 /* API.swift in Sources */,
@@ -299,6 +321,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C25843F929766A1600AC1A83 /* JsonDecodingTests.swift in Sources */,
+				C2B63EDE298BB3680090F0A0 /* LoadingView.swift in Sources */,
+				C2B63EDB298B43260090F0A0 /* VerticalAlignLabel.swift in Sources */,
 				C25843FF29766B5A00AC1A83 /* DailyBoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,7 +486,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,7 +515,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
