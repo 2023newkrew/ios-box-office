@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import XCTest
 
 enum Section: CaseIterable {
     case main
@@ -31,7 +30,7 @@ class BoxOfficeListViewController: UIViewController {
         self.configureRefreshControl()
         self.configureCollectionView()
         self.configureDataSource()
-        self.perform()
+        self.refresh()
     }
     
 }
@@ -68,10 +67,16 @@ extension BoxOfficeListViewController {
     }
     
     @objc private func refresh() {
-        self.perform()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: { [weak self] in
-            self?.refreshControl?.endRefreshing()
-        })
+        self.perform() { result in
+            switch result {
+            case true:
+                DispatchQueue.main.async {
+                    self.refreshControl?.endRefreshing()
+                }
+            case false:
+                self.refresh()
+            }
+        }
     }
 }
 
@@ -86,7 +91,7 @@ extension BoxOfficeListViewController {
         }
     }
     
-    private func perform() {
+    private func perform(completion: @escaping (Bool) -> Void) {
         let networkManager = NetworkManager()
         let url = networkManager.apiURL(api: API.dailyBoxOffice, yyyyMMdd: Day.yesterday.formattedDate)
         let decoder = JSONDecoder()
@@ -99,11 +104,13 @@ extension BoxOfficeListViewController {
                     snapshot.appendSections([.main])
                     snapshot.appendItems(dailyBoxOffice.information.movieList)
                     self.dataSource.apply(snapshot, animatingDifferences: true)
+                    return completion(true)
                 } catch {
-                    print(String(describing: error))
+                    return completion(false)
                 }
             case .failure(let error):
                 print(error)
+                return completion(false)
             }
         }
     }
