@@ -168,4 +168,52 @@ struct MovieDetailResult: Decodable {
     }
 }
 
+extension MovieDetailResult {
+    func summary() -> MovieDetailSummary {
+        let directorSummary = self.directors
+            .map { director in
+                director.peopleName
+            }.joined(separator: ", ")
+        
+        let watchGradeSummary = self.audits
+            .map { audit in
+                audit.watchGradeName
+            }.joined(separator: ", ")
+        
+        let nationSummary = self.nations
+            .map { nation in
+                nation.nationName
+            }.joined(separator: ", ")
+        
+        let genreSummary = self.genres
+            .map { genre in
+                genre.genreName
+            }.joined(separator: ", ")
+        
+        let actorSummary = self.actors
+            .map { actor in
+                actor.peopleName
+            }.joined(separator: ", ")
 
+        return MovieDetailSummary(title: self.movieName,
+                                  director: directorSummary,
+                                  productYear: "\(self.productYear)년",
+                                  openYear: DateFormatter().changeFormat(of: self.openYear),
+                                  showTime: "\(self.showTime)분",
+                                  watchGrade: watchGradeSummary,
+                                  productNation: nationSummary,
+                                  genre: genreSummary,
+                                  actor: actorSummary)
+    }
+}
+
+private extension DateFormatter {
+    func changeFormat(of dateString: String) -> String {
+        self.dateFormat = DateFormat.plain
+        guard let date = self.date(from: dateString) else {
+            return dateString
+        }
+        self.dateFormat = DateFormat.dashed
+        return self.string(from: date)
+    }
+}

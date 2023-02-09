@@ -8,11 +8,6 @@
 import UIKit
 
 class BoxOfficeListViewController: UIViewController {
-    private enum DateFormat {
-        static let title = "yyyy-MM-dd"
-        static let target = "yyyyMMdd"
-    }
-    
     private enum Section: CaseIterable {
         case main
     }
@@ -27,7 +22,7 @@ class BoxOfficeListViewController: UIViewController {
         return collectionView.dequeueConfiguredReusableCell(using: self.cellRegistration, for: indexPath, item: identifier)
     }
     
-    private let boxOfficeCollectionView: UICollectionView = {
+    private let boxOfficeCollectionView = {
         let heightDimension = NSCollectionLayoutDimension.estimated(50)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -42,10 +37,12 @@ class BoxOfficeListViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: customLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.layer.borderColor = UIColor.systemGray4.cgColor
+        collectionView.layer.borderWidth = 0.5
         return collectionView
     }()
     
-    private let refresher: UIRefreshControl = UIRefreshControl()
+    private let refresher = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,39 +78,37 @@ class BoxOfficeListViewController: UIViewController {
     
     @objc private func loadData() {
         self.refresher.beginRefreshing()
-        
-        let formatter = DateFormatter()
-        
-        guard let key = SecretKey.boxOfficeAPIKey else {
-            return
+        Task {
+            let formatter = DateFormatter()
+            let dashedYesterday = formatter.yesterday(format: DateFormat.dashed)
+            let plainYesterday = formatter.yesterday(format: DateFormat.plain)
+            
+            async let summaryList = NetworkService.boxOfficeSummaryList(atPlainDate: plainYesterday)
+            
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(await summaryList ?? [])
+            
+            self.refresher.endRefreshing()
+            self.updateUI(title: dashedYesterday, snapshot: snapshot)
         }
-        let request = APIRequest
-            .getDailyBoxOffice(key: key,
-                               targetDate: formatter.yesterday(format: DateFormat.target))
-        let apiProvider = APIProvider(request: request)
-        
-        apiProvider.startLoading { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data,
-                   let boxOfficeList = try? JSONDecoder().decode(DailyBoxOfficeSearchResult.self, from: data) {
-                    self.title = formatter.yesterday(format: DateFormat.title)
-                    let summarys = boxOfficeList.dailyList.map { boxOffice in
-                        boxOffice.summary()
-                    }
-                    
-                    var snapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>()
-                    snapshot.appendSections([.main])
-                    snapshot.appendItems(summarys)
-                    self.dataSource.apply(snapshot, animatingDifferences: true)
-                }
-                self.refresher.endRefreshing()
-            }
-        }
+    }
+    
+    private func updateUI(title: String, snapshot: NSDiffableDataSourceSnapshot<Section, BoxOfficeSummary>) {
+        self.title = title
+        self.dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
 extension BoxOfficeListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movieCode = self.dataSource.itemIdentifier(for: indexPath)?.movieCode,
+           let movieTitle = self.dataSource.itemIdentifier(for: indexPath)?.title {
+            
+            self.navigationController?
+                .pushViewController(MovieDetailViewController(movieCode: movieCode, movieTitle: movieTitle), animated: true)
+        }
+        
         self.boxOfficeCollectionView.deselectItem(at: indexPath, animated: true)
     }
 }
