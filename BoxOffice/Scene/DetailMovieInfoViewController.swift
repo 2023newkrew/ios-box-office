@@ -92,7 +92,6 @@ extension DetailMovieInfoViewController {
         posterImageView.contentMode = .scaleAspectFit
         
         activityView.translatesAutoresizingMaskIntoConstraints = false
-        activityView.startAnimating()
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -280,11 +279,9 @@ extension DetailMovieInfoViewController {
         guard let imageInfo = imageInfo, let url = URL(string: imageInfo.imageUrl) else {
             return
         }
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                DispatchQueue.main.async { [weak self] in
-                    self?.posterImageView.image = image
-                }
+        ImageCacheUtility.fetchImage(imageURL: url) { data in
+            DispatchQueue.main.async { [weak self] in
+                self?.posterImageView.image = UIImage(data: data)
             }
         }
     }
@@ -296,6 +293,7 @@ extension DetailMovieInfoViewController {
     }
     
     private func loadMoviePoster() {
+        activityView.startAnimating()
         networkService.fetch(searchTarget: .searchMoviePosterImage,
                              headers: AppKeys.kakaoAPI,
                              queryItems: [QueryKeys.imageKeyQuery: QueryKeys.imageQuery(movieName)]) {
